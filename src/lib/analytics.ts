@@ -15,7 +15,8 @@ type EventName =
   | "service_card_reveal"
   | "faq_open"
   | "carousel_advance"
-  | "insight_read";
+  | "insight_read"
+  | "newsletter_signup";
 
 type EventProps = Record<string, string | number | boolean | undefined>;
 

@@ -10,6 +10,19 @@ export const WHATSAPP_URL = WHATSAPP_NUMBER
   ? `https://wa.me/${WHATSAPP_NUMBER}`
   : "";
 export const SHOW_WHATSAPP = true;
+
+// D11: public location line for the footer.
+export const LOCATION_LINE = "[ Location line — D11 ]";
+
+// D13: real profile URLs needed before these link out.
+export const SOCIAL_LINKS: {
+  name: string;
+  href: string;
+  placeholder?: boolean;
+}[] = [
+  { name: "LinkedIn", href: "", placeholder: true },
+  { name: "X", href: "", placeholder: true },
+];
 export const CURRENCY_NOTE = "NGN / USD";
 
 export type Service = {
