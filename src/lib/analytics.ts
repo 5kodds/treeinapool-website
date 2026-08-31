@@ -10,7 +10,8 @@ type EventName =
   | "form_submitted"
   | "whatsapp_click"
   | "case_study_read"
-  | "service_card_click";
+  | "service_card_click"
+  | "nav_dropdown_open";
 
 type EventProps = Record<string, string | number | boolean | undefined>;
 

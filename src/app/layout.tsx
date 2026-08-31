@@ -3,6 +3,7 @@ import { Barlow, Barlow_Condensed } from "next/font/google";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/site";
+import { getFeaturedCaseStudies } from "@/lib/case-studies";
 import "./globals.css";
 
 const barlow = Barlow({
@@ -41,13 +42,19 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
+  const featuredWork = getFeaturedCaseStudies(2).map((study) => ({
+    name: study.title,
+    href: `/work/${study.slug}`,
+    description: study.category,
+  }));
+
   return (
     <html
       lang="en"
       className={`${barlow.variable} ${barlowCondensed.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
-        <Navbar />
+        <Navbar featuredWork={featuredWork} />
         <main className="flex-1">{children}</main>
         <Footer />
       </body>

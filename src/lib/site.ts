@@ -12,13 +12,6 @@ export const WHATSAPP_URL = WHATSAPP_NUMBER
 export const SHOW_WHATSAPP = true;
 export const CURRENCY_NOTE = "NGN / USD";
 
-export const NAV_ITEMS = [
-  { name: "Services", href: "/services" },
-  { name: "Work", href: "/work" },
-  { name: "Process", href: "/process" },
-  { name: "About", href: "/about" },
-] as const;
-
 export type Service = {
   id: string;
   code: string;
@@ -110,6 +103,50 @@ export const SERVICES: Service[] = [
     ],
     owns: "Pipelines + evals",
   },
+];
+
+export type NavChild = { name: string; href: string; description?: string };
+
+export type NavGroup = {
+  name: string;
+  href?: string;
+  children?: NavChild[];
+  /** Rendered as the always-visible primary CTA rather than a nav link. */
+  cta?: boolean;
+  /** Featured case studies are merged into this group's children at render time. */
+  mergeFeaturedWork?: boolean;
+};
+
+/** Single source of truth for header and footer navigation. */
+export const NAV: NavGroup[] = [
+  {
+    name: "Services",
+    href: "/services",
+    children: [
+      ...SERVICES.map((service) => ({
+        name: `${service.code} · ${service.name}`,
+        href: `/services#${service.code.toLowerCase()}`,
+        description: service.who,
+      })),
+      { name: "All services", href: "/services", description: "Compare scope, timeline and bands" },
+    ],
+  },
+  {
+    name: "Work",
+    href: "/work",
+    mergeFeaturedWork: true,
+    children: [{ name: "All work", href: "/work", description: "Every case study and teardown" }],
+  },
+  {
+    name: "Company",
+    children: [
+      { name: "About", href: "/about", description: "Who builds it, and how the studio works" },
+      { name: "Process", href: "/process", description: "How an engagement runs, stage by stage" },
+      { name: "Performance", href: "/performance", description: "Our own Core Web Vitals, dated" },
+    ],
+  },
+  { name: "Insights", href: "/insights" },
+  { name: "Contact", href: "/contact", cta: true },
 ];
 
 export const PROCESS_STAGES = [

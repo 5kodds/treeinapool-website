@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { CONTACT_EMAIL, NAV_ITEMS, SHOW_WHATSAPP, SITE_NAME, WHATSAPP_NUMBER } from "@/lib/site";
+import { CONTACT_EMAIL, NAV, SHOW_WHATSAPP, SITE_NAME, WHATSAPP_NUMBER } from "@/lib/site";
 import { Container } from "@/components/ui/Container";
 
 export function Footer() {
@@ -10,9 +10,13 @@ export function Footer() {
           {SITE_NAME}
         </span>
         <div className="flex flex-col gap-1.5">
-          {NAV_ITEMS.map((item) => (
-            <Link key={item.href} href={item.href} className="hover:text-[var(--color-accent-700)]">
-              {item.name}
+          {NAV.filter((group) => group.href && !group.cta).map((group) => (
+            <Link
+              key={group.name}
+              href={group.href!}
+              className="hover:text-[var(--color-accent-700)]"
+            >
+              {group.name}
             </Link>
           ))}
         </div>
