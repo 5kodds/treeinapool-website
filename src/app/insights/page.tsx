@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   title: "Insights",
   description:
     "Practical writing on scoping, pricing and running a software build — the things we explain on discovery calls, written down.",
+  alternates: { canonical: "/insights" },
 };
 
 export default function InsightsPage() {

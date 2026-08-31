@@ -12,6 +12,7 @@ export const metadata: Metadata = {
   title: "About",
   description:
     "Who builds at TreeInAPool, how the studio works, and why the name.",
+  alternates: { canonical: "/about" },
 };
 
 const VALUES = [

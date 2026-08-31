@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   title: "Process",
   description:
     "How a TreeInAPool engagement runs, stage by stage, plus answers to the top pre-sales questions.",
+  alternates: { canonical: "/process" },
 };
 
 export default function ProcessPage() {

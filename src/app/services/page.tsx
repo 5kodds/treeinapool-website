@@ -17,6 +17,7 @@ export const metadata: Metadata = {
   title: "Services",
   description:
     "Four fixed-scope ways to work with TreeInAPool: prototype to production, product design, full-cycle builds, and AI & automation.",
+  alternates: { canonical: "/services" },
 };
 
 export default function ServicesPage() {

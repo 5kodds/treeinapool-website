@@ -7,6 +7,7 @@ import { CONTACT_EMAIL, SITE_NAME } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Privacy",
   description: `How ${SITE_NAME} handles the information you send through this site.`,
+  alternates: { canonical: "/privacy" },
 };
 
 export default function PrivacyPage() {

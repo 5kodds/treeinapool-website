@@ -7,6 +7,7 @@ import { CONTACT_EMAIL, SITE_NAME } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Terms",
   description: `The terms that apply to using the ${SITE_NAME} website.`,
+  alternates: { canonical: "/terms" },
 };
 
 export default function TermsPage() {
