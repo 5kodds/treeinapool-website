@@ -7,6 +7,8 @@ import { Tag } from "@/components/ui/Tag";
 import { StatTile } from "@/components/ui/StatTile";
 import { CtaLink } from "@/components/ui/CtaLink";
 import { CaseStudyReadTracker } from "@/components/CaseStudyReadTracker";
+import { FaqSection } from "@/components/FaqSection";
+import { faqsForPage } from "@/lib/site";
 import { getAllCaseStudies, getCaseStudyBySlug } from "@/lib/case-studies";
 
 type Params = { slug: string };
@@ -26,10 +28,15 @@ export async function generateMetadata({
   return {
     title: caseStudy.title,
     description: caseStudy.summary,
+    alternates: { canonical: `/work/${caseStudy.slug}` },
   };
 }
 
-export default async function CaseStudyPage({ params }: { params: Promise<Params> }) {
+export default async function CaseStudyPage({
+  params,
+}: {
+  params: Promise<Params>;
+}) {
   const { slug } = await params;
   const caseStudy = getCaseStudyBySlug(slug);
   if (!caseStudy) notFound();
@@ -42,10 +49,18 @@ export default async function CaseStudyPage({ params }: { params: Promise<Params
       <CaseStudyReadTracker slug={slug} />
 
       <Container>
-        <nav aria-label="Breadcrumb" className="pt-6 text-[13px] tracking-wide text-muted-2">
-          <Link href="/">Home</Link> <span className="px-1.5">/</span>{" "}
-          <Link href="/work">Work</Link> <span className="px-1.5">/</span>{" "}
-          <span>{caseStudy.title}</span>
+        <nav
+          aria-label="Breadcrumb"
+          className="pt-6 text-[13px] tracking-wide text-muted-2"
+        >
+          <Link href="/" className="underline">
+            Home
+          </Link>{" "}
+          <span className="px-1.5">/</span>{" "}
+          <Link href="/work" className="underline">
+            Work
+          </Link>{" "}
+          <span className="px-1.5">/</span> <span>{caseStudy.title}</span>
         </nav>
       </Container>
 
@@ -102,7 +117,9 @@ export default async function CaseStudyPage({ params }: { params: Promise<Params
                   <span className="block text-xs font-semibold uppercase tracking-[0.08em] text-muted">
                     {label}
                   </span>
-                  <p className="mt-2 text-[22px] uppercase leading-[24px]">{value}</p>
+                  <p className="mt-2 text-[22px] uppercase leading-[24px]">
+                    {value}
+                  </p>
                 </div>
               ))}
             </div>
@@ -112,9 +129,13 @@ export default async function CaseStudyPage({ params }: { params: Promise<Params
 
       <section className="border-t border-[var(--color-divider)] py-10">
         <Container className="grid gap-12 md:grid-cols-[3fr_9fr]">
-          <h2 className="text-[28px] uppercase leading-[30px] tracking-wide">Problem</h2>
+          <h2 className="text-[28px] uppercase leading-[30px] tracking-wide">
+            Problem
+          </h2>
           <div>
-            <p className="max-w-[64ch] text-[17px] leading-7">{caseStudy.problem}</p>
+            <p className="max-w-[64ch] text-[17px] leading-7">
+              {caseStudy.problem}
+            </p>
             <div className="mt-5 flex flex-wrap gap-2">
               {caseStudy.problemTags.map((tag) => (
                 <Tag key={tag} variant="outline">
@@ -128,7 +149,9 @@ export default async function CaseStudyPage({ params }: { params: Promise<Params
 
       <section className="border-t border-[var(--color-divider)] py-10">
         <Container className="grid gap-12 md:grid-cols-[3fr_9fr]">
-          <h2 className="text-[28px] uppercase leading-[30px] tracking-wide">Approach</h2>
+          <h2 className="text-[28px] uppercase leading-[30px] tracking-wide">
+            Approach
+          </h2>
           <div className="grid gap-8 sm:grid-cols-3">
             {caseStudy.approach.map((step, i) => (
               <Frame key={step.title} className="p-5">
@@ -138,7 +161,9 @@ export default async function CaseStudyPage({ params }: { params: Promise<Params
                 <h3 className="mt-2.5 text-[19px] uppercase leading-[22px] tracking-wide">
                   {step.title}
                 </h3>
-                <p className="mt-2.5 text-sm leading-6 text-muted">{step.body}</p>
+                <p className="mt-2.5 text-sm leading-6 text-muted">
+                  {step.body}
+                </p>
               </Frame>
             ))}
           </div>
@@ -156,8 +181,9 @@ export default async function CaseStudyPage({ params }: { params: Promise<Params
               ))}
             </div>
             <p className="mt-7 max-w-[70ch] text-[13px] leading-6 text-muted-2">
-              Every figure here must be one the client has confirmed. Where a number is not yet
-              available, the cell stays bracketed rather than guessed.
+              Every figure here must be one the client has confirmed. Where a
+              number is not yet available, the cell stays bracketed rather than
+              guessed.
             </p>
           </Container>
         </section>
@@ -166,7 +192,9 @@ export default async function CaseStudyPage({ params }: { params: Promise<Params
       {caseStudy.stack.length > 0 && (
         <section className="border-t border-[var(--color-divider)] py-10">
           <Container className="grid gap-12 md:grid-cols-[3fr_9fr]">
-            <h2 className="text-[28px] uppercase leading-[30px] tracking-wide">Stack</h2>
+            <h2 className="text-[28px] uppercase leading-[30px] tracking-wide">
+              Stack
+            </h2>
             <div className="flex flex-wrap content-start gap-2.5">
               {caseStudy.stack.map((tech) => (
                 <Tag key={tech}>{tech}</Tag>
@@ -177,10 +205,10 @@ export default async function CaseStudyPage({ params }: { params: Promise<Params
       )}
 
       {caseStudy.testimonial && (
-        <section className="border-t border-[var(--color-divider)] py-10">
+        <section className="border-y border-[var(--color-divider)] bg-[color-mix(in_srgb,var(--color-accent-600)_7%,transparent)] py-16 md:py-20">
           <Container>
             <figure className="m-0">
-              <blockquote className="max-w-[40ch] text-[clamp(24px,2.8vw,36px)] uppercase leading-[1.15]">
+              <blockquote className="m-0 max-w-[36ch] text-[clamp(26px,3.4vw,44px)] uppercase leading-[1.12] tracking-wide">
                 &ldquo;{caseStudy.testimonial.quote}&rdquo;
               </blockquote>
               <figcaption className="mt-8 text-[15px] leading-6 text-muted">
@@ -192,14 +220,24 @@ export default async function CaseStudyPage({ params }: { params: Promise<Params
       )}
 
       <section className="border-t border-[var(--color-divider)] py-14 md:py-16">
+        <Container>
+          <FaqSection
+            items={faqsForPage("/work")}
+            page={`/work/${slug}`}
+            title="Working with us"
+          />
+        </Container>
+      </section>
+
+      <section className="border-t border-[var(--color-divider)] py-14 md:py-16">
         <Container className="grid gap-10 md:grid-cols-[7fr_5fr] md:items-center">
           <div>
             <h2 className="text-[clamp(28px,3.4vw,44px)] uppercase leading-[1.06] tracking-wide">
               Have a process that looks like this?
             </h2>
             <p className="mt-4 max-w-[52ch] text-base leading-7 text-muted">
-              Bring the messy version. Thirty minutes on a call and you will have a scope, a
-              price, and a date.
+              Bring the messy version. Thirty minutes on a call and you will
+              have a scope, a price, and a date.
             </p>
           </div>
           <div className="flex flex-wrap gap-3 md:justify-end">

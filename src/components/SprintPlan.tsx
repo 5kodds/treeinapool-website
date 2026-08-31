@@ -1,4 +1,9 @@
-const ROWS: { label: string; startCol: number; span: number; light?: boolean }[] = [
+const ROWS: {
+  label: string;
+  startCol: number;
+  span: number;
+  light?: boolean;
+}[] = [
   { label: "Discovery", startCol: 2, span: 1 },
   { label: "Design", startCol: 3, span: 2 },
   { label: "Build", startCol: 4, span: 4 },
@@ -50,8 +55,8 @@ export function SprintPlan() {
       ))}
 
       <p className="m-0 px-6 py-3 text-[13px] leading-6 text-muted">
-        Illustrative plan. Yours is written during discovery, with dates, and it is the document
-        we are both held to.
+        Illustrative plan. Yours is written during discovery, with dates, and it
+        is the document we are both held to.
       </p>
     </div>
   );

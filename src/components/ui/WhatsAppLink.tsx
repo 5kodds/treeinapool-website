@@ -6,7 +6,10 @@ import { CONTACT_EMAIL, WHATSAPP_URL } from "@/lib/site";
 export function WhatsAppLink({ className }: { className?: string }) {
   if (!WHATSAPP_URL) {
     return (
-      <a href={`mailto:${CONTACT_EMAIL}`} className={className ?? "btn btn-ghost"}>
+      <a
+        href={`mailto:${CONTACT_EMAIL}`}
+        className={className ?? "btn btn-ghost"}
+      >
         Email us
       </a>
     );

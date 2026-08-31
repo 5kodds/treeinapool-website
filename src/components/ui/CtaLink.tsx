@@ -28,7 +28,7 @@ export function CtaLink({
       "btn-secondary": variant === "secondary",
       "btn-ghost": variant === "ghost",
     },
-    className
+    className,
   );
 
   const handleClick = () => {

@@ -1,0 +1,46 @@
+{
+  "measuredOn": "2026-08-31",
+  "lighthouseVersion": "13.4.1",
+  "measuredAgainst": "local production build (npm run build && npm run start)",
+  "note": "Scores from a local production build. Re-run against the live domain once deployed, and before any pitch.",
+  "pages": [
+    {
+      "path": "/",
+      "label": "Home",
+      "scores": {
+        "performance": 98,
+        "accessibility": 99,
+        "bestPractices": 100,
+        "seo": 100
+      },
+      "vitals": {
+        "lcpMs": 2195,
+        "cls": 0,
+        "tbtMs": 111,
+        "fcpMs": 1092,
+        "speedIndexMs": 1092
+      },
+      "formFactor": "mobile",
+      "throttling": "simulate"
+    },
+    {
+      "path": "/work/guided-intake-lender",
+      "label": "Case study",
+      "scores": {
+        "performance": 99,
+        "accessibility": 100,
+        "bestPractices": 100,
+        "seo": 100
+      },
+      "vitals": {
+        "lcpMs": 1213,
+        "cls": 0,
+        "tbtMs": 144,
+        "fcpMs": 763,
+        "speedIndexMs": 763
+      },
+      "formFactor": "mobile",
+      "throttling": "simulate"
+    }
+  ]
+}
