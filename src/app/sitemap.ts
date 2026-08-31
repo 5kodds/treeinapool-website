@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/lib/site";
 import { getAllCaseStudies } from "@/lib/case-studies";
+import { getAllInsights } from "@/lib/insights";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = [
@@ -10,6 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/process", priority: 0.7, changeFrequency: "monthly" as const },
     { path: "/about", priority: 0.6, changeFrequency: "monthly" as const },
     { path: "/contact", priority: 0.9, changeFrequency: "monthly" as const },
+    { path: "/insights", priority: 0.7, changeFrequency: "weekly" as const },
   ].map((route) => ({
     url: `${SITE_URL}${route.path}`,
     lastModified: new Date(),
@@ -24,5 +26,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  return [...staticRoutes, ...caseStudyRoutes];
+  const insightRoutes = getAllInsights().map((insight) => ({
+    url: `${SITE_URL}/insights/${insight.slug}`,
+    lastModified: new Date(insight.date),
+    changeFrequency: "monthly" as const,
+    priority: 0.5,
+  }));
+
+  return [...staticRoutes, ...caseStudyRoutes, ...insightRoutes];
 }

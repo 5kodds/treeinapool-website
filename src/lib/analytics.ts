@@ -14,7 +14,8 @@ type EventName =
   | "nav_dropdown_open"
   | "service_card_reveal"
   | "faq_open"
-  | "carousel_advance";
+  | "carousel_advance"
+  | "insight_read";
 
 type EventProps = Record<string, string | number | boolean | undefined>;
 
