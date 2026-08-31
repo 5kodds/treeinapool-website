@@ -39,10 +39,17 @@ const VIEWPORTS = [
   { name: "mobile", width: 390, height: 844 },
 ];
 
+/**
+ * `npm run start` spawns next-server as a grandchild, so killing the npm
+ * process alone orphans the server: it keeps the port and, in CI, keeps the
+ * step open long after the work is done. Spawning detached puts both in
+ * their own process group so stopServer() can signal the whole group.
+ */
 function startServer() {
   const server = spawn("npm", ["run", "start", "--", "-p", String(PORT)], {
     stdio: ["ignore", "pipe", "pipe"],
     env: process.env,
+    detached: true,
   });
   return new Promise((resolve, reject) => {
     const timeout = setTimeout(
@@ -59,6 +66,36 @@ function startServer() {
   });
 }
 
+function stopServer(server) {
+  try {
+    // Negative pid signals the whole group, so next-server goes with npm.
+    process.kill(-server.pid, "SIGTERM");
+  } catch {
+    server.kill("SIGTERM");
+  }
+}
+
+const PAGE_TIMEOUT_MS = 30_000;
+
+/**
+ * page.evaluate has no default timeout, so a stalled in-page call would
+ * hang the job indefinitely. Every step is bounded and a stall fails the
+ * route loudly instead of silently burning runner minutes.
+ */
+function withTimeout(promise, label) {
+  let timer;
+  return Promise.race([
+    promise,
+    new Promise((_, reject) => {
+      timer = setTimeout(
+        () =>
+          reject(new Error(`timed out after ${PAGE_TIMEOUT_MS}ms: ${label}`)),
+        PAGE_TIMEOUT_MS,
+      );
+    }),
+  ]).finally(() => clearTimeout(timer));
+}
+
 const server = await startServer();
 const browser = await chromium.launch({
   executablePath: process.env.CHROME_PATH || undefined,
@@ -66,6 +103,7 @@ const browser = await chromium.launch({
 });
 
 let blocking = 0;
+let errored = 0;
 
 try {
   for (const viewport of VIEWPORTS) {
@@ -73,26 +111,50 @@ try {
       viewport: { width: viewport.width, height: viewport.height },
     });
     const page = await context.newPage();
+    page.setDefaultTimeout(PAGE_TIMEOUT_MS);
+    page.setDefaultNavigationTimeout(PAGE_TIMEOUT_MS);
 
     for (const route of ROUTES) {
-      await page.goto(`${ORIGIN}${route}`, { waitUntil: "load" });
-      await page.addScriptTag({ content: AXE_SOURCE });
-      const { violations } = await page.evaluate(async () => {
-        // @ts-expect-error injected at runtime
-        return await window.axe.run(document, {
-          runOnly: {
-            type: "tag",
-            values: ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"],
-          },
-        });
-      });
+      const label = `${viewport.name.padEnd(7)} ${route}`;
+      let violations;
+
+      try {
+        // domcontentloaded, not load: the audit does not need every
+        // subresource settled, and waiting on them is a stall risk.
+        await withTimeout(
+          page.goto(`${ORIGIN}${route}`, { waitUntil: "domcontentloaded" }),
+          `goto ${route}`,
+        );
+        await withTimeout(
+          page.addScriptTag({ content: AXE_SOURCE }),
+          `inject axe on ${route}`,
+        );
+        ({ violations } = await withTimeout(
+          page.evaluate(async () => {
+            // @ts-expect-error injected at runtime
+            return await window.axe.run(document, {
+              runOnly: {
+                type: "tag",
+                values: ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"],
+              },
+              // Skip serialising every passing node — violations are all
+              // this script reports on, and the payload is much smaller.
+              resultTypes: ["violations"],
+            });
+          }),
+          `axe.run on ${route}`,
+        ));
+      } catch (error) {
+        errored += 1;
+        console.log(`✗ ${label}\n    ${error.message}`);
+        continue;
+      }
 
       const serious = violations.filter((v) =>
         ["serious", "critical"].includes(v.impact),
       );
       blocking += serious.length;
 
-      const label = `${viewport.name.padEnd(7)} ${route}`;
       if (violations.length === 0) {
         console.log(`✓ ${label}`);
       } else {
@@ -111,11 +173,19 @@ try {
   }
 } finally {
   await browser.close();
-  server.kill();
+  stopServer(server);
+}
+
+if (errored > 0) {
+  console.error(
+    `\n${errored} route(s) could not be audited — treat as a failure.`,
+  );
+  process.exit(1);
 }
 
 if (blocking > 0) {
   console.error(`\n${blocking} serious/critical accessibility violation(s).`);
   process.exit(1);
 }
+
 console.log("\nNo serious or critical violations.");

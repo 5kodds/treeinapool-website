@@ -8,17 +8,17 @@
       "path": "/",
       "label": "Home",
       "scores": {
-        "performance": 98,
+        "performance": 96,
         "accessibility": 99,
         "bestPractices": 100,
         "seo": 100
       },
       "vitals": {
-        "lcpMs": 2195,
+        "lcpMs": 2581,
         "cls": 0,
-        "tbtMs": 111,
-        "fcpMs": 1092,
-        "speedIndexMs": 1092
+        "tbtMs": 135,
+        "fcpMs": 1083,
+        "speedIndexMs": 1083
       },
       "formFactor": "mobile",
       "throttling": "simulate"
@@ -33,11 +33,11 @@
         "seo": 100
       },
       "vitals": {
-        "lcpMs": 1213,
+        "lcpMs": 1971,
         "cls": 0,
-        "tbtMs": 144,
-        "fcpMs": 763,
-        "speedIndexMs": 763
+        "tbtMs": 96,
+        "fcpMs": 795,
+        "speedIndexMs": 795
       },
       "formFactor": "mobile",
       "throttling": "simulate"

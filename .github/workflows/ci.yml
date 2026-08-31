@@ -8,6 +8,9 @@ on:
 jobs:
   verify:
     runs-on: ubuntu-latest
+    # The audit takes well under a minute on a quiet runner; this stops a
+    # stall from silently burning the job's full six-hour allowance.
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
 

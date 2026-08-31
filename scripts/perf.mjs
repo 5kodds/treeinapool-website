@@ -25,10 +25,17 @@ const ROUTES = [
 const CHROME_PATH =
   process.env.CHROME_PATH ?? process.env.LIGHTHOUSE_CHROMIUM_PATH ?? undefined;
 
+/**
+ * `npm run start` spawns next-server as a grandchild, so killing the npm
+ * process alone orphans the server: it keeps the port and, in CI, keeps the
+ * step open long after the work is done. Spawning detached puts both in
+ * their own process group so stopServer() can signal the whole group.
+ */
 function startServer() {
   const server = spawn("npm", ["run", "start", "--", "-p", String(PORT)], {
     stdio: ["ignore", "pipe", "pipe"],
     env: process.env,
+    detached: true,
   });
 
   return new Promise((resolve, reject) => {
@@ -44,6 +51,15 @@ function startServer() {
     });
     server.on("error", reject);
   });
+}
+
+function stopServer(server) {
+  try {
+    // Negative pid signals the whole group, so next-server goes with npm.
+    process.kill(-server.pid, "SIGTERM");
+  } catch {
+    server.kill("SIGTERM");
+  }
 }
 
 async function audit(url, chromePort) {
@@ -109,5 +125,5 @@ try {
   console.log(`\nWrote ${outPath}`);
 } finally {
   await chrome.kill();
-  server.kill();
+  stopServer(server);
 }
