@@ -9,7 +9,12 @@ import {
 } from "@/lib/contact-schema";
 import { CONTACT_EMAIL } from "@/lib/site";
 
-type Status = "idle" | "submitting" | "success" | "success-undelivered" | "error";
+type Status =
+  | "idle"
+  | "submitting"
+  | "success"
+  | "success-undelivered"
+  | "error";
 
 export function ContactForm({ compact = false }: { compact?: boolean }) {
   const [status, setStatus] = useState<Status>("idle");
@@ -44,8 +49,8 @@ export function ContactForm({ compact = false }: { compact?: boolean }) {
     const body = `Name: ${values.name}\nEmail: ${values.email}\nProject type: ${values.projectType}\nBudget band: ${values.budgetBand}\n\n${values.message}`;
     setMailtoHref(
       `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(
-        `New enquiry: ${values.projectType}`
-      )}&body=${encodeURIComponent(body)}`
+        `New enquiry: ${values.projectType}`,
+      )}&body=${encodeURIComponent(body)}`,
     );
 
     try {
@@ -99,24 +104,49 @@ export function ContactForm({ compact = false }: { compact?: boolean }) {
           <label htmlFor="name" className="mb-1.5 block text-xs text-muted">
             Name
           </label>
-          <input id="name" name="name" type="text" required className="field-input" />
-          {fieldErrors.name && <p className="mt-1 text-xs text-red-700">{fieldErrors.name}</p>}
+          <input
+            id="name"
+            name="name"
+            type="text"
+            required
+            className="field-input"
+          />
+          {fieldErrors.name && (
+            <p className="mt-1 text-xs text-red-700">{fieldErrors.name}</p>
+          )}
         </div>
         <div className="field">
           <label htmlFor="email" className="mb-1.5 block text-xs text-muted">
             Email
           </label>
-          <input id="email" name="email" type="email" required className="field-input" />
-          {fieldErrors.email && <p className="mt-1 text-xs text-red-700">{fieldErrors.email}</p>}
+          <input
+            id="email"
+            name="email"
+            type="email"
+            required
+            className="field-input"
+          />
+          {fieldErrors.email && (
+            <p className="mt-1 text-xs text-red-700">{fieldErrors.email}</p>
+          )}
         </div>
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="field">
-          <label htmlFor="projectType" className="mb-1.5 block text-xs text-muted">
+          <label
+            htmlFor="projectType"
+            className="mb-1.5 block text-xs text-muted"
+          >
             Project type
           </label>
-          <select id="projectType" name="projectType" required className="field-input" defaultValue="">
+          <select
+            id="projectType"
+            name="projectType"
+            required
+            className="field-input"
+            defaultValue=""
+          >
             <option value="" disabled>
               Choose one
             </option>
@@ -128,10 +158,19 @@ export function ContactForm({ compact = false }: { compact?: boolean }) {
           </select>
         </div>
         <div className="field">
-          <label htmlFor="budgetBand" className="mb-1.5 block text-xs text-muted">
+          <label
+            htmlFor="budgetBand"
+            className="mb-1.5 block text-xs text-muted"
+          >
             Budget band
           </label>
-          <select id="budgetBand" name="budgetBand" required className="field-input" defaultValue="">
+          <select
+            id="budgetBand"
+            name="budgetBand"
+            required
+            className="field-input"
+            defaultValue=""
+          >
             <option value="" disabled>
               Choose one
             </option>
@@ -170,8 +209,14 @@ export function ContactForm({ compact = false }: { compact?: boolean }) {
         </p>
       )}
 
-      <button type="submit" className="btn btn-primary btn-block sm:w-fit" disabled={status === "submitting"}>
-        {status === "submitting" ? "Sending…" : "Send and get a reply in 1 business day"}
+      <button
+        type="submit"
+        className="btn btn-primary btn-block sm:w-fit"
+        disabled={status === "submitting"}
+      >
+        {status === "submitting"
+          ? "Sending…"
+          : "Send and get a reply in 1 business day"}
       </button>
     </form>
   );

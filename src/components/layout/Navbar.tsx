@@ -37,13 +37,13 @@ export function Navbar({ featuredWork = [] }: { featuredWork?: NavChild[] }) {
   const groups: NavGroup[] = NAV.map((group) =>
     group.mergeFeaturedWork
       ? { ...group, children: [...featuredWork, ...(group.children ?? [])] }
-      : group
+      : group,
   );
 
   const isActive = (group: NavGroup) =>
     Boolean(
       (group.href && group.href !== "/" && pathname.startsWith(group.href)) ||
-        group.children?.some((child) => pathname === child.href.split("#")[0])
+      group.children?.some((child) => pathname === child.href.split("#")[0]),
     );
 
   return (
@@ -55,8 +55,19 @@ export function Navbar({ featuredWork = [] }: { featuredWork?: NavChild[] }) {
       }`}
     >
       <Container className="flex h-16 items-center justify-between gap-4">
-        <Link href="/" className="flex items-center gap-2" aria-label={SITE_NAME}>
-          <Image src={logo} alt="" width={28} height={28} className="h-7 w-auto" priority />
+        <Link
+          href="/"
+          className="flex items-center gap-2"
+          aria-label={SITE_NAME}
+        >
+          <Image
+            src={logo}
+            alt=""
+            width={28}
+            height={28}
+            className="h-7 w-auto"
+            priority
+          />
           <span className="font-[family-name:var(--font-heading)] text-lg font-semibold uppercase tracking-wide">
             {SITE_NAME}
           </span>

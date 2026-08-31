@@ -12,6 +12,7 @@ import { AltFeatureSection } from "@/components/AltFeatureSection";
 import { FaqSection } from "@/components/FaqSection";
 import { SprintPlan } from "@/components/SprintPlan";
 import { ContactForm } from "@/components/ContactForm";
+import { SectionReveal } from "@/components/ui/SectionReveal";
 import {
   faqsForPage,
   PERSONALITY_STATEMENT,
@@ -96,7 +97,7 @@ export default function Home() {
       )}
 
       {/* Personality statement */}
-      <section className="py-14 md:py-16">
+      <section className="py-14 md:py-20">
         <Container>
           <p className="max-w-[26ch] font-[family-name:var(--font-heading)] text-[clamp(30px,4.4vw,56px)] font-semibold uppercase leading-[1.08] tracking-wide">
             {PERSONALITY_STATEMENT}
@@ -105,46 +106,52 @@ export default function Home() {
       </section>
 
       {/* Services */}
-      <section className="py-14 md:py-16">
+      <section className="py-14 md:py-20">
         <Container>
-          <Kicker>01 · What we build</Kicker>
-          <div className="grid gap-8 sm:grid-cols-2">
-            {SERVICES.map((service) => (
-              <RevealCard key={service.id} service={service} />
-            ))}
-          </div>
+          <SectionReveal>
+            <Kicker>01 · What we build</Kicker>
+            <div className="grid gap-8 sm:grid-cols-2">
+              {SERVICES.map((service) => (
+                <RevealCard key={service.id} service={service} />
+              ))}
+            </div>
+          </SectionReveal>
         </Container>
       </section>
 
       {/* Why TreeInAPool */}
-      <section className="py-14 md:py-16">
+      <section className="py-14 md:py-20">
         <Container>
-          <Kicker>02 · Why TreeInAPool</Kicker>
-          <AltFeatureSection blocks={WHY_US} />
+          <SectionReveal>
+            <Kicker>02 · Why TreeInAPool</Kicker>
+            <AltFeatureSection blocks={WHY_US} />
+          </SectionReveal>
         </Container>
       </section>
 
       {/* Featured work */}
       {caseStudies.length > 0 && (
-        <section className="py-14 md:py-16">
+        <section className="py-14 md:py-20">
           <Container>
-            <Kicker>03 · Selected work</Kicker>
-            <div className="grid gap-10 sm:grid-cols-2">
-              {caseStudies.map((cs) => (
-                <CaseStudyCard key={cs.slug} caseStudy={cs} />
-              ))}
-            </div>
-            <p className="mt-8">
-              <Link href="/work" className="text-[14px] leading-6 underline">
-                See every case study →
-              </Link>
-            </p>
+            <SectionReveal>
+              <Kicker>03 · Selected work</Kicker>
+              <div className="grid gap-10 sm:grid-cols-2">
+                {caseStudies.map((cs) => (
+                  <CaseStudyCard key={cs.slug} caseStudy={cs} />
+                ))}
+              </div>
+              <p className="mt-8">
+                <Link href="/work" className="text-[14px] leading-6 underline">
+                  See every case study →
+                </Link>
+              </p>
+            </SectionReveal>
           </Container>
         </section>
       )}
 
       {/* Process teaser */}
-      <section className="py-14 md:py-16">
+      <section className="py-14 md:py-20">
         <Container>
           <Kicker>04 · How an engagement runs</Kicker>
           <div className="grid gap-8 border-t border-[var(--color-divider)] sm:grid-cols-2 lg:grid-cols-4">
@@ -195,7 +202,7 @@ export default function Home() {
       </section>
 
       {/* Roadmap */}
-      <section className="py-14 md:py-16">
+      <section className="py-14 md:py-20">
         <Container>
           <Kicker>05 · The roadmap you get on day one</Kicker>
           <div className="grid gap-12 md:grid-cols-[7fr_4fr] md:items-start">
@@ -231,7 +238,7 @@ export default function Home() {
       </section>
 
       {/* FAQ */}
-      <section className="py-14 md:py-16">
+      <section className="py-14 md:py-20">
         <Container>
           <FaqSection
             items={homeFaqs}

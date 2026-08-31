@@ -41,7 +41,9 @@ export function AltFeatureSection({ blocks }: { blocks: readonly Block[] }) {
               <h3 className="max-w-[24ch] text-[clamp(24px,2.6vw,32px)] uppercase leading-[1.1] tracking-wide">
                 {block.title}
               </h3>
-              <p className="mt-4 max-w-[56ch] text-[15px] leading-7 text-muted">{block.body}</p>
+              <p className="mt-4 max-w-[56ch] text-[15px] leading-7 text-muted">
+                {block.body}
+              </p>
 
               <button
                 type="button"
@@ -50,7 +52,11 @@ export function AltFeatureSection({ blocks }: { blocks: readonly Block[] }) {
                 onClick={() => {
                   const next = isOpen ? null : index;
                   setOpenIndex(next);
-                  if (next !== null) track("faq_open", { question: block.title, page: "home-why" });
+                  if (next !== null)
+                    track("faq_open", {
+                      question: block.title,
+                      page: "home-why",
+                    });
                 }}
                 className="mt-5 flex items-center gap-2 border-t border-[var(--color-divider)] pt-4 text-sm font-medium text-[var(--color-accent-700)]"
               >

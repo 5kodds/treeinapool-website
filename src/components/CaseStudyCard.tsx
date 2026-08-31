@@ -10,9 +10,14 @@ export function CaseStudyCard({ caseStudy }: { caseStudy: CaseStudy }) {
     <Link
       href={`/work/${caseStudy.slug}`}
       className="block text-inherit no-underline"
-      onClick={() => track("service_card_click", { card: caseStudy.slug, type: "case-study" })}
+      onClick={() =>
+        track("service_card_click", {
+          card: caseStudy.slug,
+          type: "case-study",
+        })
+      }
     >
-      <article className="blueprint">
+      <article className="blueprint lift">
         <i className="corner tl" aria-hidden="true" />
         <i className="corner tr" aria-hidden="true" />
         <i className="corner bl" aria-hidden="true" />
@@ -29,8 +34,12 @@ export function CaseStudyCard({ caseStudy }: { caseStudy: CaseStudy }) {
           </span>
         </div>
         <div className="p-6">
-          <h3 className="text-[26px] leading-[30px] uppercase tracking-wide">{caseStudy.title}</h3>
-          <p className="mt-3.5 text-[15px] leading-6 text-muted">{caseStudy.summary}</p>
+          <h3 className="text-[26px] leading-[30px] uppercase tracking-wide">
+            {caseStudy.title}
+          </h3>
+          <p className="mt-3.5 text-[15px] leading-6 text-muted">
+            {caseStudy.summary}
+          </p>
           <div className="mt-5 flex flex-wrap gap-2">
             <Tag>{caseStudy.category}</Tag>
             {caseStudy.stack[0] && <Tag>{caseStudy.stack[0]}</Tag>}

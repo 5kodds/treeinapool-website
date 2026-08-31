@@ -6,7 +6,12 @@ import Image from "next/image";
 import { ChevronDown, X } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { CtaLink } from "@/components/ui/CtaLink";
-import { CONTACT_EMAIL, SHOW_WHATSAPP, SITE_NAME, type NavGroup } from "@/lib/site";
+import {
+  CONTACT_EMAIL,
+  SHOW_WHATSAPP,
+  SITE_NAME,
+  type NavGroup,
+} from "@/lib/site";
 import logo from "@/assets/treeinapool-logo.png";
 
 export function MobileMenu({
@@ -37,7 +42,13 @@ export function MobileMenu({
     <div className="fixed inset-0 z-50 flex flex-col bg-[var(--color-bg)] md:hidden">
       <Container className="flex h-16 shrink-0 items-center justify-between border-b border-[var(--color-divider)]">
         <Link href="/" className="flex items-center gap-2" onClick={onClose}>
-          <Image src={logo} alt="" width={28} height={28} className="h-7 w-auto" />
+          <Image
+            src={logo}
+            alt=""
+            width={28}
+            height={28}
+            className="h-7 w-auto"
+          />
           <span className="font-[family-name:var(--font-heading)] text-lg font-semibold uppercase tracking-wide">
             {SITE_NAME}
           </span>
@@ -58,7 +69,10 @@ export function MobileMenu({
           const isOpen = expanded === group.name;
 
           return (
-            <div key={group.name} className="border-b border-[var(--color-divider)]">
+            <div
+              key={group.name}
+              className="border-b border-[var(--color-divider)]"
+            >
               <div className="flex items-stretch">
                 {group.href ? (
                   <Link

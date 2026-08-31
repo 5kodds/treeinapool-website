@@ -18,7 +18,7 @@ export function RevealCard({ service }: { service: Service }) {
   const panelId = useId();
 
   return (
-    <div className="blueprint h-full">
+    <div className="blueprint lift h-full">
       <i className="corner tl" aria-hidden="true" />
       <i className="corner tr" aria-hidden="true" />
       <i className="corner bl" aria-hidden="true" />
@@ -44,7 +44,9 @@ export function RevealCard({ service }: { service: Service }) {
               {service.name}
             </span>
           </span>
-          <span className="mt-2 block text-[15px] leading-6 text-muted">{service.who}</span>
+          <span className="mt-2 block text-[15px] leading-6 text-muted">
+            {service.who}
+          </span>
         </span>
         <Plus
           className={`mt-1 h-5 w-5 shrink-0 text-[var(--color-accent-700)] transition-transform duration-200 ${
@@ -62,7 +64,9 @@ export function RevealCard({ service }: { service: Service }) {
       >
         <div className="overflow-hidden">
           <div className="border-t border-[var(--color-divider)] p-6">
-            <p className="m-0 text-[15px] leading-6 text-muted">{service.summary}</p>
+            <p className="m-0 text-[15px] leading-6 text-muted">
+              {service.summary}
+            </p>
             <div className="mt-5 flex flex-wrap items-center gap-2">
               <Tag variant="outline">{service.timeline}</Tag>
               <Tag>You own: {service.owns}</Tag>

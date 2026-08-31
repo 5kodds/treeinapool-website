@@ -21,7 +21,11 @@ export const contactSchema = z.object({
   email: z.string().trim().email("Enter a valid email").max(255),
   projectType: z.enum(PROJECT_TYPES),
   budgetBand: z.enum(BUDGET_BANDS),
-  message: z.string().trim().min(10, "Give us a bit more detail (10+ characters)").max(1000),
+  message: z
+    .string()
+    .trim()
+    .min(10, "Give us a bit more detail (10+ characters)")
+    .max(1000),
 });
 
 export type ContactFormValues = z.infer<typeof contactSchema>;

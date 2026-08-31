@@ -20,7 +20,9 @@ export function Accordion({
   page: string;
   defaultOpen?: number;
 }) {
-  const [openIndex, setOpenIndex] = useState<number | null>(defaultOpen ?? null);
+  const [openIndex, setOpenIndex] = useState<number | null>(
+    defaultOpen ?? null,
+  );
   const baseId = useId();
 
   return (
@@ -41,7 +43,8 @@ export function Accordion({
                 onClick={() => {
                   const next = isOpen ? null : index;
                   setOpenIndex(next);
-                  if (next !== null) track("faq_open", { question: item.q, page });
+                  if (next !== null)
+                    track("faq_open", { question: item.q, page });
                 }}
                 className="flex w-full items-center justify-between gap-4 py-5 text-left text-[17px] font-medium"
               >
@@ -63,7 +66,9 @@ export function Accordion({
               }`}
             >
               <div className="overflow-hidden">
-                <p className="max-w-[70ch] pb-5 text-[15px] leading-7 text-muted">{item.a}</p>
+                <p className="max-w-[70ch] pb-5 text-[15px] leading-7 text-muted">
+                  {item.a}
+                </p>
               </div>
             </div>
           </div>

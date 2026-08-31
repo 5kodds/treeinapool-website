@@ -1,25 +1,12 @@
 "use client";
 
-import { useEffect, useRef, useState, useSyncExternalStore } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
 import { track } from "@/lib/analytics";
 import type { Testimonial } from "@/lib/site";
+import { usePrefersReducedMotion } from "@/lib/use-prefers-reduced-motion";
 
 const ADVANCE_MS = 7000;
-
-const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
-
-function usePrefersReducedMotion() {
-  return useSyncExternalStore(
-    (onChange) => {
-      const query = window.matchMedia(REDUCED_MOTION_QUERY);
-      query.addEventListener("change", onChange);
-      return () => query.removeEventListener("change", onChange);
-    },
-    () => window.matchMedia(REDUCED_MOTION_QUERY).matches,
-    () => false
-  );
-}
 
 export function QuoteCarousel({ quotes }: { quotes: Testimonial[] }) {
   const [index, setIndex] = useState(0);
@@ -39,7 +26,9 @@ export function QuoteCarousel({ quotes }: { quotes: Testimonial[] }) {
   }, [playing, quotes.length]);
 
   function go(direction: 1 | -1) {
-    setIndex((current) => (current + direction + quotes.length) % quotes.length);
+    setIndex(
+      (current) => (current + direction + quotes.length) % quotes.length,
+    );
     setPaused(true);
     track("carousel_advance", { direction: direction === 1 ? "next" : "prev" });
   }
@@ -49,7 +38,11 @@ export function QuoteCarousel({ quotes }: { quotes: Testimonial[] }) {
 
   return (
     <div className="grid gap-8 md:grid-cols-[8fr_4fr] md:items-end">
-      <figure className="m-0" aria-roledescription="carousel" aria-label="Client quotes">
+      <figure
+        className="m-0"
+        aria-roledescription="carousel"
+        aria-label="Client quotes"
+      >
         <div ref={liveRegion} aria-live="polite" aria-atomic="true">
           <blockquote className="m-0 max-w-[38ch] text-[clamp(24px,2.8vw,36px)] uppercase leading-[1.15]">
             &ldquo;{active.quote}&rdquo;
