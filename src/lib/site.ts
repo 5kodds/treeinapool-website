@@ -180,25 +180,146 @@ export const PROCESS_STAGES = [
   },
 ] as const;
 
-export const FAQS = [
+/**
+ * Proof sections (testimonials, client logos) ship fully built but filled
+ * with bracketed placeholders. They render only when this flag is on —
+ * on in development, off in production until real, permissioned data lands.
+ */
+export const SHOW_PLACEHOLDER_PROOF =
+  process.env.NEXT_PUBLIC_SHOW_PLACEHOLDER_PROOF === "true" ||
+  process.env.NODE_ENV === "development";
+
+export type Testimonial = {
+  quote: string;
+  name: string;
+  role: string;
+  /** Placeholder rows never render in production. See D8. */
+  placeholder?: boolean;
+};
+
+// D8: real quotes + written permission needed before these go live.
+export const TESTIMONIALS: Testimonial[] = [
+  {
+    quote:
+      "[ Client quote pending — one sentence, in their words, naming the change they felt. ]",
+    name: "[ Name ]",
+    role: "[ Role, company ]",
+    placeholder: true,
+  },
+  {
+    quote: "[ Client quote pending — the outcome, not the adjectives. ]",
+    name: "[ Name ]",
+    role: "[ Role, company ]",
+    placeholder: true,
+  },
+  {
+    quote: "[ Client quote pending — what working together was actually like. ]",
+    name: "[ Name ]",
+    role: "[ Role, company ]",
+    placeholder: true,
+  },
+];
+
+export type TrustItem = { name: string; note: string; placeholder?: boolean };
+
+// D8: no logo goes up without the client's written sign-off.
+export const TRUST_ITEMS: TrustItem[] = [
+  { name: "[ Client logo ]", note: "Fintech", placeholder: true },
+  { name: "[ Client logo ]", note: "Operations", placeholder: true },
+  { name: "[ Client logo ]", note: "Logistics", placeholder: true },
+  { name: "[ Client logo ]", note: "Healthcare", placeholder: true },
+];
+
+// D9: founder sign-off needed on this line.
+export const PERSONALITY_STATEMENT =
+  "Working with us is less like hiring an agency and more like hiring the two people who will actually build the thing — because that is who turns up to the call.";
+
+export const WHY_US = [
+  {
+    title: "You are never guessing what happened this week",
+    body: "Most agency relationships go quiet between invoices. Ours can't: every sprint ends with a live URL you can open, click, and break. If a week went badly, you find out in that demo, not in a post-mortem.",
+    points: [
+      "Two-week sprints, each ending in working software",
+      "A re-published roadmap showing what shipped and what slipped",
+      "One person accountable, reachable, and in the demo",
+    ],
+  },
+  {
+    title: "The scope is a document, not a conversation",
+    body: "Discovery ends with a written scope: what's included, what isn't, what it costs, and when it lands. Changes are priced in writing before anyone builds them, so the number you approved is the number you pay.",
+    points: [
+      "Fixed scope and price agreed before a line of product code",
+      "Change requests quoted, then approved, then built",
+      "No line item you can't trace to something you asked for",
+    ],
+  },
+  {
+    title: "You keep everything when we're done",
+    body: "Repositories, hosting, analytics, and domains transfer to you at launch. If you never speak to us again, the product keeps running and any competent developer can pick it up.",
+    points: [
+      "Code and accounts transferred, not licensed back",
+      "Documented architecture a new team can read",
+      "30 days of post-launch support, retainer optional after",
+    ],
+  },
+] as const;
+
+export type Faq = {
+  q: string;
+  a: string;
+  /** Routes this question is shown on. "/" is the Home page. */
+  pages: string[];
+};
+
+export const FAQS: Faq[] = [
   {
     q: "How is pricing structured?",
     a: "Fixed scope, fixed price, agreed in writing after the discovery call. If scope changes mid-project, the change is priced and approved before we build it — no surprise invoices.",
+    pages: ["/", "/services", "/process", "/contact"],
   },
   {
     q: "Who owns the code and the IP?",
     a: "You do. Repositories and accounts are transferred to you at launch, not licensed back to you.",
+    pages: ["/", "/services", "/process", "/work"],
   },
   {
     q: "How do we communicate during the build?",
     a: "A weekly demo on a live URL, plus an async channel for day-to-day questions. No status-report theatre — you see the actual product every sprint.",
+    pages: ["/", "/process", "/work"],
   },
   {
     q: "What happens after launch?",
     a: "30 days of support are included with every full build. After that, a maintenance retainer is optional — nothing is forced.",
+    pages: ["/", "/services", "/process", "/work"],
   },
   {
     q: "What if we're not sure which service we need?",
     a: "That's what the discovery call is for. You'll leave with a written recommendation, including \"you don't need us yet\" when that's the honest answer.",
+    pages: ["/", "/services", "/contact"],
   },
-] as const;
+  {
+    q: "How quickly can you start?",
+    a: "Discovery usually starts within a week or two of the call. Build slots are booked in sequence, so the exact start date is confirmed in writing with the scope.",
+    pages: ["/process", "/contact"],
+  },
+  {
+    q: "Do you work with teams outside Nigeria?",
+    a: "Yes. Engagements run async with a weekly live demo, and we quote in both NGN and USD.",
+    pages: ["/contact", "/services"],
+  },
+  {
+    q: "What do you need from us during the build?",
+    a: "About two hours a week: one demo, plus decisions when a question is genuinely yours to answer. Everything else is our job.",
+    pages: ["/process", "/work"],
+  },
+  {
+    q: "Can you take over a project another agency started?",
+    a: "Often, yes. It starts with an audit of what exists so nobody promises a timeline before reading the code.",
+    pages: ["/services", "/work", "/contact"],
+  },
+];
+
+/** FAQs mapped to a given route. */
+export function faqsForPage(page: string): Faq[] {
+  return FAQS.filter((faq) => faq.pages.includes(page));
+}

@@ -2,17 +2,30 @@ import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { Frame } from "@/components/ui/Frame";
 import { Kicker } from "@/components/ui/Kicker";
-import { Tag } from "@/components/ui/Tag";
 import { CtaLink } from "@/components/ui/CtaLink";
 import { WhatsAppLink } from "@/components/ui/WhatsAppLink";
 import { CaseStudyCard } from "@/components/CaseStudyCard";
+import { QuoteCarousel } from "@/components/QuoteCarousel";
+import { RevealCard } from "@/components/RevealCard";
+import { AltFeatureSection } from "@/components/AltFeatureSection";
+import { FaqSection } from "@/components/FaqSection";
 import { SprintPlan } from "@/components/SprintPlan";
 import { ContactForm } from "@/components/ContactForm";
-import { SERVICES, SHOW_WHATSAPP } from "@/lib/site";
+import {
+  faqsForPage,
+  PERSONALITY_STATEMENT,
+  SERVICES,
+  SHOW_PLACEHOLDER_PROOF,
+  SHOW_WHATSAPP,
+  TESTIMONIALS,
+  WHY_US,
+} from "@/lib/site";
 import { getFeaturedCaseStudies } from "@/lib/case-studies";
 
 export default function Home() {
   const caseStudies = getFeaturedCaseStudies(2);
+  const quotes = TESTIMONIALS.filter((quote) => SHOW_PLACEHOLDER_PROOF || !quote.placeholder);
+  const homeFaqs = faqsForPage("/").slice(0, 5);
 
   return (
     <>
@@ -52,35 +65,42 @@ export default function Home() {
         </Container>
       </section>
 
-      {/* Services snapshot */}
+      {/* Social proof */}
+      {quotes.length > 0 && (
+        <section className="border-t border-[var(--color-divider)] py-14 md:py-16">
+          <Container>
+            <Kicker>What clients say</Kicker>
+            <QuoteCarousel quotes={quotes} />
+          </Container>
+        </section>
+      )}
+
+      {/* Personality statement */}
+      <section className="py-14 md:py-16">
+        <Container>
+          <p className="max-w-[26ch] font-[family-name:var(--font-heading)] text-[clamp(30px,4.4vw,56px)] font-semibold uppercase leading-[1.08] tracking-wide">
+            {PERSONALITY_STATEMENT}
+          </p>
+        </Container>
+      </section>
+
+      {/* Services */}
       <section className="py-14 md:py-16">
         <Container>
           <Kicker>01 · What we build</Kicker>
           <div className="grid gap-8 sm:grid-cols-2">
             {SERVICES.map((service) => (
-              <Link
-                key={service.id}
-                href={`/services#${service.code.toLowerCase()}`}
-                className="text-inherit no-underline"
-              >
-                <Frame className="h-full p-6">
-                  <div className="flex items-baseline gap-2.5">
-                    <span className="text-[13px] font-semibold tracking-[0.08em] text-[var(--color-accent-700)]">
-                      {service.code}
-                    </span>
-                    <h2 className="text-2xl uppercase leading-[26px] tracking-wide">
-                      {service.name}
-                    </h2>
-                  </div>
-                  <p className="mt-4 text-[15px] leading-6 text-muted">{service.summary}</p>
-                  <div className="mt-5 flex flex-wrap gap-2">
-                    <Tag variant="outline">{service.who}</Tag>
-                    <Tag>{service.timeline}</Tag>
-                  </div>
-                </Frame>
-              </Link>
+              <RevealCard key={service.id} service={service} />
             ))}
           </div>
+        </Container>
+      </section>
+
+      {/* Why TreeInAPool */}
+      <section className="py-14 md:py-16">
+        <Container>
+          <Kicker>02 · Why TreeInAPool</Kicker>
+          <AltFeatureSection blocks={WHY_US} />
         </Container>
       </section>
 
@@ -88,12 +108,17 @@ export default function Home() {
       {caseStudies.length > 0 && (
         <section className="py-14 md:py-16">
           <Container>
-            <Kicker>02 · Selected work</Kicker>
+            <Kicker>03 · Selected work</Kicker>
             <div className="grid gap-10 sm:grid-cols-2">
               {caseStudies.map((cs) => (
                 <CaseStudyCard key={cs.slug} caseStudy={cs} />
               ))}
             </div>
+            <p className="mt-8">
+              <Link href="/work" className="text-[14px] leading-6 underline">
+                See every case study →
+              </Link>
+            </p>
           </Container>
         </section>
       )}
@@ -101,7 +126,7 @@ export default function Home() {
       {/* Process teaser */}
       <section className="py-14 md:py-16">
         <Container>
-          <Kicker>03 · How an engagement runs</Kicker>
+          <Kicker>04 · How an engagement runs</Kicker>
           <div className="grid gap-8 border-t border-[var(--color-divider)] sm:grid-cols-2 lg:grid-cols-4">
             {[
               { n: "01", name: "Discover", body: "One call, one written scope. You leave knowing price and timeline. 1 week." },
@@ -111,7 +136,7 @@ export default function Home() {
             ].map((stage, i, arr) => (
               <div
                 key={stage.n}
-                className={`py-6 lg:py-6 ${i < arr.length - 1 ? "lg:border-r lg:border-[var(--color-divider)]" : ""} ${i === 0 ? "lg:pr-6" : "lg:px-6"}`}
+                className={`py-6 ${i < arr.length - 1 ? "lg:border-r lg:border-[var(--color-divider)]" : ""} ${i === 0 ? "lg:pr-6" : "lg:px-6"}`}
               >
                 <span className="text-[34px] leading-[34px] text-[var(--color-accent-700)]">
                   {stage.n}
@@ -134,7 +159,7 @@ export default function Home() {
       {/* Roadmap */}
       <section className="py-14 md:py-16">
         <Container>
-          <Kicker>04 · The roadmap you get on day one</Kicker>
+          <Kicker>05 · The roadmap you get on day one</Kicker>
           <div className="grid gap-12 md:grid-cols-[7fr_4fr] md:items-start">
             <SprintPlan />
             <div>
@@ -164,11 +189,18 @@ export default function Home() {
         </Container>
       </section>
 
+      {/* FAQ */}
+      <section className="py-14 md:py-16">
+        <Container>
+          <FaqSection items={homeFaqs} page="/" title="06 · Questions we get asked" />
+        </Container>
+      </section>
+
       {/* Book the call */}
       <section className="py-14 md:pb-20 md:pt-16">
         <Container className="grid gap-14 md:grid-cols-2 md:items-center">
           <div>
-            <Kicker>05 · Book the call</Kicker>
+            <Kicker>07 · Book the call</Kicker>
             <h2 className="text-[clamp(30px,3.6vw,46px)] uppercase leading-[1.06] tracking-wide">
               Thirty minutes, and you leave with a scope
             </h2>

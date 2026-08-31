@@ -11,7 +11,10 @@ type EventName =
   | "whatsapp_click"
   | "case_study_read"
   | "service_card_click"
-  | "nav_dropdown_open";
+  | "nav_dropdown_open"
+  | "service_card_reveal"
+  | "faq_open"
+  | "carousel_advance";
 
 type EventProps = Record<string, string | number | boolean | undefined>;
 
