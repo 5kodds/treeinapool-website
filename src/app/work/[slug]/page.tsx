@@ -199,10 +199,10 @@ export default async function CaseStudyPage({
       )}
 
       {caseStudy.testimonial && (
-        <section className="border-t border-[var(--color-divider)] py-10">
+        <section className="border-y border-[var(--color-divider)] bg-[color-mix(in_srgb,var(--color-accent-600)_7%,transparent)] py-16 md:py-20">
           <Container>
             <figure className="m-0">
-              <blockquote className="max-w-[40ch] text-[clamp(24px,2.8vw,36px)] uppercase leading-[1.15]">
+              <blockquote className="m-0 max-w-[36ch] text-[clamp(26px,3.4vw,44px)] uppercase leading-[1.12] tracking-wide">
                 &ldquo;{caseStudy.testimonial.quote}&rdquo;
               </blockquote>
               <figcaption className="mt-8 text-[15px] leading-6 text-muted">

@@ -6,6 +6,7 @@ import { CtaLink } from "@/components/ui/CtaLink";
 import { WhatsAppLink } from "@/components/ui/WhatsAppLink";
 import { CaseStudyCard } from "@/components/CaseStudyCard";
 import { QuoteCarousel } from "@/components/QuoteCarousel";
+import { TrustBar } from "@/components/TrustBar";
 import { RevealCard } from "@/components/RevealCard";
 import { AltFeatureSection } from "@/components/AltFeatureSection";
 import { FaqSection } from "@/components/FaqSection";
@@ -18,6 +19,7 @@ import {
   SHOW_PLACEHOLDER_PROOF,
   SHOW_WHATSAPP,
   TESTIMONIALS,
+  TRUST_ITEMS,
   WHY_US,
 } from "@/lib/site";
 import { getFeaturedCaseStudies } from "@/lib/case-studies";
@@ -26,6 +28,9 @@ export default function Home() {
   const caseStudies = getFeaturedCaseStudies(2);
   const quotes = TESTIMONIALS.filter(
     (quote) => SHOW_PLACEHOLDER_PROOF || !quote.placeholder,
+  );
+  const trustItems = TRUST_ITEMS.filter(
+    (item) => SHOW_PLACEHOLDER_PROOF || !item.placeholder,
   );
   const homeFaqs = faqsForPage("/").slice(0, 5);
 
@@ -75,6 +80,12 @@ export default function Home() {
       </section>
 
       {/* Social proof */}
+      {trustItems.length > 0 && (
+        <Container>
+          <TrustBar items={trustItems} />
+        </Container>
+      )}
+
       {quotes.length > 0 && (
         <section className="border-t border-[var(--color-divider)] py-14 md:py-16">
           <Container>
