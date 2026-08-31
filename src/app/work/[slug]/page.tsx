@@ -8,7 +8,7 @@ import { StatTile } from "@/components/ui/StatTile";
 import { CtaLink } from "@/components/ui/CtaLink";
 import { CaseStudyReadTracker } from "@/components/CaseStudyReadTracker";
 import { FaqSection } from "@/components/FaqSection";
-import { faqsForPage } from "@/lib/site";
+import { faqsForPage, SITE_URL } from "@/lib/site";
 import { getAllCaseStudies, getCaseStudyBySlug } from "@/lib/case-studies";
 
 type Params = { slug: string };
@@ -29,6 +29,12 @@ export async function generateMetadata({
     title: caseStudy.title,
     description: caseStudy.summary,
     alternates: { canonical: `/work/${caseStudy.slug}` },
+    openGraph: {
+      title: caseStudy.title,
+      description: caseStudy.summary,
+      type: "article",
+      url: `${SITE_URL}/work/${caseStudy.slug}`,
+    },
   };
 }
 
