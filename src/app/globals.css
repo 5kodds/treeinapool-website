@@ -6,7 +6,7 @@
   --color-text: #1d1f20;
   --color-divider: color-mix(in srgb, #1d1f20 16%, transparent);
   --color-muted: color-mix(in srgb, #1d1f20 70%, transparent);
-  --color-muted-2: color-mix(in srgb, #1d1f20 55%, transparent);
+  --color-muted-2: color-mix(in srgb, #1d1f20 65%, transparent);
 
   --color-accent-100: #eef6ff;
   --color-accent-200: #d6ebff;
@@ -95,6 +95,13 @@
 
   a {
     color: var(--color-accent-700);
+  }
+  /* WCAG 1.4.1: a link inside a block of text cannot rely on colour alone. */
+  p a:not(.btn),
+  li a:not(.btn),
+  figcaption a:not(.btn) {
+    text-decoration: underline;
+    text-underline-offset: 3px;
   }
 
   :focus-visible {
@@ -215,7 +222,10 @@
     padding-inline: 22px;
     border: 1px solid var(--color-divider);
     border-radius: 0;
-    transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+    transition:
+      background-color 0.15s ease,
+      color 0.15s ease,
+      border-color 0.15s ease;
     white-space: nowrap;
   }
   .btn:disabled {
@@ -223,13 +233,13 @@
     cursor: not-allowed;
   }
   .btn-primary {
-    background: var(--color-accent-600);
+    background: var(--color-accent-700);
     color: var(--color-bg);
-    border-color: var(--color-accent-600);
+    border-color: var(--color-accent-700);
   }
   .btn-primary:hover {
-    background: var(--color-accent-700);
-    border-color: var(--color-accent-700);
+    background: var(--color-accent-800);
+    border-color: var(--color-accent-800);
   }
   .btn-secondary {
     background: transparent;
@@ -271,7 +281,8 @@
   }
   .table-tp td {
     padding: 10px;
-    border-bottom: 1px solid color-mix(in srgb, var(--color-text) 8%, transparent);
+    border-bottom: 1px solid
+      color-mix(in srgb, var(--color-text) 8%, transparent);
   }
   .table-tp tbody tr:hover {
     background: color-mix(in srgb, var(--color-text) 4%, transparent);

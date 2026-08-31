@@ -24,6 +24,7 @@ import {
   WHY_US,
 } from "@/lib/site";
 import { getFeaturedCaseStudies } from "@/lib/case-studies";
+import { getPerformanceReport, formatMs } from "@/lib/performance";
 
 export default function Home() {
   const caseStudies = getFeaturedCaseStudies(2);
@@ -34,6 +35,8 @@ export default function Home() {
     (item) => SHOW_PLACEHOLDER_PROOF || !item.placeholder,
   );
   const homeFaqs = faqsForPage("/").slice(0, 5);
+  const perf = getPerformanceReport();
+  const perfHome = perf?.pages.find((page) => page.path === "/");
 
   return (
     <>
@@ -85,6 +88,39 @@ export default function Home() {
         <Container>
           <TrustBar items={trustItems} />
         </Container>
+      )}
+
+      {perfHome && (
+        <section className="border-t border-[var(--color-divider)] py-12">
+          <Container>
+            <div className="flex flex-wrap items-baseline justify-between gap-3">
+              <span className="kicker mb-0">Measured, not claimed</span>
+              <span className="text-[13px] text-muted-2">
+                Lighthouse, {perf?.measuredOn} · this site ·{" "}
+                <Link href="/performance" className="underline">
+                  how it was measured
+                </Link>
+              </span>
+            </div>
+            <dl className="mt-6 grid grid-cols-2 gap-6 border-t border-[var(--color-divider)] pt-6 sm:grid-cols-4">
+              {[
+                ["Performance", String(perfHome.scores.performance)],
+                ["Accessibility", String(perfHome.scores.accessibility)],
+                ["Largest paint", formatMs(perfHome.vitals.lcpMs)],
+                ["Layout shift", perfHome.vitals.cls.toFixed(3)],
+              ].map(([label, value]) => (
+                <div key={label}>
+                  <dd className="font-[family-name:var(--font-heading)] text-[clamp(30px,3.4vw,44px)] font-semibold leading-none">
+                    {value}
+                  </dd>
+                  <dt className="mt-2 text-[11px] uppercase tracking-[0.08em] text-muted-2">
+                    {label}
+                  </dt>
+                </div>
+              ))}
+            </dl>
+          </Container>
+        </section>
       )}
 
       {quotes.length > 0 && (

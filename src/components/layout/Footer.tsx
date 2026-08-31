@@ -16,6 +16,7 @@ const COMPANY_LINKS = [
   { name: "About", href: "/about" },
   { name: "Process", href: "/process" },
   { name: "Work", href: "/work" },
+  { name: "Teardowns", href: "/teardowns" },
   { name: "Insights", href: "/insights" },
   { name: "Performance", href: "/performance" },
   { name: "Contact", href: "/contact" },

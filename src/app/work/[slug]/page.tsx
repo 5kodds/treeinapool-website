@@ -53,9 +53,14 @@ export default async function CaseStudyPage({
           aria-label="Breadcrumb"
           className="pt-6 text-[13px] tracking-wide text-muted-2"
         >
-          <Link href="/">Home</Link> <span className="px-1.5">/</span>{" "}
-          <Link href="/work">Work</Link> <span className="px-1.5">/</span>{" "}
-          <span>{caseStudy.title}</span>
+          <Link href="/" className="underline">
+            Home
+          </Link>{" "}
+          <span className="px-1.5">/</span>{" "}
+          <Link href="/work" className="underline">
+            Work
+          </Link>{" "}
+          <span className="px-1.5">/</span> <span>{caseStudy.title}</span>
         </nav>
       </Container>
 

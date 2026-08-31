@@ -233,7 +233,12 @@ export const NAV: NavGroup[] = [
       {
         name: "All work",
         href: "/work",
-        description: "Every case study and teardown",
+        description: "Client engagements, with outcomes",
+      },
+      {
+        name: "Teardowns",
+        href: "/teardowns",
+        description: "Unsolicited analysis of public sites",
       },
     ],
   },
@@ -290,6 +295,67 @@ export const PROCESS_STAGES = [
     body: "Deploy, hand over the code and the accounts, then 30 days of support.",
     client: "Go live, hand your team the keys, raise anything that breaks.",
   },
+] as const;
+
+export const DISCOVERY_OUTPUTS = [
+  {
+    title: "A written scope",
+    body: "The sequence we're building, what is explicitly not in it, and the assumptions behind both — so nothing important is carried only in someone's memory.",
+  },
+  {
+    title: "A price and a date",
+    body: "Fixed, in writing, with the mechanism for changing them spelled out before anyone needs it.",
+  },
+  {
+    title: "A baseline measurement",
+    body: "Where the current numbers actually sit — load times, drop-off, whatever the project is meant to move — recorded before we touch anything.",
+  },
+  {
+    title: "A risk list",
+    body: "What could make this late or expensive, ranked, with the mitigation for each. The uncomfortable ones go at the top.",
+  },
+  {
+    title: "An honest recommendation",
+    body: 'Including "you don\'t need us yet" or "this is the wrong first project" when that is what the week actually showed.',
+  },
+] as const;
+
+/** Budgets we hold ourselves to on client builds, stated as numbers. */
+export const BUDGETS = [
+  {
+    metric: "Lighthouse performance (mobile)",
+    commitment: "≥ 90",
+    note: "Measured on the launch build, on the real domain",
+  },
+  {
+    metric: "Lighthouse accessibility",
+    commitment: "≥ 95",
+    note: "Plus a keyboard-only pass and an axe run with zero serious violations",
+  },
+  {
+    metric: "WCAG conformance",
+    commitment: "2.1 AA",
+    note: "Treated as a bug class, not a nice-to-have",
+  },
+  {
+    metric: "Largest contentful paint",
+    commitment: "< 2.5s",
+    note: "On a mid-tier device over 4G",
+  },
+  {
+    metric: "Cumulative layout shift",
+    commitment: "< 0.1",
+    note: "No content jumping as the page settles",
+  },
+] as const;
+
+export const MONTHLY_REPORT = [
+  "What shipped, with the live URL to check it against",
+  "What slipped, why, and the revised date",
+  "Budget burned against budget planned",
+  "The numbers we baselined at discovery, re-measured",
+  "What we need from you next month, with dates",
+  "Risks that changed status since last month",
 ] as const;
 
 /**

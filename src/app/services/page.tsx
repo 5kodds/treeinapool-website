@@ -68,7 +68,12 @@ export default function ServicesPage() {
                 {CURRENCY_NOTE}
               </span>
             </header>
-            <div className="overflow-x-auto">
+            <div
+              className="overflow-x-auto"
+              role="region"
+              aria-label="Service comparison table"
+              tabIndex={0}
+            >
               <table className="table-tp min-w-[640px]">
                 <thead>
                   <tr>

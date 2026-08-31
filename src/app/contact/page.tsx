@@ -3,7 +3,9 @@ import { Container } from "@/components/ui/Container";
 import { Frame } from "@/components/ui/Frame";
 import { Kicker } from "@/components/ui/Kicker";
 import { WhatsAppLink } from "@/components/ui/WhatsAppLink";
+import { Suspense } from "react";
 import { ContactForm } from "@/components/ContactForm";
+import { EnquiryTabs } from "@/components/EnquiryTabs";
 import { FaqSection } from "@/components/FaqSection";
 import { CONTACT_EMAIL, faqsForPage, SHOW_WHATSAPP } from "@/lib/site";
 
@@ -45,11 +47,17 @@ export default function ContactPage() {
 
           <Frame className="p-0">
             <div className="border-b border-[var(--color-divider)] px-6 py-3 text-[13px] font-semibold uppercase leading-6 tracking-[0.08em] text-muted">
-              Project enquiry
+              Enquiry
             </div>
-            <div className="p-6">
-              <ContactForm />
-            </div>
+            <Suspense
+              fallback={
+                <div className="p-6">
+                  <ContactForm />
+                </div>
+              }
+            >
+              <EnquiryTabs />
+            </Suspense>
           </Frame>
         </Container>
       </section>

@@ -74,8 +74,13 @@ export default async function InsightPage({
           aria-label="Breadcrumb"
           className="pt-6 text-[13px] tracking-wide text-muted-2"
         >
-          <Link href="/">Home</Link> <span className="px-1.5">/</span>{" "}
-          <Link href="/insights">Insights</Link>{" "}
+          <Link href="/" className="underline">
+            Home
+          </Link>{" "}
+          <span className="px-1.5">/</span>{" "}
+          <Link href="/insights" className="underline">
+            Insights
+          </Link>{" "}
           <span className="px-1.5">/</span> <span>{insight.title}</span>
         </nav>
       </Container>

@@ -16,7 +16,8 @@ type EventName =
   | "faq_open"
   | "carousel_advance"
   | "insight_read"
-  | "newsletter_signup";
+  | "newsletter_signup"
+  | "rebuild_enquiry_submitted";
 
 type EventProps = Record<string, string | number | boolean | undefined>;
 
