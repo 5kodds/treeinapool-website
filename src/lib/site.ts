@@ -21,8 +21,13 @@ export type Service = {
   bandNgn: string;
   bandUsd: string;
   summary: string;
+  /** Longer "what this actually is" copy for the service page. */
+  whatItIs: string;
+  /** Who the engagement suits, and who it doesn't. */
+  whoItsFor: string;
   included: string[];
   owns: string;
+  faqs: { q: string; a: string }[];
 };
 
 // D3: price bands are placeholders pending the founder's real numbers.
@@ -37,6 +42,10 @@ export const SERVICES: Service[] = [
     bandUsd: "$[ 0k ]",
     summary:
       "Your Lovable or Bubble build, rewritten as a product that survives real users and real load.",
+    whatItIs:
+      "A rebuild, not a patch. We read the prototype you already have, keep the product decisions it proved, and re-implement it on a stack that survives real traffic, real data and a real team. Your users move across on a migration plan with a rollback, so nobody loses an account on launch day.",
+    whoItsFor:
+      "For founders whose no-code build has started to hurt: the data model is bending, the monthly bill climbs with every user, and you cannot hire a developer to work on it. If your prototype is still cheap and still answering questions, you are not ready for this yet — and we will tell you so.",
     included: [
       "Audit of the existing prototype and data",
       "Production architecture and stack decision",
@@ -45,6 +54,20 @@ export const SERVICES: Service[] = [
       "Deploy, monitoring, handover",
     ],
     owns: "Code + accounts",
+    faqs: [
+      {
+        q: "Will our users notice the switch?",
+        a: "Only in that it gets faster. The migration runs with a rollback plan, and we cut over once the new build has been tested against real data.",
+      },
+      {
+        q: "Can you keep the same look?",
+        a: "Yes. Most rebuilds keep the interface people already know and change what's underneath, unless you specifically want a redesign.",
+      },
+      {
+        q: "What if parts of the prototype are worth keeping?",
+        a: "Then we keep them. The audit's job is to separate what proved itself from what was scaffolding.",
+      },
+    ],
   },
   {
     id: "product-design",
@@ -56,6 +79,10 @@ export const SERVICES: Service[] = [
     bandUsd: "$[ 0k ]",
     summary:
       "Flows, screens and a component system your developers build from directly — with the states and edge cases drawn, not left to interpretation.",
+    whatItIs:
+      "Flows, screens, and a component system your developers can build from without asking a question every hour. Every state is drawn — empty, loading, error, permission-denied — because those are the screens that get invented badly at 2am when they aren't specified.",
+    whoItsFor:
+      "For teams with engineers but no designer, and for founders who need the product decided before they spend build budget. If you need a logo and brand identity, that's a different job and we'll point you somewhere better.",
     included: [
       "User flows for the core journeys",
       "High-fidelity screens, desktop and mobile",
@@ -64,6 +91,20 @@ export const SERVICES: Service[] = [
       "One round of usability testing",
     ],
     owns: "Files + tokens",
+    faqs: [
+      {
+        q: "Do we get the source files?",
+        a: "Yes — the design files and the exported design tokens, in your account, from the first week.",
+      },
+      {
+        q: "Can you work with our existing design system?",
+        a: "Yes. If one exists we extend it rather than replacing it, which is usually cheaper and always less disruptive.",
+      },
+      {
+        q: "What if our developers disagree with a design?",
+        a: "Good — that conversation happens during design, not after the build. Engineering feedback shapes the flows before they're signed off.",
+      },
+    ],
   },
   {
     id: "full-cycle-build",
@@ -75,6 +116,10 @@ export const SERVICES: Service[] = [
     bandUsd: "$[ 0k ]",
     summary:
       "Discovery through launch for one product: a web app, a mobile app, or the internal portal your operation currently runs on spreadsheets.",
+    whatItIs:
+      "Discovery through launch for one product, run in two-week sprints. Every sprint ends with a live URL you can open and click, and the roadmap is re-published so you can see what shipped, what slipped, and what's next.",
+    whoItsFor:
+      "For SMEs digitising an operation that currently runs on spreadsheets, shared inboxes and WhatsApp, and for founders taking a validated idea to a first real release. If the scope is genuinely open-ended, start with discovery only.",
     included: [
       "Discovery workshop and written scope",
       "Design (as S2, scoped to the build)",
@@ -83,6 +128,20 @@ export const SERVICES: Service[] = [
       "Launch plus 30 days of support",
     ],
     owns: "The whole product",
+    faqs: [
+      {
+        q: "What happens if the scope changes mid-build?",
+        a: "It gets priced in writing and you approve it before anyone builds it. The roadmap is updated so the change is visible, not absorbed silently.",
+      },
+      {
+        q: "How much of our team's time does this take?",
+        a: "About two hours a week: one demo, plus decisions only you can make.",
+      },
+      {
+        q: "Do you handle hosting and deployment?",
+        a: "Yes, on infrastructure registered in your name so it transfers cleanly at launch.",
+      },
+    ],
   },
   {
     id: "ai-automation",
@@ -94,6 +153,10 @@ export const SERVICES: Service[] = [
     bandUsd: "$[ 0k ]",
     summary:
       "The steps someone on your team does by hand every day — quoting, triage, reconciliation, reporting — moved into software, with a human still in the loop where it matters.",
+    whatItIs:
+      "We map the manual work first, then automate the parts that are safe to automate and leave a human in the loop where a wrong answer is expensive. Every deployment ships with an evaluation harness, so accuracy is a number you can watch rather than a claim.",
+    whoItsFor:
+      "For operations where someone spends hours a day on quoting, triage, reconciliation or reporting. If the underlying process isn't written down anywhere yet, the mapping is the first deliverable — automating a process nobody agrees on just produces faster confusion.",
     included: [
       "Process mapping of the manual work",
       "Model and tooling selection",
@@ -102,6 +165,20 @@ export const SERVICES: Service[] = [
       "Escalation paths for the edge cases",
     ],
     owns: "Pipelines + evals",
+    faqs: [
+      {
+        q: "How do we know it's accurate?",
+        a: "You get a baseline measured against real examples before launch, and the same harness runs afterwards so drift shows up early.",
+      },
+      {
+        q: "What happens on edge cases?",
+        a: "They escalate to a person by design. The system is built to know what it doesn't know.",
+      },
+      {
+        q: "Are we locked into one model provider?",
+        a: "No. The integration is written so the model behind it can be swapped without rewriting the workflow.",
+      },
+    ],
   },
 ];
 
@@ -128,21 +205,43 @@ export const NAV: NavGroup[] = [
         href: `/services#${service.code.toLowerCase()}`,
         description: service.who,
       })),
-      { name: "All services", href: "/services", description: "Compare scope, timeline and bands" },
+      {
+        name: "All services",
+        href: "/services",
+        description: "Compare scope, timeline and bands",
+      },
     ],
   },
   {
     name: "Work",
     href: "/work",
     mergeFeaturedWork: true,
-    children: [{ name: "All work", href: "/work", description: "Every case study and teardown" }],
+    children: [
+      {
+        name: "All work",
+        href: "/work",
+        description: "Every case study and teardown",
+      },
+    ],
   },
   {
     name: "Company",
     children: [
-      { name: "About", href: "/about", description: "Who builds it, and how the studio works" },
-      { name: "Process", href: "/process", description: "How an engagement runs, stage by stage" },
-      { name: "Performance", href: "/performance", description: "Our own Core Web Vitals, dated" },
+      {
+        name: "About",
+        href: "/about",
+        description: "Who builds it, and how the studio works",
+      },
+      {
+        name: "Process",
+        href: "/process",
+        description: "How an engagement runs, stage by stage",
+      },
+      {
+        name: "Performance",
+        href: "/performance",
+        description: "Our own Core Web Vitals, dated",
+      },
     ],
   },
   { name: "Insights", href: "/insights" },
@@ -213,7 +312,8 @@ export const TESTIMONIALS: Testimonial[] = [
     placeholder: true,
   },
   {
-    quote: "[ Client quote pending — what working together was actually like. ]",
+    quote:
+      "[ Client quote pending — what working together was actually like. ]",
     name: "[ Name ]",
     role: "[ Role, company ]",
     placeholder: true,
@@ -280,7 +380,7 @@ export const FAQS: Faq[] = [
   {
     q: "Who owns the code and the IP?",
     a: "You do. Repositories and accounts are transferred to you at launch, not licensed back to you.",
-    pages: ["/", "/services", "/process", "/work"],
+    pages: ["/", "/services", "/process", "/work", "/about"],
   },
   {
     q: "How do we communicate during the build?",
@@ -310,12 +410,12 @@ export const FAQS: Faq[] = [
   {
     q: "What do you need from us during the build?",
     a: "About two hours a week: one demo, plus decisions when a question is genuinely yours to answer. Everything else is our job.",
-    pages: ["/process", "/work"],
+    pages: ["/process", "/work", "/about"],
   },
   {
     q: "Can you take over a project another agency started?",
     a: "Often, yes. It starts with an audit of what exists so nobody promises a timeline before reading the code.",
-    pages: ["/services", "/work", "/contact"],
+    pages: ["/services", "/work", "/contact", "/about"],
   },
 ];
 

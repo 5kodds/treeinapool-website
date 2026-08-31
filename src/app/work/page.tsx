@@ -3,11 +3,14 @@ import { Container } from "@/components/ui/Container";
 import { Kicker } from "@/components/ui/Kicker";
 import { CtaLink } from "@/components/ui/CtaLink";
 import { CaseStudyCard } from "@/components/CaseStudyCard";
+import { FaqSection } from "@/components/FaqSection";
+import { faqsForPage } from "@/lib/site";
 import { getAllCaseStudies } from "@/lib/case-studies";
 
 export const metadata: Metadata = {
   title: "Work",
-  description: "Case studies: the problems we were brought, what we built, and the numbers after launch.",
+  description:
+    "Case studies: the problems we were brought, what we built, and the numbers after launch.",
 };
 
 export default function WorkPage() {
@@ -22,8 +25,9 @@ export default function WorkPage() {
             Proof, not portfolio filler.
           </h1>
           <p className="mt-7 max-w-[56ch] text-[17px] leading-7 text-muted">
-            Every case study follows the same template: the problem as the client saw it, what we
-            did about it, and the numbers after launch — confirmed by them, not us.
+            Every case study follows the same template: the problem as the
+            client saw it, what we did about it, and the numbers after launch —
+            confirmed by them, not us.
           </p>
         </Container>
       </section>
@@ -37,8 +41,16 @@ export default function WorkPage() {
               ))}
             </div>
           ) : (
-            <p className="text-muted">Case studies are being written up — check back soon.</p>
+            <p className="text-muted">
+              Case studies are being written up — check back soon.
+            </p>
           )}
+        </Container>
+      </section>
+
+      <section className="border-t border-[var(--color-divider)] py-14 md:py-16">
+        <Container>
+          <FaqSection items={faqsForPage("/work")} page="/work" />
         </Container>
       </section>
 

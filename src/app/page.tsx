@@ -24,7 +24,9 @@ import { getFeaturedCaseStudies } from "@/lib/case-studies";
 
 export default function Home() {
   const caseStudies = getFeaturedCaseStudies(2);
-  const quotes = TESTIMONIALS.filter((quote) => SHOW_PLACEHOLDER_PROOF || !quote.placeholder);
+  const quotes = TESTIMONIALS.filter(
+    (quote) => SHOW_PLACEHOLDER_PROOF || !quote.placeholder,
+  );
   const homeFaqs = faqsForPage("/").slice(0, 5);
 
   return (
@@ -36,18 +38,25 @@ export default function Home() {
             <h1 className="-ml-[0.05em] text-[clamp(40px,9vw,84px)] uppercase leading-[1.03] tracking-wide">
               <span className="block">We turn prototypes</span>
               <span className="block">into products</span>
-              <span className="block text-[var(--color-accent-700)]">people pay for.</span>
+              <span className="block text-[var(--color-accent-700)]">
+                people pay for.
+              </span>
             </h1>
             <p className="mt-8 max-w-[56ch] text-[17px] leading-7 text-muted">
-              TreeInAPool is a product development agency. Bring us a no-code prototype, a
-              spreadsheet, or a sketch on a whiteboard — we ship the production version, designed
-              and built to be maintained.
+              TreeInAPool is a product development agency. Bring us a no-code
+              prototype, a spreadsheet, or a sketch on a whiteboard — we ship
+              the production version, designed and built to be maintained.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <CtaLink href="/contact" page="home" position="hero">
                 Book a free discovery call
               </CtaLink>
-              <CtaLink href="/work" variant="ghost" page="home" position="hero-secondary">
+              <CtaLink
+                href="/work"
+                variant="ghost"
+                page="home"
+                position="hero-secondary"
+              >
                 See the work
               </CtaLink>
             </div>
@@ -58,8 +67,8 @@ export default function Home() {
               [ 00 ] products shipped since [ year ]
             </p>
             <p className="mt-3 text-[13px] leading-5 text-muted-2">
-              Placeholder — needs the real count before launch. No fake logos, no invented
-              metrics.
+              Placeholder — needs the real count before launch. No fake logos,
+              no invented metrics.
             </p>
           </Frame>
         </Container>
@@ -129,10 +138,26 @@ export default function Home() {
           <Kicker>04 · How an engagement runs</Kicker>
           <div className="grid gap-8 border-t border-[var(--color-divider)] sm:grid-cols-2 lg:grid-cols-4">
             {[
-              { n: "01", name: "Discover", body: "One call, one written scope. You leave knowing price and timeline. 1 week." },
-              { n: "02", name: "Design", body: "Flows and screens you approve before a line of product code is written. 2 weeks." },
-              { n: "03", name: "Build", body: "Weekly demo on a live URL. You test what exists, not a status report. 4–10 weeks." },
-              { n: "04", name: "Launch", body: "Deploy, hand over the code and the accounts, then 30 days of support." },
+              {
+                n: "01",
+                name: "Discover",
+                body: "One call, one written scope. You leave knowing price and timeline. 1 week.",
+              },
+              {
+                n: "02",
+                name: "Design",
+                body: "Flows and screens you approve before a line of product code is written. 2 weeks.",
+              },
+              {
+                n: "03",
+                name: "Build",
+                body: "Weekly demo on a live URL. You test what exists, not a status report. 4–10 weeks.",
+              },
+              {
+                n: "04",
+                name: "Launch",
+                body: "Deploy, hand over the code and the accounts, then 30 days of support.",
+              },
             ].map((stage, i, arr) => (
               <div
                 key={stage.n}
@@ -144,7 +169,9 @@ export default function Home() {
                 <h3 className="mt-3 text-xl uppercase leading-[22px] tracking-wide">
                   {stage.name}
                 </h3>
-                <p className="mt-2.5 text-sm leading-6 text-muted">{stage.body}</p>
+                <p className="mt-2.5 text-sm leading-6 text-muted">
+                  {stage.body}
+                </p>
               </div>
             ))}
           </div>
@@ -163,11 +190,14 @@ export default function Home() {
           <div className="grid gap-12 md:grid-cols-[7fr_4fr] md:items-start">
             <SprintPlan />
             <div>
-              <h2 className="text-[32px] uppercase leading-[34px] tracking-wide">No black box</h2>
+              <h2 className="text-[32px] uppercase leading-[34px] tracking-wide">
+                No black box
+              </h2>
               <p className="mt-4 text-[15px] leading-6 text-muted">
-                Two-week sprints, each ending in something you can open and click. The roadmap is
-                agreed before we start and re-published every sprint, so you always know what
-                shipped, what slipped, and what is next.
+                Two-week sprints, each ending in something you can open and
+                click. The roadmap is agreed before we start and re-published
+                every sprint, so you always know what shipped, what slipped, and
+                what is next.
               </p>
               <div className="mt-6 border-t border-[var(--color-divider)]">
                 {[
@@ -192,7 +222,11 @@ export default function Home() {
       {/* FAQ */}
       <section className="py-14 md:py-16">
         <Container>
-          <FaqSection items={homeFaqs} page="/" title="06 · Questions we get asked" />
+          <FaqSection
+            items={homeFaqs}
+            page="/"
+            title="06 · Questions we get asked"
+          />
         </Container>
       </section>
 
@@ -205,8 +239,9 @@ export default function Home() {
               Thirty minutes, and you leave with a scope
             </h2>
             <p className="mt-5 max-w-[52ch] text-base leading-7 text-muted">
-              Bring whatever you have. We will tell you what it takes to ship it, what it costs,
-              and whether we are the right people to build it.
+              Bring whatever you have. We will tell you what it takes to ship
+              it, what it costs, and whether we are the right people to build
+              it.
             </p>
             {SHOW_WHATSAPP && (
               <div className="mt-7">

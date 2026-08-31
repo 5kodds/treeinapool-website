@@ -11,8 +11,8 @@ export default function NotFound() {
           That page didn&apos;t ship.
         </h1>
         <p className="mt-6 max-w-[48ch] text-base leading-7 text-muted">
-          The page you&apos;re looking for doesn&apos;t exist, or it moved. Try the work below, or
-          head back home.
+          The page you&apos;re looking for doesn&apos;t exist, or it moved. Try
+          the work below, or head back home.
         </p>
         <div className="mt-8 flex flex-wrap gap-3">
           <CtaLink href="/" variant="secondary" page="404" position="body">
