@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { caseStudyImages } from "@/lib/case-study-images";
+import { caseStudyImages, imageAlt } from "@/lib/case-study-images";
 import { Container } from "@/components/ui/Container";
 import { Frame } from "@/components/ui/Frame";
 import { Tag } from "@/components/ui/Tag";
@@ -94,7 +94,7 @@ export default async function CaseStudyPage({
             <div className="relative aspect-[21/9] overflow-hidden border border-[var(--color-divider)]">
               <Image
                 src={images.hero}
-                alt={`${caseStudy.title}, screenshot of the live product`}
+                alt={imageAlt(images, caseStudy.title)}
                 fill
                 priority
                 sizes="(min-width: 1100px) 1040px, 100vw"
@@ -113,6 +113,11 @@ export default async function CaseStudyPage({
                 {caseStudy.category}
               </span>
             </div>
+          )}
+          {images?.credit && (
+            <p className="mt-3 text-[13px] leading-6 text-muted-2">
+              {images.credit}
+            </p>
           )}
         </Container>
       </section>

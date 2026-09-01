@@ -5,7 +5,7 @@ import Image from "next/image";
 import { track } from "@/lib/analytics";
 import { Tag } from "@/components/ui/Tag";
 import type { CaseStudy } from "@/lib/case-studies";
-import { caseStudyImages } from "@/lib/case-study-images";
+import { caseStudyImages, imageAlt } from "@/lib/case-study-images";
 
 export function CaseStudyCard({ caseStudy }: { caseStudy: CaseStudy }) {
   const images = caseStudyImages(caseStudy.slug);
@@ -30,7 +30,7 @@ export function CaseStudyCard({ caseStudy }: { caseStudy: CaseStudy }) {
           <div className="relative aspect-[16/10] overflow-hidden border-b border-[var(--color-divider)]">
             <Image
               src={images.card}
-              alt={`${caseStudy.title}, screenshot of the live product`}
+              alt={imageAlt(images, caseStudy.title)}
               fill
               sizes="(min-width: 640px) 50vw, 100vw"
               className="object-cover"

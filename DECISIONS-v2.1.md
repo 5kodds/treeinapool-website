@@ -107,16 +107,24 @@ placeholders on the work cards and case study heroes. They live in
 |-------|-------|--------|
 | Vuvu.ng | Yes | vuvu.ng, hero with both store badges |
 | AfroMadeIt Global | Yes | afromadeitglobal.com, hero |
-| Farm Buddy | **No, deliberately** | See below |
+| Farm Buddy | Photograph, labelled as one | Public domain cassava leaf, see below |
 
-**Farm Buddy has no screenshot on purpose.** It is live at
-farmbud.netlify.app, but the current build is an unstyled prototype: default
-form controls, a broken image placeholder, and a Gemini API key error on
-submit. Putting that shot on a page that sells turning prototypes into
-products would disprove the claim in the same screen. Two ways to fix it,
-both the founder's call: restyle and redeploy the product, or supply a
-screenshot of a build worth showing. Until then the study keeps the drawn
-placeholder, which reads as unfinished rather than as bad.
+**Farm Buddy still has no screenshot, and should not get one yet.** It is
+live at farmbud.netlify.app, but the current build is an unstyled prototype:
+default form controls, a broken image placeholder, and a Gemini API key
+error on submit. Putting that shot on a page selling prototype-to-production
+work would disprove the claim in the same screen.
+
+The slot now carries a **photograph instead**, at the founder's request: a
+cassava leaf showing mosaic mottling, in a field, shot on a phone, which is
+exactly what a Farm Buddy user points the camera at. It is public domain
+(CC0) via Openverse, so no attribution is owed, and it is credited anyway.
+
+`CaseStudyImages.kind` distinguishes `screenshot` from `photograph`, and both
+the alt text and a visible caption follow from it. A photograph presented as
+a screenshot is the quiet kind of lie this site exists to avoid, so the
+caption says in the open: "Illustration, not a screenshot." Replace it with
+a real screenshot the day the product is worth showing.
 
 **Client permission.** The Vuvu screenshot rides on the same Baniri
 permission as naming them at all, D5. If they would rather not be named, the
@@ -200,6 +208,20 @@ axe does not treat a skipped level as a violation.
 
 Audit is now **0 errors and 1 warning**, that warning being the /terms
 clause awaiting counsel (D12).
+
+## The AfroMadeIt case study title
+
+It read "A landing page, built three times". Three builds sounds like two
+failures, and "a landing page" sells the cheapest part of the job. The work
+was positioning: deciding what the firm claims, to which of several
+audiences, before deciding how any of it looks.
+
+It now reads **"Positioning an HR consultancy across three markets"**, which
+is what happened, carries the terms a buyer would actually search for
+(positioning, HR consultancy, markets), and puts strategy rather than
+rework in the headline. The approach steps were rewritten to match: the
+rebuilds are framed as decisions about the claim, not as fresh coats of
+paint.
 
 ## Conflicts flagged rather than guessed
 
