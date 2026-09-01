@@ -29,6 +29,7 @@ npm run a11y     # axe-core across every route, desktop + mobile; fails on serio
 npm run audit    # dead links, metadata, JSON-LD, console errors, placeholder leaks
 npm run e2e      # the journeys that convert: both forms, newsletter, nav, accordions
 npm run verify   # lint + build + a11y + audit + e2e, in order
+npm run logo     # regenerate the logo assets from assets-src/ (rarely needed)
 ```
 
 `npm run verify` is the one command to run before a deploy. Each of the
@@ -158,6 +159,28 @@ a Plausible (or GA4) script to `src/app/layout.tsx`.
 
 North-star metric: qualified lead submissions per 100 sessions
 (`form_submitted` + `rebuild_enquiry_submitted` over sessions).
+
+## Logo assets
+
+`assets-src/treeinapool-logo-master.png` is the original render, on a solid
+white field. It is the only file to replace if the artwork ever changes;
+`npm run logo` derives everything the site ships from it:
+
+| Output | Used for |
+|---|---|
+| `src/assets/treeinapool-logo.png` | Header mark (next/image handles delivery) |
+| `src/app/icon.png` | Browser tab icon |
+| `src/app/apple-icon.png` | iOS home screen |
+
+The script removes the white background by flood-filling inwards from the
+canvas edge, so the pale highlights *on* the mark survive — a global
+"delete white" would punch holes through them. The two enclosed loop holes
+can't be reached from the edge, so they're caught separately by neutrality:
+on this artwork the holes are pure grey-white (saturation 0) while the
+highlights are blue-tinted (saturation ~37). Alpha ramps across the
+anti-aliased rim rather than hard-cutting, which keeps the edge smooth at
+favicon sizes. Output is trimmed to the mark and palette-quantised: 746 KB
+down to 57 KB with no visible loss.
 
 ## Deploying
 

@@ -30,6 +30,43 @@ async function check(name, fn) {
   }
 }
 
+/**
+ * Waits for an element instead of sampling it. Playwright's count() does
+ * not wait, so asserting on it races hydration — these pages render their
+ * interactive parts on the client, so the element is legitimately absent
+ * for a moment after domcontentloaded.
+ */
+async function present(locator, message, timeout = 15_000) {
+  try {
+    await locator.first().waitFor({ state: "visible", timeout });
+  } catch {
+    throw new Error(message);
+  }
+}
+
+/**
+ * A submission counts as confirmed only when the form swaps to its success
+ * element. Checking page text instead would match the surrounding marketing
+ * copy and stay green through a genuine delivery failure — which is exactly
+ * what an upstream 403 looks like.
+ */
+async function confirmed(scope, message) {
+  // The two forms word their success state differently: the project form
+  // says "Message sent", the rebuild form "Enquiry received".
+  const status = scope.locator('[role="status"]', {
+    hasText: /message sent|enquiry received/i,
+  });
+  try {
+    await status.first().waitFor({ state: "visible", timeout: 10_000 });
+  } catch {
+    const alert = scope.locator('[role="alert"]');
+    const detail = (await alert.count())
+      ? ` — form reported: "${(await alert.first().innerText()).trim().slice(0, 120)}"`
+      : "";
+    throw new Error(`${message}${detail}`);
+  }
+}
+
 function assert(condition, message) {
   if (!condition) throw new Error(message);
 }
@@ -73,56 +110,54 @@ try {
     if (await budget.count()) await budget.selectOption({ index: 1 });
     await page.fill("#message", "We need to rebuild our internal ops tool.");
     await page.click('form button[type="submit"]');
-    await page.waitForTimeout(1500);
-    const body = await page.innerText("body");
-    assert(
-      /message sent|thank|reply within/i.test(body),
-      "expected an on-screen confirmation after submitting",
-    );
+    // Assert on the result element, not on page text: the static copy in
+    // the left column also says "reply within one business day", so a body
+    // regex would pass even when delivery failed.
+    await confirmed(page, "project enquiry did not confirm");
   });
 
   await check("rebuild enquiry tab submits", async () => {
     await page.goto(`${ORIGIN}/contact`, { waitUntil: "domcontentloaded" });
     const tab = page.getByRole("tab", { name: /rebuild/i });
-    assert((await tab.count()) > 0, "no rebuild enquiry tab found");
+    await present(tab, "no rebuild enquiry tab found");
     await tab.first().click();
     await page.waitForTimeout(300);
 
+    // Fail loudly on a missing field. Skipping silently is how the first
+    // version of this test filled almost nothing and still reported green:
+    // every selector below except name and email was wrong.
     for (const [selector, value] of [
       ["#rebuild-name", "Test User"],
       ["#rebuild-email", "test@example.com"],
-      ["#siteUrl", "https://example.com"],
+      ["#rebuild-site", "https://example.com"],
+      ["#rebuild-message", "Our current site is slow and hard to update."],
     ]) {
-      const field = page.locator(selector);
-      if (await field.count()) await field.fill(value);
+      await present(page.locator(selector), `missing field ${selector}`);
+      await page.fill(selector, value);
     }
 
     for (const selector of [
-      "#platform",
-      "#conversionGoal",
-      "#timeline",
-      "#rebuildBudget",
+      "#rebuild-platform",
+      "#rebuild-goal",
+      "#rebuild-timeline",
+      "#rebuild-budget",
     ]) {
-      const field = page.locator(selector);
-      if (await field.count()) await field.selectOption({ index: 1 });
+      await present(page.locator(selector), `missing field ${selector}`);
+      await page.selectOption(selector, { index: 1 });
     }
 
-    await page.locator('form button[type="submit"]').last().click();
-    await page.waitForTimeout(1500);
-    const body = await page.innerText("body");
-    assert(
-      /message sent|thank|reply within/i.test(body),
-      "expected an on-screen confirmation after the rebuild enquiry",
-    );
+    // Scope to the tab panel. `form button` picks up the footer newsletter
+    // form as well, and .last() was submitting that instead — its empty
+    // email is where the confusing "Enter a valid email address" came from.
+    const panel = page.locator('[role="tabpanel"]');
+    await panel.locator('button[type="submit"]').first().click();
+    await confirmed(panel, "rebuild enquiry did not confirm");
   });
 
   await check("newsletter form submits from the footer", async () => {
     await page.goto(`${ORIGIN}/`, { waitUntil: "domcontentloaded" });
     const email = page.locator('footer input[type="email"]');
-    assert(
-      (await email.count()) > 0,
-      "no newsletter email field in the footer",
-    );
+    await present(email, "no newsletter email field in the footer");
     await email.first().fill("subscriber@example.com");
     await page.locator("footer form button").first().click();
     await page.waitForTimeout(1200);
@@ -141,7 +176,7 @@ try {
     const trigger = page
       .locator('header button[aria-haspopup="true"]', { hasText: /services/i })
       .first();
-    assert((await trigger.count()) > 0, "no Services nav trigger found");
+    await present(trigger, "no Services nav trigger found");
     await trigger.hover();
     await page.waitForTimeout(300);
     assert(
@@ -177,7 +212,7 @@ try {
   await check("FAQ accordion expands", async () => {
     await page.goto(`${ORIGIN}/process`, { waitUntil: "domcontentloaded" });
     const toggle = page.locator("button[aria-expanded][aria-controls]").last();
-    assert((await toggle.count()) > 0, "no FAQ accordion toggle on /process");
+    await present(toggle, "no FAQ accordion toggle on /process");
     assert(
       (await toggle.getAttribute("aria-expanded")) === "false",
       "the FAQ started open; expected collapsed by default",
@@ -201,16 +236,13 @@ try {
   await check("mobile menu opens and navigates", async () => {
     await mobilePage.goto(`${ORIGIN}/`, { waitUntil: "domcontentloaded" });
     const opener = mobilePage.getByLabel(/open menu/i);
-    assert((await opener.count()) > 0, "no mobile menu button");
+    await present(opener, "no mobile menu button");
     await opener.first().click();
     await mobilePage.waitForTimeout(400);
     // Groups with children keep their child links in a collapsed list, so
     // target the visible top-level link rather than the first match.
     const workLink = mobilePage.locator('a[href="/work"]:visible').first();
-    assert(
-      (await workLink.count()) > 0,
-      "no visible Work link in the mobile menu",
-    );
+    await present(workLink, "no visible Work link in the mobile menu");
     await workLink.click();
     await mobilePage.waitForURL("**/work", { timeout: 10_000 });
   });
@@ -223,10 +255,7 @@ try {
       .click();
     await mobilePage.waitForTimeout(400);
     const expander = mobilePage.getByLabel(/expand /i).first();
-    assert(
-      (await expander.count()) > 0,
-      "no expandable group in the mobile menu",
-    );
+    await present(expander, "no expandable group in the mobile menu");
     const before = await mobilePage.locator("a:visible").count();
     await expander.click();
     await mobilePage.waitForTimeout(300);

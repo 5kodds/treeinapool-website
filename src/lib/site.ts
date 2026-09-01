@@ -1,5 +1,23 @@
 export const SITE_NAME = "TreeInAPool";
-export const SITE_URL = "https://treeinapool.com";
+/**
+ * Absolute base for canonicals, the sitemap, robots, OG image URLs and
+ * JSON-LD. It must match wherever the site is actually being served: point
+ * it at a domain that does not resolve and every social preview breaks,
+ * because the OG image is referenced absolutely.
+ *
+ * Order: an explicit NEXT_PUBLIC_SITE_URL wins; otherwise Vercel's own
+ * production URL if system environment variables are exposed (the default);
+ * otherwise the intended domain, pending D6.
+ */
+const VERCEL_PRODUCTION_URL =
+  process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL;
+
+export const SITE_URL = (
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  (VERCEL_PRODUCTION_URL
+    ? `https://${VERCEL_PRODUCTION_URL}`
+    : "https://treeinapool.com")
+).replace(/\/+$/, "");
 export const SITE_DESCRIPTION =
   "TreeInAPool is a product development agency. We turn prototypes into products people pay for.";
 
