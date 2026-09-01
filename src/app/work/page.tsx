@@ -26,9 +26,11 @@ export default function WorkPage() {
             Proof, not portfolio filler.
           </h1>
           <p className="mt-7 max-w-[56ch] text-[17px] leading-7 text-muted">
-            Every case study follows the same template: the problem as the
-            client saw it, what we did about it, and the numbers after launch,
-            confirmed by them, not us.
+            Every case study follows the same template: the problem, what we did
+            about it, and the numbers after launch. Each one says plainly
+            whether it was built for a client or is our own product, because a
+            portfolio that blurs the two is not evidence of anything. Where a
+            figure has not been confirmed, none is shown.
           </p>
         </Container>
       </section>
