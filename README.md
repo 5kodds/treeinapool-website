@@ -26,7 +26,13 @@ npm run build    # production build — every page statically generated
 npm run lint
 npm run perf     # regenerate content/performance/latest.json (needs a build first)
 npm run a11y     # axe-core across every route, desktop + mobile; fails on serious/critical
+npm run audit    # dead links, metadata, JSON-LD, console errors, placeholder leaks
+npm run e2e      # the journeys that convert: both forms, newsletter, nav, accordions
+npm run verify   # lint + build + a11y + audit + e2e, in order
 ```
+
+`npm run verify` is the one command to run before a deploy. Each of the
+four checks below also runs on every push in CI.
 
 ## Project structure
 
@@ -108,6 +114,27 @@ axe-core over every route at 1440px and 390px and exits non-zero on any
 serious or critical violation; CI runs it on every push. Pinch-zoom is never
 disabled, and reduced-motion visitors get instant states with no
 auto-advancing carousel.
+
+## What the checks cover
+
+| Command | Catches | Fails the build on |
+|---|---|---|
+| `npm run lint` | Type and lint errors | any error |
+| `npm run build` | Anything that breaks static generation | any error |
+| `npm run a11y` | WCAG 2.1 AA violations, both viewports | serious or critical |
+| `npm run audit` | Dead internal links, missing title/description/og, unparseable JSON-LD, `<img>` with no alt, missing or duplicated `<h1>`, console errors, failed requests | any ERROR |
+| `npm run e2e` | Both enquiry forms, newsletter, nav dropdown (hover + keyboard + Escape), FAQ accordions, mobile menu | any failed journey |
+
+Two deliberate design choices in `audit`:
+
+- **Placeholder leaks are warnings, not errors.** Bracketed placeholders
+  are expected until the decision log is closed, so they are reported on
+  every run — that list *is* the live view of what `DECISIONS-v2.1.md`
+  still owes — but they don't fail the build. When you want them to gate a
+  launch, promote them to ERROR in `scripts/audit.mjs`.
+- **External links are checked but never fail the build.** A third-party
+  outage isn't a reason to block a deploy. CI passes `--skip-external`;
+  run `npm run audit` locally to include them.
 
 ## Analytics
 

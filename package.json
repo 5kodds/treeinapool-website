@@ -8,7 +8,10 @@
     "start": "next start",
     "lint": "eslint",
     "perf": "node scripts/perf.mjs",
-    "a11y": "node scripts/a11y.mjs"
+    "a11y": "node scripts/a11y.mjs",
+    "audit": "node scripts/audit.mjs",
+    "e2e": "node scripts/e2e.mjs",
+    "verify": "npm run lint && npm run build && npm run a11y && npm run audit && npm run e2e"
   },
   "dependencies": {
     "clsx": "^2.1.1",

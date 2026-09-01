@@ -9,11 +9,11 @@
  * they were measured under. Nothing on /performance is hand-written — if
  * this file has not been run, the page says so instead of showing numbers.
  */
-import { spawn } from "node:child_process";
 import { writeFileSync, mkdirSync } from "node:fs";
 import path from "node:path";
 import lighthouse from "lighthouse";
 import * as chromeLauncher from "chrome-launcher";
+import { startServer, stopServer } from "./lib/dev-server.mjs";
 
 const PORT = Number(process.env.PERF_PORT ?? 3999);
 const ORIGIN = `http://localhost:${PORT}`;
@@ -24,43 +24,6 @@ const ROUTES = [
 
 const CHROME_PATH =
   process.env.CHROME_PATH ?? process.env.LIGHTHOUSE_CHROMIUM_PATH ?? undefined;
-
-/**
- * `npm run start` spawns next-server as a grandchild, so killing the npm
- * process alone orphans the server: it keeps the port and, in CI, keeps the
- * step open long after the work is done. Spawning detached puts both in
- * their own process group so stopServer() can signal the whole group.
- */
-function startServer() {
-  const server = spawn("npm", ["run", "start", "--", "-p", String(PORT)], {
-    stdio: ["ignore", "pipe", "pipe"],
-    env: process.env,
-    detached: true,
-  });
-
-  return new Promise((resolve, reject) => {
-    const timeout = setTimeout(
-      () => reject(new Error("Server did not start in 60s")),
-      60_000,
-    );
-    server.stdout.on("data", (chunk) => {
-      if (chunk.toString().includes("Ready")) {
-        clearTimeout(timeout);
-        resolve(server);
-      }
-    });
-    server.on("error", reject);
-  });
-}
-
-function stopServer(server) {
-  try {
-    // Negative pid signals the whole group, so next-server goes with npm.
-    process.kill(-server.pid, "SIGTERM");
-  } catch {
-    server.kill("SIGTERM");
-  }
-}
 
 async function audit(url, chromePort) {
   const result = await lighthouse(
@@ -89,7 +52,7 @@ async function audit(url, chromePort) {
   };
 }
 
-const server = await startServer();
+const server = await startServer(PORT);
 const chrome = await chromeLauncher.launch({
   chromeFlags: ["--headless=new", "--no-sandbox", "--disable-dev-shm-usage"],
   chromePath: CHROME_PATH,

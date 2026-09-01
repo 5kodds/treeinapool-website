@@ -34,3 +34,14 @@ jobs:
 
       - name: Accessibility (axe-core)
         run: npm run a11y
+
+      # Dead links, missing metadata, broken JSON-LD, console errors.
+      # External links are skipped: a third-party outage is not a reason
+      # to fail this repo's build.
+      - name: Site audit
+        run: npm run audit -- --skip-external
+
+      # The journeys that convert. A page can render perfectly and still
+      # fail to take a lead, which no static check catches.
+      - name: End-to-end journeys
+        run: npm run e2e
