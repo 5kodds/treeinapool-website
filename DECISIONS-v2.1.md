@@ -223,6 +223,32 @@ rework in the headline. The approach steps were rewritten to match: the
 rebuilds are framed as decisions about the claim, not as fresh coats of
 paint.
 
+## D19, certification badges
+
+The founder wants the Google Partner / Meta / association stamps seen on
+competitor footers. The bar is **built and wired into the footer**, and it
+renders nothing while `CREDENTIALS` is empty, which it is.
+
+It stays empty until certificates exist. Those marks are issued by
+programmes that publish a searchable member directory, so a fabricated badge
+is one click from being disproved, and using the artwork without the
+certification is trademark misuse as well as a false claim. Both named
+programmes are also **advertising** programmes: Google Partner needs a
+rolling 90-day spend of $10,000 across managed Google Ads accounts plus
+certified strategists; Meta's is structured the same way. This studio does
+not run ads, so neither is reachable and neither would mean anything to
+somebody buying a product build.
+
+`CREDENTIALS-ROADMAP.md` lists what is worth pursuing instead, in order.
+The short version: **Vercel Solution Partner** is the badge that matches
+what is actually sold and is free to apply for; **Shopify Partner** is free
+and immediate; cloud partner status waits on a registered entity and a
+second engineer to certify.
+
+Worth being clear about the priority. The missing badge is not what costs
+this site a deal. The missing **verified client review** is, and that is
+blocked on the same Baniri permission as D5 and D8.
+
 ## Conflicts flagged rather than guessed
 
 None. Where the v2.1 brief and the v2 PRD could have collided, on booking

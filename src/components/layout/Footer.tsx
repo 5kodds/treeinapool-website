@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { CredentialBar } from "@/components/CredentialBar";
 import { Container } from "@/components/ui/Container";
 import { NewsletterForm } from "@/components/NewsletterForm";
 import {
@@ -139,6 +140,10 @@ export function Footer() {
             <li>{LOCATION_LINE}</li>
           </ul>
         </div>
+      </Container>
+
+      <Container>
+        <CredentialBar />
       </Container>
 
       {/* Legal */}

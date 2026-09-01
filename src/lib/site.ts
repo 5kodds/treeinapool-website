@@ -492,6 +492,34 @@ export const TRUST_ITEMS: TrustItem[] = [
   },
 ];
 
+export type Credential = {
+  /** Exactly as the issuing programme names it. Never paraphrase a badge. */
+  name: string;
+  /** What it certifies, in the reader's terms. */
+  note: string;
+  /** Where a visitor verifies it in the issuer's own directory. */
+  href: string;
+  /** Optional badge artwork, used only under the issuer's brand guidelines. */
+  logo?: string;
+};
+
+/**
+ * Third-party credentials, for the footer.
+ *
+ * **Empty on purpose, and the bar stays hidden while it is.** The whole value
+ * of a Google Partner or Meta Business Partner badge is that somebody else
+ * vouched; a badge nobody awarded is worth less than no badge, and using
+ * those marks without the certification is trademark misuse on top of being
+ * a lie. Every one of these programmes verifies membership in a public
+ * directory a prospect can search, so a fake one is one click from being
+ * caught.
+ *
+ * Add a row only once the certificate exists, and only with artwork used
+ * under that programme's brand guidelines. DECISIONS-v2.1.md lists which
+ * programmes are actually worth pursuing for a studio of this shape.
+ */
+export const CREDENTIALS: Credential[] = [];
+
 /**
  * D9. The previous line promised "the two people who will actually build the
  * thing", which named a headcount the studio does not have and contradicted
