@@ -28,7 +28,7 @@ export function FaqSection({
 
   return (
     <>
-      <Kicker>{title}</Kicker>
+      <Kicker as="h2">{title}</Kicker>
       <Accordion items={items} page={page} />
       <script
         type="application/ld+json"

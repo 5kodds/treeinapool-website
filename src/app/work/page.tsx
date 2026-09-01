@@ -37,6 +37,7 @@ export default function WorkPage() {
 
       <section className="pb-16 md:pb-20">
         <Container>
+          <h2 className="sr-only">Case studies</h2>
           {caseStudies.length > 0 ? (
             <div className="grid gap-10 sm:grid-cols-2">
               {caseStudies.map((cs) => (

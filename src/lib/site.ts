@@ -32,8 +32,13 @@ export const WHATSAPP_URL = WHATSAPP_NUMBER
 export const WHATSAPP_DISPLAY = "+1 985 244 7681";
 export const SHOW_WHATSAPP = true;
 
-// D11: public location line for the footer.
-export const LOCATION_LINE = "[ Location line, D11 ]";
+/**
+ * D11. Rendered unconditionally in the footer, so a bracketed value here was
+ * visible on every page of the site. Set to what is certainly true; narrow it
+ * to a city whenever the founder wants to name one.
+ */
+export const LOCATION_LINE =
+  "Nigeria, working with teams in US, UK and African markets";
 
 // D13: real profile URLs needed before these link out.
 export const SOCIAL_LINKS: {

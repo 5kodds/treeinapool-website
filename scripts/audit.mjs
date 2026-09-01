@@ -42,6 +42,7 @@ const add = (level, route, check, detail) =>
 // must never reach a section a visitor reads as fact. This flags the ones
 // that render, so the decision log and the live site cannot drift apart.
 const PLACEHOLDER = /\[\s*[^\]]{0,60}\]/g;
+const seenPlaceholders = new Set();
 const PLACEHOLDER_ALLOWED = [/\[\s*\]/];
 
 // Hosts that answer non-browser requests with a refusal regardless of whether
@@ -148,8 +149,11 @@ try {
           headings: [...document.querySelectorAll("h1,h2,h3,h4,h5,h6")].map(
             (h) => Number(h.tagName[1]),
           ),
-          // main only: nav and footer repeat sitewide and would double-report.
-          text:
+          // Scanning <main> alone was hiding a placeholder that sat in the
+          // footer of all eighteen pages. Chrome and footer are scanned too,
+          // and the caller de-duplicates so a sitewide string reports once.
+          text: document.body.innerText,
+          mainText:
             document.querySelector("main")?.innerText ??
             document.body.innerText,
         };
@@ -219,6 +223,11 @@ try {
       (match) => !PLACEHOLDER_ALLOWED.some((allowed) => allowed.test(match)),
     );
     for (const placeholder of [...new Set(placeholders)]) {
+      // A string in the header or footer appears on all eighteen routes.
+      // Report it once, against the first route it was seen on, so one
+      // sitewide placeholder does not drown out eighteen page-specific ones.
+      if (seenPlaceholders.has(placeholder)) continue;
+      seenPlaceholders.add(placeholder);
       add("WARN", route, "placeholder", `visible to visitors: ${placeholder}`);
     }
 

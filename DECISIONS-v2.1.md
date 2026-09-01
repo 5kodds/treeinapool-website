@@ -36,7 +36,7 @@ invented value, and nothing fabricated reaches a production build.
 | D1 | Stack choice | n/a | Settled: Next.js 16 App Router, static generation |
 | D4 | Booking tool | `/contact` | Settled for now: form-only, no scheduler embed. Both enquiry paths work today |
 | D9 | Approve or edit the personality statement | `src/lib/site.ts` → `PERSONALITY_STATEMENT` | **Rewritten.** The old line sold "the two people who will actually build the thing", which named a headcount the studio does not have and contradicted the About page two clicks away. It now states what is actually being bought: the person who scopes the work runs the sprints and hands it over, no account manager, nobody on the project unbriefed by the founder |
-| D11 | Public location line | `src/lib/site.ts` → `LOCATION_LINE` | Footer shows `[ Location line, D11 ]` |
+| D11 | Public location line | `src/lib/site.ts` → `LOCATION_LINE` | **Resolved, narrow it if you want.** It was rendering `[ Location line, D11 ]` in the footer of all eighteen pages, and the audit had been blind to it because the scan covered `<main>` only. It now reads "Nigeria, working with teams in US, UK and African markets". Name a city here whenever you want to |
 | D13 | Social profile URLs (LinkedIn, X, others) | `src/lib/site.ts` → `SOCIAL_LINKS` | **Half resolved.** LinkedIn is live at `linkedin.com/in/olaseniotusanya` and now also appears in the founder `sameAs` on the Organization JSON-LD. X is still a placeholder: the handle `@olaseniotusanya` is listed on his GitHub profile, but it is a personal account, so it links out only if he wants it to. Links render only once a real URL exists |
 | D14 | Newsletter provider | `FORMSPREE_NEWSLETTER_ENDPOINT` | Sign-ups are accepted and the visitor is offered a mailto fallback; nothing is stored until this is set |
 | D17 | Budget bands on the enquiry forms | `src/lib/contact-schema.ts` → `BUDGET_BANDS`, `REBUILD_BUDGET_BANDS` | **Resolved.** Both sets mirror the published starting-from bands, so a band means the same thing on the form as on the page that sent the visitor there. Each set ends with "Above the bands, custom scope" and "Prefer to discuss on the call" |
@@ -179,6 +179,27 @@ argues against, and to a buyer weighing a $40k-plus engagement it reads as
 "this studio has nothing of its own to show". These are cheap to swap if the
 founder disagrees: each block in `WHY_US` names its figure, and replacing
 `WhyFigure` with an `Image` is a few lines in `AltFeatureSection`.
+
+## Two defects the checks were hiding
+
+**The audit was scanning `<main>` only.** Header and footer were excluded to
+avoid reporting a sitewide string eighteen times, which meant a bracketed
+placeholder living in the footer could never be caught. One was:
+`[ Location line, D11 ]`, visible on every page of the live site while the
+audit reported the site clean. The scan now covers the whole body and
+de-duplicates instead, so a sitewide placeholder reports once rather than
+not at all.
+
+**The heading hierarchy skipped a level on three pages.** `Kicker` rendered
+a `<span>`, so sections labelled "02 · Why TreeInAPool" or "Frequently
+asked" were followed by `h3`s with no `h2` in between: a screen reader user
+navigating by heading lost the section boundary. `Kicker` now takes
+`as="h2"` where it genuinely labels a section, and the case study grid on
+/work carries a screen-reader-only heading. axe never caught this, because
+axe does not treat a skipped level as a violation.
+
+Audit is now **0 errors and 1 warning**, that warning being the /terms
+clause awaiting counsel (D12).
 
 ## Conflicts flagged rather than guessed
 

@@ -203,7 +203,7 @@ export default function Home() {
       {quotes.length > 0 && (
         <section className="border-t border-[var(--color-divider)] py-14 md:py-16">
           <Container>
-            <Kicker>What clients say</Kicker>
+            <Kicker as="h2">What clients say</Kicker>
             <QuoteCarousel quotes={quotes} />
           </Container>
         </section>
@@ -222,7 +222,7 @@ export default function Home() {
       <section className="py-14 md:py-20">
         <Container>
           <SectionReveal>
-            <Kicker>01 · What we build</Kicker>
+            <Kicker as="h2">01 · What we build</Kicker>
             <div className="grid gap-8 sm:grid-cols-2">
               {SERVICES.map((service) => (
                 <RevealCard key={service.id} service={service} />
@@ -236,7 +236,7 @@ export default function Home() {
       <section className="py-14 md:py-20">
         <Container>
           <SectionReveal>
-            <Kicker>02 · Why TreeInAPool</Kicker>
+            <Kicker as="h2">02 · Why TreeInAPool</Kicker>
             <AltFeatureSection blocks={WHY_US} />
           </SectionReveal>
         </Container>
@@ -247,7 +247,7 @@ export default function Home() {
         <section className="py-14 md:py-20">
           <Container>
             <SectionReveal>
-              <Kicker>03 · Selected work</Kicker>
+              <Kicker as="h2">03 · Selected work</Kicker>
               <div className="grid gap-10 sm:grid-cols-2">
                 {caseStudies.map((cs) => (
                   <CaseStudyCard key={cs.slug} caseStudy={cs} />
@@ -266,7 +266,7 @@ export default function Home() {
       {/* Process teaser */}
       <section className="py-14 md:py-20">
         <Container>
-          <Kicker>04 · How an engagement runs</Kicker>
+          <Kicker as="h2">04 · How an engagement runs</Kicker>
           <div className="grid gap-8 border-t border-[var(--color-divider)] sm:grid-cols-2 lg:grid-cols-4">
             {[
               {
@@ -317,7 +317,7 @@ export default function Home() {
       {/* Roadmap */}
       <section className="py-14 md:py-20">
         <Container>
-          <Kicker>05 · The roadmap you get on day one</Kicker>
+          <Kicker as="h2">05 · The roadmap you get on day one</Kicker>
           <div className="grid gap-12 md:grid-cols-[7fr_4fr] md:items-start">
             <SprintPlan />
             <div>
