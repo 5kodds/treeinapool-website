@@ -48,7 +48,7 @@ export function QuoteCarousel({ quotes }: { quotes: Testimonial[] }) {
             &ldquo;{active.quote}&rdquo;
           </blockquote>
           <figcaption className="mt-6 text-[15px] leading-6 text-muted">
-            — {active.name}, {active.role}
+            , {active.name}, {active.role}
           </figcaption>
         </div>
       </figure>

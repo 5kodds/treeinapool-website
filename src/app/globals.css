@@ -115,7 +115,7 @@
 }
 
 @layer components {
-  /* — blueprint frame: hairline border with tick-mark corners — */
+  /* blueprint frame: hairline border with tick-mark corners */
   .blueprint {
     position: relative;
     border: 1px solid var(--color-divider);
@@ -311,7 +311,7 @@
     resize: vertical;
   }
 
-  /* — long-form article body — */
+  /* long-form article body */
   .article-body h2 {
     margin: 48px 0 16px;
     font-size: clamp(24px, 2.4vw, 30px);
@@ -381,7 +381,7 @@
     border-width: 0;
   }
 
-  /* — scroll reveal — */
+  /* scroll reveal */
   .section-reveal {
     opacity: 0;
     transform: translateY(14px);
@@ -394,7 +394,7 @@
     transform: none;
   }
 
-  /* — card hover lift — */
+  /* card hover lift */
   .lift {
     transition:
       transform 0.18s ease-out,
@@ -405,7 +405,7 @@
     box-shadow: 0 10px 26px color-mix(in srgb, #2b2b2d 12%, transparent);
   }
 
-  /* — long-form measure cap — */
+  /* long-form measure cap */
   .measure {
     max-width: 70ch;
   }

@@ -21,7 +21,7 @@ export const SITE_URL = (
 export const SITE_DESCRIPTION =
   "TreeInAPool is a product development agency. We turn prototypes into products people pay for.";
 
-// D2: dual market framing — global tone, local reach.
+// D2: dual market framing: global tone, local reach.
 export const CONTACT_EMAIL = "hello@treeinapool.com";
 export const WHATSAPP_NUMBER = ""; // TODO: add the real WhatsApp number (with country code, no symbols) before launch
 export const WHATSAPP_URL = WHATSAPP_NUMBER
@@ -30,7 +30,7 @@ export const WHATSAPP_URL = WHATSAPP_NUMBER
 export const SHOW_WHATSAPP = true;
 
 // D11: public location line for the footer.
-export const LOCATION_LINE = "[ Location line — D11 ]";
+export const LOCATION_LINE = "[ Location line, D11 ]";
 
 // D13: real profile URLs needed before these link out.
 export const SOCIAL_LINKS: {
@@ -76,7 +76,7 @@ export const SERVICES: Service[] = [
     whatItIs:
       "A rebuild, not a patch. We read the prototype you already have, keep the product decisions it proved, and re-implement it on a stack that survives real traffic, real data and a real team. Your users move across on a migration plan with a rollback, so nobody loses an account on launch day.",
     whoItsFor:
-      "For founders whose no-code build has started to hurt: the data model is bending, the monthly bill climbs with every user, and you cannot hire a developer to work on it. If your prototype is still cheap and still answering questions, you are not ready for this yet — and we will tell you so.",
+      "For founders whose no-code build has started to hurt: the data model is bending, the monthly bill climbs with every user, and you cannot hire a developer to work on it. If your prototype is still cheap and still answering questions, you are not ready for this yet, and we will tell you so.",
     included: [
       "Audit of the existing prototype and data",
       "Production architecture and stack decision",
@@ -109,9 +109,9 @@ export const SERVICES: Service[] = [
     bandNgn: "₦[ 0.0m ]",
     bandUsd: "$[ 0k ]",
     summary:
-      "Flows, screens and a component system your developers build from directly — with the states and edge cases drawn, not left to interpretation.",
+      "Flows, screens and a component system your developers build from directly, with the states and edge cases drawn, not left to interpretation.",
     whatItIs:
-      "Flows, screens, and a component system your developers can build from without asking a question every hour. Every state is drawn — empty, loading, error, permission-denied — because those are the screens that get invented badly at 2am when they aren't specified.",
+      "Flows, screens, and a component system your developers can build from without asking a question every hour. Every state is drawn, including empty, loading, error and permission-denied, because those are the screens that get invented badly at 2am when they aren't specified.",
     whoItsFor:
       "For teams with engineers but no designer, and for founders who need the product decided before they spend build budget. If you need a logo and brand identity, that's a different job and we'll point you somewhere better.",
     included: [
@@ -125,7 +125,7 @@ export const SERVICES: Service[] = [
     faqs: [
       {
         q: "Do we get the source files?",
-        a: "Yes — the design files and the exported design tokens, in your account, from the first week.",
+        a: "Yes. The design files and the exported design tokens, in your account, from the first week.",
       },
       {
         q: "Can you work with our existing design system?",
@@ -133,7 +133,7 @@ export const SERVICES: Service[] = [
       },
       {
         q: "What if our developers disagree with a design?",
-        a: "Good — that conversation happens during design, not after the build. Engineering feedback shapes the flows before they're signed off.",
+        a: "Good. That conversation happens during design, not after the build. Engineering feedback shapes the flows before they're signed off.",
       },
     ],
   },
@@ -183,11 +183,11 @@ export const SERVICES: Service[] = [
     bandNgn: "₦[ 0.0m ]",
     bandUsd: "$[ 0k ]",
     summary:
-      "The steps someone on your team does by hand every day — quoting, triage, reconciliation, reporting — moved into software, with a human still in the loop where it matters.",
+      "The steps someone on your team does by hand every day, such as quoting, triage, reconciliation and reporting, moved into software, with a human still in the loop where it matters.",
     whatItIs:
       "We map the manual work first, then automate the parts that are safe to automate and leave a human in the loop where a wrong answer is expensive. Every deployment ships with an evaluation harness, so accuracy is a number you can watch rather than a claim.",
     whoItsFor:
-      "For operations where someone spends hours a day on quoting, triage, reconciliation or reporting. If the underlying process isn't written down anywhere yet, the mapping is the first deliverable — automating a process nobody agrees on just produces faster confusion.",
+      "For operations where someone spends hours a day on quoting, triage, reconciliation or reporting. If the underlying process isn't written down anywhere yet, the mapping is the first deliverable, because automating a process nobody agrees on just produces faster confusion.",
     included: [
       "Process mapping of the manual work",
       "Model and tooling selection",
@@ -281,7 +281,9 @@ export const NAV: NavGroup[] = [
     ],
   },
   { name: "Insights", href: "/insights" },
-  { name: "Contact", href: "/contact", cta: true },
+  // Targets the form directly. Plain /contact left the header CTA doing
+  // nothing visible for anyone already on that page.
+  { name: "Contact", href: "/contact#enquiry", cta: true },
 ];
 
 export const PROCESS_STAGES = [
@@ -318,7 +320,7 @@ export const PROCESS_STAGES = [
 export const DISCOVERY_OUTPUTS = [
   {
     title: "A written scope",
-    body: "The sequence we're building, what is explicitly not in it, and the assumptions behind both — so nothing important is carried only in someone's memory.",
+    body: "The sequence we're building, what is explicitly not in it, and the assumptions behind both, so nothing important is carried only in someone's memory.",
   },
   {
     title: "A price and a date",
@@ -326,7 +328,7 @@ export const DISCOVERY_OUTPUTS = [
   },
   {
     title: "A baseline measurement",
-    body: "Where the current numbers actually sit — load times, drop-off, whatever the project is meant to move — recorded before we touch anything.",
+    body: "Where the current numbers actually sit, covering load times, drop-off and whatever the project is meant to move, recorded before we touch anything.",
   },
   {
     title: "A risk list",
@@ -378,8 +380,7 @@ export const MONTHLY_REPORT = [
 
 /**
  * Proof sections (testimonials, client logos) ship fully built but filled
- * with bracketed placeholders. They render only when this flag is on —
- * on in development, off in production until real, permissioned data lands.
+ * with bracketed placeholders. They render only when this flag is on, * on in development, off in production until real, permissioned data lands.
  */
 export const SHOW_PLACEHOLDER_PROOF =
   process.env.NEXT_PUBLIC_SHOW_PLACEHOLDER_PROOF === "true" ||
@@ -397,20 +398,19 @@ export type Testimonial = {
 export const TESTIMONIALS: Testimonial[] = [
   {
     quote:
-      "[ Client quote pending — one sentence, in their words, naming the change they felt. ]",
+      "[ Client quote pending: one sentence, in their words, naming the change they felt. ]",
     name: "[ Name ]",
     role: "[ Role, company ]",
     placeholder: true,
   },
   {
-    quote: "[ Client quote pending — the outcome, not the adjectives. ]",
+    quote: "[ Client quote pending: the outcome, not the adjectives. ]",
     name: "[ Name ]",
     role: "[ Role, company ]",
     placeholder: true,
   },
   {
-    quote:
-      "[ Client quote pending — what working together was actually like. ]",
+    quote: "[ Client quote pending: what working together was actually like. ]",
     name: "[ Name ]",
     role: "[ Role, company ]",
     placeholder: true,
@@ -429,7 +429,7 @@ export const TRUST_ITEMS: TrustItem[] = [
 
 // D9: founder sign-off needed on this line.
 export const PERSONALITY_STATEMENT =
-  "Working with us is less like hiring an agency and more like hiring the two people who will actually build the thing — because that is who turns up to the call.";
+  "Working with us is less like hiring an agency and more like hiring the two people who will actually build the thing, because that is who turns up to the call.";
 
 export const WHY_US = [
   {
@@ -471,7 +471,7 @@ export type Faq = {
 export const FAQS: Faq[] = [
   {
     q: "How is pricing structured?",
-    a: "Fixed scope, fixed price, agreed in writing after the discovery call. If scope changes mid-project, the change is priced and approved before we build it — no surprise invoices.",
+    a: "Fixed scope, fixed price, agreed in writing after the discovery call. If scope changes mid-project, the change is priced and approved before we build it. No surprise invoices.",
     pages: ["/", "/services", "/process", "/contact"],
   },
   {
@@ -481,12 +481,12 @@ export const FAQS: Faq[] = [
   },
   {
     q: "How do we communicate during the build?",
-    a: "A weekly demo on a live URL, plus an async channel for day-to-day questions. No status-report theatre — you see the actual product every sprint.",
+    a: "A weekly demo on a live URL, plus an async channel for day-to-day questions. No status-report theatre. You see the actual product every sprint.",
     pages: ["/", "/process", "/work"],
   },
   {
     q: "What happens after launch?",
-    a: "30 days of support are included with every full build. After that, a maintenance retainer is optional — nothing is forced.",
+    a: "30 days of support are included with every full build. After that, a maintenance retainer is optional. Nothing is forced.",
     pages: ["/", "/services", "/process", "/work"],
   },
   {

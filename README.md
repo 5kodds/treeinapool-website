@@ -1,4 +1,10 @@
-# TreeInAPool — Website
+# TreeInAPool Website
+
+**Live: https://treeinapool-website.vercel.app**
+
+Deployed on Vercel from `main`: every push builds and ships. A custom domain
+is still open as decision D6, and `SITE_URL` follows whatever host the site
+is served from, so nothing in the code changes when that domain lands.
 
 Marketing and lead-generation site for TreeInAPool. Next.js App Router,
 TypeScript, Tailwind v4, statically generated, no CMS and no database.
@@ -10,7 +16,7 @@ credibility addendum.
 ## Stack
 
 - **Next.js 16** (App Router, static generation) + **React 19** + **TypeScript**
-- **Tailwind v4** — design tokens in `src/app/globals.css` under `@theme`,
+- **Tailwind v4**, design tokens in `src/app/globals.css` under `@theme`,
   with component classes in `@layer components` so utilities always win
 - **gray-matter** for the three markdown content types
 - **zod** for form validation, client and server side
@@ -22,7 +28,7 @@ credibility addendum.
 ```bash
 npm install
 npm run dev      # http://localhost:3000
-npm run build    # production build — every page statically generated
+npm run build    # production build, every page statically generated
 npm run lint
 npm run perf     # regenerate content/performance/latest.json (needs a build first)
 npm run a11y     # axe-core across every route, desktop + mobile; fails on serious/critical
@@ -53,17 +59,17 @@ src/lib/markdown.ts         # dependency-free renderer for the article subset
 ## Content types
 
 All three are markdown with frontmatter, loaded by a matching `src/lib/*.ts`.
-Adding a file publishes a page — no code change, and the sitemap picks it up.
+Adding a file publishes a page with no code change, and the sitemap picks it up.
 
-**Case studies** (`content/case-studies/`) — client, sector, engagement,
+**Case studies** (`content/case-studies/`), client, sector, engagement,
 duration, problem, approach steps, outcome stats, stack, optional
 testimonial. The testimonial band renders only when the field is non-null.
 
-**Insights** (`content/insights/`) — title, date, category, summary,
+**Insights** (`content/insights/`), title, date, category, summary,
 optional readingTime (derived when absent) and `draft`. Renders with a
 sticky table of contents built from the `##` headings.
 
-**Teardowns** (`content/teardowns/`) — unsolicited analyses of public
+**Teardowns** (`content/teardowns/`), unsolicited analyses of public
 sites, deliberately styled apart from client work and labelled *"Unsolicited
 analysis. Not a client engagement."* Every finding and prediction requires
 `source` and `observedOn`; entries missing either are **dropped at load
@@ -73,13 +79,13 @@ writing one.
 
 ## Wire up lead delivery
 
-Both enquiry paths (`/contact` — new project and rebuild tabs) post to
+Both enquiry paths (`/contact`, new project and rebuild tabs) post to
 `/api/contact`, which validates with zod and then:
 
 - if `FORMSPREE_ENDPOINT` is set, forwards the submission with a
   `lead_type` of `project` or `rebuild` so the two can be triaged apart;
 - if it isn't set, accepts the submission so the on-screen flow works but
-  **stores and sends nothing** — the visitor gets a pre-filled `mailto:`
+  **stores and sends nothing**. The visitor gets a pre-filled `mailto:`
   fallback so a real lead still reaches `hello@treeinapool.com`.
 
 `/api/subscribe` behaves the same way for newsletter sign-ups via
@@ -95,9 +101,9 @@ Proof sections are built but empty: testimonials and client logos live in
 production). Filling in real, permissioned data and flipping that one
 variable is the entire go-live step.
 
-Everything else the founder owns — pricing bands, the products-shipped
+Everything else the founder owns (pricing bands, the products-shipped
 count, the WhatsApp number, case study figures, the founder bio and the
-name-origin story — is a visibly bracketed `[ placeholder ]` rather than an
+name-origin story) is a visibly bracketed `[ placeholder ]` rather than an
 invented value. `DECISIONS-v2.1.md` tracks every one, who it blocks, and
 where it lands.
 
@@ -130,8 +136,8 @@ Two deliberate design choices in `audit`:
 
 - **Placeholder leaks are warnings, not errors.** Bracketed placeholders
   are expected until the decision log is closed, so they are reported on
-  every run — that list *is* the live view of what `DECISIONS-v2.1.md`
-  still owes — but they don't fail the build. When you want them to gate a
+  every run. That list *is* the live view of what `DECISIONS-v2.1.md`
+  still owes, but they don't fail the build. When you want them to gate a
   launch, promote them to ERROR in `scripts/audit.mjs`.
 - **External links are checked but never fail the build.** A third-party
   outage isn't a reason to block a deploy. CI passes `--skip-external`;
@@ -153,7 +159,7 @@ a Plausible (or GA4) script to `src/app/layout.tsx`.
 | `carousel_advance` | The quote carousel is advanced manually | `direction` |
 | `form_submitted` | The project enquiry form is submitted | `projectType` |
 | `rebuild_enquiry_submitted` | The rebuild enquiry form is submitted | `platform`, `timeline` |
-| `newsletter_signup` | The footer newsletter form is submitted | — |
+| `newsletter_signup` | The footer newsletter form is submitted |, |
 | `case_study_read` | 60% scroll on a case study | `slug` |
 | `insight_read` | 75% scroll on an article | `slug` |
 
@@ -173,7 +179,7 @@ white field. It is the only file to replace if the artwork ever changes;
 | `src/app/apple-icon.png` | iOS home screen |
 
 The script removes the white background by flood-filling inwards from the
-canvas edge, so the pale highlights *on* the mark survive — a global
+canvas edge, so the pale highlights *on* the mark survive. A global
 "delete white" would punch holes through them. The two enclosed loop holes
 can't be reached from the edge, so they're caught separately by neutrality:
 on this artwork the holes are pure grey-white (saturation 0) while the
@@ -184,7 +190,23 @@ down to 57 KB with no visible loss.
 
 ## Deploying
 
-A standard Next.js app with no special build configuration. Push to Vercel
-or Netlify, set `FORMSPREE_ENDPOINT` and `FORMSPREE_NEWSLETTER_ENDPOINT`,
-point the domain (D6) at it, and update `SITE_URL` in `src/lib/site.ts` to
-match.
+Live on Vercel at https://treeinapool-website.vercel.app, building from
+`main` on every push. Environment variables set there:
+
+| Variable | Purpose |
+|---|---|
+| `FORMSPREE_ENDPOINT` | Project and rebuild enquiries |
+| `FORMSPREE_NEWSLETTER_ENDPOINT` | Footer newsletter |
+| `NEXT_PUBLIC_SITE_URL` | Optional. Overrides the base URL used for canonicals, sitemap and OG images |
+
+`NEXT_PUBLIC_SITE_URL` is optional because `SITE_URL` falls back to Vercel's
+own production URL. Set it explicitly once the custom domain (D6) is live.
+
+Both Formspree forms must have **reCAPTCHA disabled**: this app posts
+server-to-server, which Formspree treats as an AJAX submission and rejects
+with HTTP 403 while reCAPTCHA is on. Spam protection therefore belongs in
+this app (honeypot, rate limiting) rather than at Formspree.
+
+Verified against the live deployment: every route returns 200, the 404 page
+works, canonicals and OG image URLs resolve to the deployed host, and both
+enquiry and newsletter submissions return `delivered: true`.

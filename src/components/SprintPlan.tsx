@@ -20,7 +20,7 @@ export function SprintPlan() {
       <i className="corner br" aria-hidden="true" />
       <header className="flex flex-wrap border-b border-[var(--color-divider)]">
         <span className="min-w-[16ch] flex-1 px-6 py-3 text-[13px] font-semibold uppercase leading-6 tracking-[0.08em]">
-          Sprint plan — [ client ] · first release
+          Sprint plan, [ client ] · first release
         </span>
         <span className="whitespace-nowrap border-l border-[var(--color-divider)] px-6 py-3 text-[13px] font-semibold uppercase leading-6 tracking-[0.08em] text-muted">
           7 sprints · 14 weeks

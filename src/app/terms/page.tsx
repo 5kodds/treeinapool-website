@@ -32,7 +32,7 @@ export default function TermsPage() {
           <p>
             These terms apply to your use of this website. The terms of any
             actual engagement are set out in the written scope and contract
-            signed for that project — nothing on this site replaces or overrides
+            signed for that project, nothing on this site replaces or overrides
             that document.
           </p>
 
@@ -56,7 +56,7 @@ export default function TermsPage() {
             The site is provided as is. We take reasonable care to keep it
             accurate and available, but we don&apos;t accept liability for
             decisions made solely on the basis of what is published here. [
-            Clause to be reviewed and set by counsel — D12. ]
+            Clause to be reviewed and set by counsel, D12. ]
           </p>
 
           <h2>Contact</h2>

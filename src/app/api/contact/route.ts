@@ -51,10 +51,10 @@ export async function POST(request: Request) {
 
   // No email provider configured yet (see README "Wire up lead delivery").
   // The submission is accepted so the on-screen flow works end to end, but
-  // it is NOT stored or emailed anywhere — the client falls back to a
+  // it is NOT stored or emailed anywhere. The client falls back to a
   // pre-filled mailto: link so a real lead still reaches the founder.
   console.warn(
-    "[contact] FORMSPREE_ENDPOINT is not set — submission was not delivered",
+    "[contact] FORMSPREE_ENDPOINT is not set, submission was not delivered",
     { lead_type: payload.lead_type, email: parsed.data.email },
   );
 

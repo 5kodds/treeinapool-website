@@ -35,9 +35,9 @@ export default function TeardownsPage() {
           <div className="mt-8 border-l-2 border-[var(--color-accent-600)] bg-[color-mix(in_srgb,var(--color-accent-600)_6%,transparent)] px-5 py-4">
             <p className="m-0 max-w-[70ch] text-[15px] leading-6">
               <strong>{TEARDOWN_DISCLAIMER}</strong> Nothing here was
-              commissioned, and no teardown describes work we were paid to do —
-              those live under <Link href="/work">Work</Link>. We critique the
-              artefact, never the people who built it.
+              commissioned, and no teardown describes work we were paid to do.
+              That work lives under <Link href="/work">Work</Link>. We critique
+              the artefact, never the people who built it.
             </p>
           </div>
         </Container>
@@ -84,7 +84,7 @@ export default function TeardownsPage() {
               <p className="mt-3 max-w-[62ch] text-[15px] leading-6 text-muted">
                 The format and the first subjects are awaiting sign-off
                 (decisions D15 and D16). The template lives in{" "}
-                <code>content/teardowns/</code> — publishing one is a matter of
+                <code>content/teardowns/</code>, publishing one is a matter of
                 filling it in and clearing the draft flag.
               </p>
             </Frame>
@@ -100,7 +100,7 @@ export default function TeardownsPage() {
             </h2>
             <p className="mt-4 max-w-[52ch] text-base leading-7 text-muted">
               Send the URL and we&apos;ll run the same analysis, with the
-              numbers and the dates attached — no obligation to hire us
+              numbers and the dates attached, no obligation to hire us
               afterwards.
             </p>
           </div>

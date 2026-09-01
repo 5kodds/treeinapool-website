@@ -74,7 +74,7 @@ export default function ProcessPage() {
           <p className="mb-8 max-w-[62ch] text-[17px] leading-7 text-muted">
             &quot;Discovery&quot; is the word agencies use for the week you pay
             for and can&apos;t inspect. Here is the full list of what lands on
-            your side of the table at the end of ours — whether or not you
+            your side of the table at the end of ours, whether or not you
             continue with us.
           </p>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -108,8 +108,8 @@ export default function ProcessPage() {
             <p>
               Most agency work cannot be proved to have worked, because nobody
               wrote down what &quot;before&quot; looked like. We take the
-              baseline in discovery — load times, drop-off points, how long the
-              manual process actually takes — and record it in the scope.
+              baseline in discovery, load times, drop-off points, how long the
+              manual process actually takes, and record it in the scope.
             </p>
             <p>
               That order matters commercially. It means the launch conversation
@@ -174,7 +174,7 @@ export default function ProcessPage() {
             </div>
           </Frame>
           <p className="mt-4 text-[13px] leading-6 text-muted-2">
-            We hold this site to the same numbers — see{" "}
+            We hold this site to the same numbers, see{" "}
             <a href="/performance">our current measurements</a> and{" "}
             <a href="/accessibility">our accessibility statement</a>.
           </p>

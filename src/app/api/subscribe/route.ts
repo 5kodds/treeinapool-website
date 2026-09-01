@@ -41,7 +41,7 @@ export async function POST(request: Request) {
   // No provider configured yet (see README "Wire up lead delivery"). The
   // address is not stored anywhere, so the client offers a mailto fallback.
   console.warn(
-    "[subscribe] FORMSPREE_NEWSLETTER_ENDPOINT is not set — address not stored",
+    "[subscribe] FORMSPREE_NEWSLETTER_ENDPOINT is not set, address not stored",
   );
 
   return NextResponse.json({ ok: true, delivered: false });

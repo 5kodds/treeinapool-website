@@ -6,7 +6,7 @@
  *
  * Starts the production server, audits the routes below on a mobile
  * profile, and writes the scores with the date, the URL, and the profile
- * they were measured under. Nothing on /performance is hand-written — if
+ * they were measured under. Nothing on /performance is hand-written, if
  * this file has not been run, the page says so instead of showing numbers.
  */
 import { writeFileSync, mkdirSync } from "node:fs";

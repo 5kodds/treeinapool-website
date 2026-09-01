@@ -52,7 +52,7 @@ export function NewsletterForm() {
   if (status === "success" || status === "success-undelivered") {
     return (
       <p className="text-[15px] leading-6" role="status">
-        Thanks — you&apos;re on the list.
+        Thanks, you&apos;re on the list.
         {status === "success-undelivered" && (
           <>
             {" "}
@@ -103,7 +103,7 @@ export function NewsletterForm() {
       )}
       {status === "error" && (
         <p className="text-sm text-red-700 sm:self-center" role="alert">
-          Something went wrong — please try again.
+          Something went wrong, please try again.
         </p>
       )}
     </form>

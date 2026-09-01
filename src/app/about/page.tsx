@@ -61,11 +61,11 @@ export default function AboutPage() {
             <p className="max-w-[62ch] text-[17px] leading-7">
               Most software projects don&apos;t fail in the code. They fail in
               the gap between what a client thought they were buying and what
-              the agency thought it was building — a gap that only shows up at
-              the end, when it&apos;s expensive.
+              the agency thought it was building. It is a gap that only shows up
+              at the end, when it&apos;s expensive.
             </p>
             <p className="mt-5 max-w-[62ch] text-[16px] leading-7 text-muted">
-              [ Founder origin story — what led to starting TreeInAPool, in
+              [ Founder origin story: what led to starting TreeInAPool, in
               Olaseni&apos;s own words. Replace this bracketed paragraph before
               launch; we won&apos;t publish invented history. ]
             </p>
@@ -74,7 +74,7 @@ export default function AboutPage() {
                 Why &quot;TreeInAPool&quot;
               </span>
               <p className="mt-3 max-w-[62ch] text-[16px] leading-7 text-muted">
-                [ The name&apos;s origin story — pending decision D7. A
+                [ The name&apos;s origin story: pending decision D7. A
                 distinctive name is an asset worth a real one-line story; this
                 section carries it once it&apos;s written down. ]
               </p>
@@ -174,12 +174,11 @@ export default function AboutPage() {
             <p className="mt-5 max-w-[62ch] text-[16px] leading-7 text-muted">
               TreeInAPool is run as a small, hands-on studio rather than a large
               agency with account layers between you and the people building
-              your product — on most engagements, the founder is in the
-              discovery call and the sprint demos, not just the sales call.
+              your product. On most engagements the founder is in the discovery
+              call and the sprint demos, not just the sales call.
             </p>
             <p className="mt-4 max-w-[62ch] text-[16px] leading-7 text-muted">
-              [ Founder bio — background and prior work. Replace before launch.
-              ]
+              [ Founder bio, background and prior work. Replace before launch. ]
             </p>
             <div className="mt-8 border-t border-[var(--color-divider)] pt-6">
               <span className="block text-xs font-semibold uppercase tracking-[0.08em] text-[var(--color-accent-700)]">
@@ -210,8 +209,7 @@ export default function AboutPage() {
               Talk to the person building it
             </h2>
             <p className="mt-4 max-w-[52ch] text-base leading-7 text-muted">
-              Thirty minutes, direct with the founder — no account manager
-              relay.
+              Thirty minutes, direct with the founder, no account manager relay.
             </p>
           </div>
           <div className="flex flex-wrap gap-3 md:justify-end">

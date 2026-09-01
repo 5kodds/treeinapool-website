@@ -8,7 +8,7 @@ import { getAllInsights, getInsightCategories } from "@/lib/insights";
 export const metadata: Metadata = {
   title: "Insights",
   description:
-    "Practical writing on scoping, pricing and running a software build — the things we explain on discovery calls, written down.",
+    "Practical writing on scoping, pricing and running a software build: the things we explain on discovery calls, written down.",
   alternates: { canonical: "/insights" },
 };
 
@@ -37,7 +37,7 @@ export default function InsightsPage() {
             <InsightsIndex insights={insights} categories={categories} />
           ) : (
             <p className="text-muted">
-              First articles are being written — check back soon.
+              First articles are being written, check back soon.
             </p>
           )}
         </Container>

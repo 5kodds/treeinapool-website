@@ -27,7 +27,7 @@ export default function WorkPage() {
           </h1>
           <p className="mt-7 max-w-[56ch] text-[17px] leading-7 text-muted">
             Every case study follows the same template: the problem as the
-            client saw it, what we did about it, and the numbers after launch —
+            client saw it, what we did about it, and the numbers after launch,
             confirmed by them, not us.
           </p>
         </Container>
@@ -43,7 +43,7 @@ export default function WorkPage() {
             </div>
           ) : (
             <p className="text-muted">
-              Case studies are being written up — check back soon.
+              Case studies are being written up, check back soon.
             </p>
           )}
         </Container>

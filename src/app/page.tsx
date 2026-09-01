@@ -53,8 +53,8 @@ export default function Home() {
             </h1>
             <p className="mt-8 max-w-[56ch] text-[17px] leading-7 text-muted">
               TreeInAPool is a product development agency. Bring us a no-code
-              prototype, a spreadsheet, or a sketch on a whiteboard — we ship
-              the production version, designed and built to be maintained.
+              prototype, a spreadsheet, or a sketch on a whiteboard. We ship the
+              production version, designed and built to be maintained.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <CtaLink href="/contact" page="home" position="hero">
@@ -76,8 +76,8 @@ export default function Home() {
               [ 00 ] products shipped since [ year ]
             </p>
             <p className="mt-3 text-[13px] leading-5 text-muted-2">
-              Placeholder — needs the real count before launch. No fake logos,
-              no invented metrics.
+              Placeholder, needs the real count before launch. No fake logos, no
+              invented metrics.
             </p>
           </Frame>
         </Container>

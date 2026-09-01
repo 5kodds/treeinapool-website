@@ -82,7 +82,7 @@ try {
                 type: "tag",
                 values: ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"],
               },
-              // Skip serialising every passing node — violations are all
+              // Skip serialising every passing node, violations are all
               // this script reports on, and the payload is much smaller.
               resultTypes: ["violations"],
             });
@@ -123,7 +123,7 @@ try {
 
 if (errored > 0) {
   console.error(
-    `\n${errored} route(s) could not be audited — treat as a failure.`,
+    `\n${errored} route(s) could not be audited, treat as a failure.`,
   );
   process.exit(1);
 }

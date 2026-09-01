@@ -18,7 +18,7 @@ WHITE_FLOOR = 236  # below this on any channel, definitely artwork
 WHITE_CEIL = 252  # at or above this, fully transparent if exterior
 
 # The two loop holes are enclosed by the mark, so an edge-connected fill
-# can never reach them — they stayed white against a dark tab. They are
+# can never reach them, they stayed white against a dark tab. They are
 # distinguishable from the highlights that must survive: measured on this
 # artwork the holes are pure neutral white (saturation 0) while the pale
 # sheen on the tube is blue-tinted (saturation ~37). Anything near-white
@@ -80,8 +80,8 @@ def build_alpha(image: Image.Image) -> Image.Image:
             whiteness = min(r, g, b)
             if whiteness < WHITE_FLOOR:
                 continue
-            # Exterior is settled by the flood fill. Enclosed background —
-            # the loop holes — is caught by neutrality instead.
+            # Exterior is settled by the flood fill. Enclosed background,
+            # meaning the loop holes, is caught by neutrality instead.
             if not exterior[row + x] and (max(r, g, b) - whiteness) > SAT_MAX:
                 continue
             if whiteness >= WHITE_CEIL:

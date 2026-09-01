@@ -8,7 +8,7 @@ import { track } from "@/lib/analytics";
 import type { Service } from "@/lib/site";
 
 /**
- * Service card that reveals its detail in place — the mockups' blueprint
+ * Service card that reveals its detail in place, the mockups' blueprint
  * framing applied to a tap-to-learn-more pattern. The whole card is a
  * disclosure button; the "Learn more" link inside is a separate stop so
  * keyboard users can reach the service section directly.

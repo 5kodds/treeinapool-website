@@ -82,7 +82,7 @@ export function ContactForm({ compact = false }: { compact?: boolean }) {
         <i className="corner br" aria-hidden="true" />
         <h3 className="text-xl uppercase">Message sent</h3>
         <p className="mt-3 text-[15px] leading-6 text-muted">
-          Thanks — we read every enquiry and reply within one business day.
+          Thanks, we read every enquiry and reply within one business day.
         </p>
         {status === "success-undelivered" && (
           <p className="mt-4 text-[13px] leading-5 text-muted-2">

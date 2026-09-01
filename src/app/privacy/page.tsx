@@ -46,14 +46,14 @@ export default function PrivacyPage() {
           <p>
             Form submissions are delivered to us by email through a third-party
             form provider. [ Name the provider and link its privacy policy once
-            the provider decision is final — D14. ] Your message is stored in
-            our email account for as long as the enquiry is relevant.
+            the provider decision is final, D14. ] Your message is stored in our
+            email account for as long as the enquiry is relevant.
           </p>
 
           <h2>Analytics</h2>
           <p>
-            The site records anonymous, aggregate usage events — which pages
-            were viewed, which buttons were clicked — with no cookies and no
+            The site records anonymous, aggregate usage events: which pages were
+            viewed and which buttons were clicked, with no cookies and no
             cross-site tracking. We cannot identify an individual visitor from
             this data.
           </p>

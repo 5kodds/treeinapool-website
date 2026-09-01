@@ -218,7 +218,7 @@ export default async function CaseStudyPage({
                 &ldquo;{caseStudy.testimonial.quote}&rdquo;
               </blockquote>
               <figcaption className="mt-8 text-[15px] leading-6 text-muted">
-                — {caseStudy.testimonial.name}
+                , {caseStudy.testimonial.name}
               </figcaption>
             </figure>
           </Container>

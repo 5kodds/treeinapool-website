@@ -14,7 +14,7 @@ Here's the honest version, using a standard two-week sprint.
 
 The first days of a sprint are mostly about removing ambiguity before it becomes code.
 
-- **Turning tickets into decisions.** Every ticket hides a question — what happens if the payment fails halfway, what does an admin see that a user doesn't. These get answered up front, because answering them mid-implementation is where rework comes from.
+- **Turning tickets into decisions.** Every ticket hides a question: what happens if the payment fails halfway, or what an admin sees that a user doesn't. These get answered up front, because answering them mid-implementation is where rework comes from.
 - **Interface and data work.** Screens get built against real data shapes, not lorem ipsum. If the data model is wrong, you want to find out now.
 - **The unglamorous plumbing.** Environments, error tracking, deploy pipelines. Boring, and the reason week six isn't chaos.
 
@@ -32,14 +32,14 @@ That last point matters more than it sounds. Watching someone else drive a demo 
 
 1. A working URL you can open without asking anyone.
 2. A short written note: what shipped, what slipped, what's next, what we need from you.
-3. An updated roadmap — the same document as last sprint, revised, not a new one.
+3. An updated roadmap: the same document as last sprint, revised rather than replaced.
 4. Visibility on the budget burn against the plan.
 
 If any of those four are missing, ask for them. If they stay missing, that's information about the engagement.
 
 ## What we need from you
 
-Usually about two hours a week: one demo, plus timely answers to questions only you can answer. That second part is where most delays actually come from — not the engineering, but a decision sitting in someone's inbox for four days while the sprint runs out.
+Usually about two hours a week: one demo, plus timely answers to questions only you can answer. That second part is where most delays actually come from, not the engineering, but a decision sitting in someone's inbox for four days while the sprint runs out.
 
 ## The warning signs of a build going quiet
 
@@ -52,6 +52,6 @@ None of these mean the project is doomed. All of them mean it's time to ask dire
 
 ## Why this is worth knowing before you hire anyone
 
-You don't need to understand the code to hold a build accountable. You need to know what a healthy week looks like — a deploy, a demo, a written note, an updated plan — and to notice when those stop arriving.
+You don't need to understand the code to hold a build accountable. You need to know what a healthy week looks like: a deploy, a demo, a written note, an updated plan, and to notice when those stop arriving.
 
 That's most of what separates clients who get good outcomes from clients who find out in month four.

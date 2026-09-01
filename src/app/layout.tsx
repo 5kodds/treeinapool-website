@@ -29,8 +29,8 @@ const barlowCondensed = Barlow_Condensed({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: `${SITE_NAME} — We turn prototypes into products people pay for`,
-    template: `%s — ${SITE_NAME}`,
+    default: `${SITE_NAME}: We turn prototypes into products people pay for`,
+    template: `%s, ${SITE_NAME}`,
   },
   description: SITE_DESCRIPTION,
   alternates: { canonical: "/" },

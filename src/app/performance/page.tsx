@@ -26,7 +26,7 @@ export default function PerformancePage() {
           <p className="mt-7 max-w-[60ch] text-[17px] leading-7 text-muted">
             Any agency can say it builds fast sites. This page shows what ours
             actually scores, when it was measured, and the command that
-            reproduces it — run it yourself.
+            reproduces it, run it yourself.
           </p>
         </Container>
       </section>
@@ -38,8 +38,8 @@ export default function PerformancePage() {
               <h2>Why speed is revenue</h2>
               <p>
                 Every extra second before a page becomes usable costs you
-                visitors who never see what you sell. On mobile connections —
-                which is most traffic, most of the time — a heavy page-builder
+                visitors who never see what you sell. On mobile connections,
+                which are most traffic most of the time, a heavy page-builder
                 site can take several seconds to show anything useful, while a
                 static site delivers the first meaningful paint in well under
                 one.
@@ -48,7 +48,7 @@ export default function PerformancePage() {
                 Speed also compounds: faster pages are crawled more thoroughly,
                 rank better on Core Web Vitals, and convert better on the same
                 traffic. It is the rare technical decision with a direct
-                commercial line attached to it — and, unlike most agency claims,
+                commercial line attached to it, and, unlike most agency claims,
                 it is independently verifiable in about thirty seconds.
               </p>
             </div>
@@ -147,8 +147,8 @@ export default function PerformancePage() {
               <p className="mt-8 max-w-[70ch] text-[13px] leading-6 text-muted-2">
                 {report.note} Measured against: {report.measuredAgainst}.
                 Throttling: {report.pages[0]?.throttling ?? "simulate"}. Lab
-                figures vary with hardware and network conditions — treat them
-                as a floor for what the architecture can do, not a promise about
+                figures vary with hardware and network conditions, treat them as
+                a floor for what the architecture can do, not a promise about
                 your project.
               </p>
             </>
@@ -174,7 +174,7 @@ export default function PerformancePage() {
             </h2>
             <p className="mt-4 max-w-[52ch] text-base leading-7 text-muted">
               Send us the URL. We&apos;ll run the same audit and tell you
-              what&apos;s costing you visitors — whether or not you hire us to
+              what&apos;s costing you visitors, whether or not you hire us to
               fix it.
             </p>
           </div>

@@ -12,7 +12,7 @@ type Block = {
 };
 
 /**
- * Alternating expandable blocks — illustration on one side, argument on
+ * Alternating expandable blocks, illustration on one side, argument on
  * the other, flipping each row.
  */
 export function AltFeatureSection({ blocks }: { blocks: readonly Block[] }) {

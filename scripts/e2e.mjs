@@ -32,7 +32,7 @@ async function check(name, fn) {
 
 /**
  * Waits for an element instead of sampling it. Playwright's count() does
- * not wait, so asserting on it races hydration — these pages render their
+ * not wait, so asserting on it races hydration, these pages render their
  * interactive parts on the client, so the element is legitimately absent
  * for a moment after domcontentloaded.
  */
@@ -47,7 +47,7 @@ async function present(locator, message, timeout = 15_000) {
 /**
  * A submission counts as confirmed only when the form swaps to its success
  * element. Checking page text instead would match the surrounding marketing
- * copy and stay green through a genuine delivery failure — which is exactly
+ * copy and stay green through a genuine delivery failure, which is exactly
  * what an upstream 403 looks like.
  */
 async function confirmed(scope, message) {
@@ -61,7 +61,7 @@ async function confirmed(scope, message) {
   } catch {
     const alert = scope.locator('[role="alert"]');
     const detail = (await alert.count())
-      ? ` — form reported: "${(await alert.first().innerText()).trim().slice(0, 120)}"`
+      ? `, form reported: "${(await alert.first().innerText()).trim().slice(0, 120)}"`
       : "";
     throw new Error(`${message}${detail}`);
   }
@@ -147,7 +147,7 @@ try {
     }
 
     // Scope to the tab panel. `form button` picks up the footer newsletter
-    // form as well, and .last() was submitting that instead — its empty
+    // form as well, and .last() was submitting that instead, its empty
     // email is where the confusing "Enter a valid email address" came from.
     const panel = page.locator('[role="tabpanel"]');
     await panel.locator('button[type="submit"]').first().click();
@@ -169,7 +169,7 @@ try {
   });
 
   // The dropdown opens on hover and focus by design (Epic A), so hover is
-  // the interaction to assert — a click() would hover first, opening it,
+  // the interaction to assert, a click() would hover first, opening it,
   // and then toggle it shut again.
   await check("nav dropdown opens on hover", async () => {
     await page.goto(`${ORIGIN}/`, { waitUntil: "domcontentloaded" });

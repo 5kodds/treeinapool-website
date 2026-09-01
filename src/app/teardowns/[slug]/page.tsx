@@ -27,7 +27,7 @@ export async function generateMetadata({
   if (!teardown) return {};
 
   return {
-    title: `${teardown.title} — teardown`,
+    title: `${teardown.title}, teardown`,
     description: teardown.summary,
     alternates: { canonical: `/teardowns/${teardown.slug}` },
   };
@@ -82,7 +82,7 @@ export default async function TeardownPage({
               <strong>{TEARDOWN_DISCLAIMER}</strong> {teardown.subject} did not
               commission this analysis and has no relationship with TreeInAPool.
               Everything below is drawn from publicly observable behaviour on
-              the date stated, and describes the artefact — not the team who
+              the date stated, and describes the artefact, not the team who
               built it.
             </p>
           </div>
@@ -98,7 +98,7 @@ export default async function TeardownPage({
             <div className="grid sm:grid-cols-3">
               {[
                 ["Subject", teardown.subject],
-                ["Sector", teardown.sector || "—"],
+                ["Sector", teardown.sector || ", "],
                 ["Audited on", teardown.auditedOn],
               ].map(([label, value], index) => (
                 <div

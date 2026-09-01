@@ -96,7 +96,7 @@ export function RebuildForm() {
         <h3 className="text-xl uppercase">Enquiry received</h3>
         <p className="mt-3 text-[15px] leading-6 text-muted">
           We&apos;ll audit the site and come back within one business day with
-          what we found — whether or not there&apos;s a project in it.
+          what we found, whether or not there&apos;s a project in it.
         </p>
         {status === "success-undelivered" && (
           <p className="mt-4 text-[13px] leading-5 text-muted-2">

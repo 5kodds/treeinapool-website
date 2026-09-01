@@ -2,11 +2,11 @@
 title: "From a spreadsheet to 400 logins"
 category: "Operations"
 year: 2026
-client: "[ Client name — pending D5 ]"
+client: "[ Client name: pending D5 ]"
 sector: "Operations"
 engagement: "S3 · Full-cycle build"
 duration: "[ 00 ] weeks"
-summary: "A shared Airtable became a portal clients sign into. [ Client, sector, numbers — pending D5. ]"
+summary: "A shared Airtable became a portal clients sign into. [ Client, sector and numbers: pending D5. ]"
 problem: "Every client update lived in one shared spreadsheet: no access control, no history, and a new hire could overwrite a week of work by accident. [ Replace with the client's own framing and the number that hurt. ]"
 problemTags:
   - "No access control"

@@ -27,8 +27,12 @@ import {
 } from "./lib/dev-server.mjs";
 
 const PORT = Number(process.env.AUDIT_PORT ?? 3994);
-const ORIGIN = `http://localhost:${PORT}`;
 const SKIP_EXTERNAL = process.argv.includes("--skip-external");
+
+// Point at a deployed site with AUDIT_BASE_URL to audit production rather
+// than a local build, same checks, against what visitors actually get.
+const REMOTE = (process.env.AUDIT_BASE_URL ?? "").replace(/\/+$/, "");
+const ORIGIN = REMOTE || `http://localhost:${PORT}`;
 
 const findings = [];
 const add = (level, route, check, detail) =>
@@ -40,7 +44,7 @@ const add = (level, route, check, detail) =>
 const PLACEHOLDER = /\[\s*[^\]]{0,60}\]/g;
 const PLACEHOLDER_ALLOWED = [/\[\s*\]/];
 
-const server = await startServer(PORT);
+const server = REMOTE ? null : await startServer(PORT);
 const browser = await chromium.launch({
   executablePath: process.env.CHROME_PATH || undefined,
   args: ["--no-sandbox"],
@@ -66,24 +70,45 @@ try {
     const onFailed = (req) => {
       // Next.js cancels in-flight RSC prefetches whenever navigation moves
       // on, and the browser aborts the favicon the same way. Those surface
-      // as requestfailed but are not defects — only real transport and
+      // as requestfailed but are not defects, only real transport and
       // status failures are worth reporting.
       const errorText = req.failure()?.errorText ?? "";
       if (errorText.includes("ERR_ABORTED")) return;
-      failedRequests.push(`${req.method()} ${req.url()} — ${errorText}`);
+      failedRequests.push(`${req.method()} ${req.url()}: ${errorText}`);
     };
 
     page.on("console", onConsole);
     page.on("requestfailed", onFailed);
 
+    // Auditing a deployed site crosses the public internet, where a single
+    // reset says nothing about the site. Retry with backoff and only report
+    // a route as dead once it has failed every attempt, a flaky check that
+    // blames the site for a network hiccup is worse than no check.
+    const attempts = REMOTE ? 3 : 1;
     let response;
-    try {
-      response = await withTimeout(
-        page.goto(`${ORIGIN}${route}`, { waitUntil: "domcontentloaded" }),
-        `goto ${route}`,
+    let loadError;
+    for (let attempt = 1; attempt <= attempts; attempt += 1) {
+      try {
+        response = await withTimeout(
+          page.goto(`${ORIGIN}${route}`, { waitUntil: "domcontentloaded" }),
+          `goto ${route}`,
+        );
+        loadError = undefined;
+        break;
+      } catch (error) {
+        loadError = error;
+        if (attempt < attempts) {
+          await new Promise((r) => setTimeout(r, 1500 * attempt));
+        }
+      }
+    }
+    if (loadError) {
+      add(
+        "ERROR",
+        route,
+        "load",
+        `${loadError.message} (after ${attempts} attempts)`,
       );
-    } catch (error) {
-      add("ERROR", route, "load", error.message);
       page.off("console", onConsole);
       page.off("requestfailed", onFailed);
       continue;
@@ -130,14 +155,16 @@ try {
     page.off("console", onConsole);
     page.off("requestfailed", onFailed);
 
-    // — metadata completeness —
+    // metadata completeness
+
     if (!data.title) add("ERROR", route, "meta", "no <title>");
     if (!data.description) add("ERROR", route, "meta", "no meta description");
     if (!data.canonical) add("WARN", route, "meta", "no canonical link");
     if (!data.ogTitle) add("ERROR", route, "meta", "no og:title");
     if (!data.ogImage) add("ERROR", route, "meta", "no og:image");
 
-    // — structured data —
+    // structured data
+
     for (const block of data.jsonLd) {
       try {
         const parsed = JSON.parse(block);
@@ -152,7 +179,8 @@ try {
       }
     }
 
-    // — images —
+    // images
+
     if (data.imagesWithoutAlt > 0) {
       add(
         "ERROR",
@@ -162,7 +190,8 @@ try {
       );
     }
 
-    // — heading structure —
+    // heading structure
+
     const h1s = data.headings.filter((level) => level === 1).length;
     if (h1s === 0) add("ERROR", route, "headings", "no <h1>");
     if (h1s > 1) add("WARN", route, "headings", `${h1s} <h1> elements`);
@@ -179,7 +208,8 @@ try {
       }
     }
 
-    // — placeholder leakage —
+    // placeholder leakage
+
     const placeholders = (data.text.match(PLACEHOLDER) ?? []).filter(
       (match) => !PLACEHOLDER_ALLOWED.some((allowed) => allowed.test(match)),
     );
@@ -187,7 +217,8 @@ try {
       add("WARN", route, "placeholder", `visible to visitors: ${placeholder}`);
     }
 
-    // — console health —
+    // console health
+
     for (const error of consoleErrors) {
       add("ERROR", route, "console", error.slice(0, 160));
     }
@@ -195,7 +226,8 @@ try {
       add("ERROR", route, "network", request.slice(0, 160));
     }
 
-    // — collect link targets —
+    // collect link targets
+
     for (const link of data.links) {
       if (!link.href || link.href.startsWith("#")) continue;
       if (link.href.startsWith("mailto:") || link.href.startsWith("tel:"))
@@ -209,12 +241,14 @@ try {
       }
     }
 
+    if (REMOTE) await new Promise((r) => setTimeout(r, 400));
     process.stdout.write(".");
   }
 
   process.stdout.write("\n");
 
-  // — internal link integrity —
+  // internal link integrity
+
   for (const target of internalTargets) {
     const res = await page.request.get(`${ORIGIN}${target}`).catch(() => null);
     if (!res) {
@@ -229,7 +263,8 @@ try {
     }
   }
 
-  // — external links —
+  // external links
+
   if (!SKIP_EXTERNAL) {
     for (const target of externalTargets) {
       const res = await page.request
@@ -256,10 +291,11 @@ try {
   await context.close();
 } finally {
   await browser.close();
-  stopServer(server);
+  if (server) stopServer(server);
 }
 
-// — report —
+// report
+
 const errors = findings.filter((f) => f.level === "ERROR");
 const warnings = findings.filter((f) => f.level === "WARN");
 
@@ -282,8 +318,8 @@ function report(title, list) {
 console.log(
   `\nAudited ${ROUTES.length} routes, ${internalTargets.size} internal and ${externalTargets.size} external link targets.`,
 );
-report("ERRORS — fix before launch", errors);
-report("WARNINGS — review", warnings);
+report("ERRORS, fix before launch", errors);
+report("WARNINGS, review", warnings);
 
 if (errors.length === 0 && warnings.length === 0) {
   console.log("\nClean: nothing to fix.");

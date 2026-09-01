@@ -53,7 +53,7 @@ function renderInline(text: string): string {
 }
 
 /**
- * Renders the markdown subset the insight articles use — headings,
+ * Renders the markdown subset the insight articles use, headings,
  * paragraphs, lists, blockquotes and inline formatting. Runs at build time
  * over repo-authored content, so no parser dependency is pulled in.
  */

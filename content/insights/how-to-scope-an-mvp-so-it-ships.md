@@ -26,7 +26,7 @@ Take the rest of the wish list and put each item in exactly one bucket:
 - **Blocks scale.** It will hurt at a thousand users but not at fifty. Bulk actions, admin dashboards, and most reporting live here.
 - **Someone would like it.** Everything else. Dark mode, the second integration, the export button someone requested in a meeting once.
 
-Only the first bucket is in the MVP. The other two go into a written backlog — visible, dated, and not deleted, because the fastest way to make a stakeholder fight for a feature is to make them feel it vanished.
+Only the first bucket is in the MVP. The other two go into a written backlog that is visible, dated and never deleted, because the fastest way to make a stakeholder fight for a feature is to make them feel it vanished.
 
 ## Give every feature an owner-of-the-decision
 
@@ -48,4 +48,4 @@ That document isn't bureaucracy. It's the thing that lets you say yes to a mid-b
 
 ## The uncomfortable part
 
-A well-scoped MVP looks embarrassingly small on paper. That feeling is correct and you should ship it anyway. The alternative isn't a bigger launch — it's a launch that keeps moving three weeks to the right, every three weeks, until the budget decides the scope for you.
+A well-scoped MVP looks embarrassingly small on paper. That feeling is correct and you should ship it anyway. The alternative isn't a bigger launch, it's a launch that keeps moving three weeks to the right, every three weeks, until the budget decides the scope for you.

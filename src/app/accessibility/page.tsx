@@ -50,9 +50,9 @@ export default function AccessibilityPage() {
                 CI on every push.
               </li>
               <li>
-                <strong>Keyboard.</strong> Every interactive element —
-                navigation dropdowns, the mobile menu, accordions, the quote
-                carousel, both forms — is reachable and operable with a keyboard
+                <strong>Keyboard.</strong> Every interactive element, including
+                navigation dropdowns, the mobile menu, accordions and the quote
+                carousel, both forms, is reachable and operable with a keyboard
                 alone, with a visible focus ring and Escape closing anything
                 that opens.
               </li>
@@ -115,7 +115,7 @@ export default function AccessibilityPage() {
               </>
             ) : (
               <p className="mt-4 text-[15px] leading-6 text-muted">
-                No measured run recorded yet — run <code>npm run perf</code>.
+                No measured run recorded yet, run <code>npm run perf</code>.
               </p>
             )}
           </Frame>

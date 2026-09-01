@@ -225,7 +225,7 @@ export default function ServicesPage() {
             </h2>
             <p className="mt-4 max-w-[52ch] text-base leading-7 text-muted">
               That is what the discovery call is for. Thirty minutes, and you
-              leave with a recommendation in writing — including &quot;you
+              leave with a recommendation in writing, including &quot;you
               don&apos;t need us yet&quot; when that is the honest answer.
             </p>
           </div>

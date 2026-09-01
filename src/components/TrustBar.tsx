@@ -2,7 +2,7 @@ import type { TrustItem } from "@/lib/site";
 
 /**
  * Client logo / badge row. Real logos replace the placeholder cells one by
- * one in site.ts — a cell only ships once the client has signed off (D8).
+ * one in site.ts, a cell only ships once the client has signed off (D8).
  */
 export function TrustBar({ items }: { items: TrustItem[] }) {
   if (items.length === 0) return null;

@@ -28,7 +28,7 @@ export default function ContactPage() {
             </h1>
             <p className="mt-6 max-w-[48ch] text-base leading-7 text-muted">
               Fill in the form and we&apos;ll reply within one business day to
-              set up the call. Bring whatever you have — a prototype, a
+              set up the call. Bring whatever you have: a prototype, a
               spreadsheet, or a sketch.
             </p>
 
@@ -45,7 +45,10 @@ export default function ContactPage() {
             </div>
           </div>
 
-          <Frame className="p-0">
+          {/* Anchor target for the "Book a call" CTA. Without it, clicking
+              that button while already on /contact does nothing visible, and the most prominent control on the page reads
+              as broken. */}
+          <Frame className="scroll-mt-24 p-0" id="enquiry" tabIndex={-1}>
             <div className="border-b border-[var(--color-divider)] px-6 py-3 text-[13px] font-semibold uppercase leading-6 tracking-[0.08em] text-muted">
               Enquiry
             </div>

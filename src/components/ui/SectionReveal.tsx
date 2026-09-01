@@ -6,7 +6,7 @@ import { usePrefersReducedMotion } from "@/lib/use-prefers-reduced-motion";
 /**
  * Fades and lifts a section into view once. Content is visible from the
  * start for reduced-motion visitors and if IntersectionObserver never
- * fires — the animation is decoration, never a gate on reading.
+ * fires, the animation is decoration, never a gate on reading.
  */
 export function SectionReveal({
   children,

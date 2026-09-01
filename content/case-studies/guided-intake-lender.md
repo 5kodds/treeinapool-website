@@ -2,7 +2,7 @@
 title: "Cut onboarding time 60%"
 category: "Fintech"
 year: 2026
-client: "[ Client name — pending D5 ]"
+client: "[ Client name: pending D5 ]"
 sector: "Lending"
 engagement: "S3 · Full-cycle build"
 duration: "11 weeks"

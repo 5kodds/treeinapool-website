@@ -38,7 +38,7 @@ export type PerfReport = {
 
 /**
  * Reads the last recorded Lighthouse run. Returns null when no run has been
- * recorded — the page then says so rather than showing a number nobody
+ * recorded, the page then says so rather than showing a number nobody
  * measured. Regenerate with `npm run perf`.
  */
 export function getPerformanceReport(): PerfReport | null {

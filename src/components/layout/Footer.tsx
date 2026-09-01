@@ -36,7 +36,7 @@ export function Footer() {
           </h2>
           <p className="mt-2 max-w-[52ch] text-[15px] leading-6 text-muted">
             New writing on scoping, pricing and shipping software. No drip
-            sequence, no pitch — unsubscribe in one click.
+            sequence, no pitch, unsubscribe in one click.
           </p>
         </div>
         <div className="md:justify-self-end">
@@ -132,7 +132,7 @@ export function Footer() {
                     WhatsApp: {WHATSAPP_NUMBER}
                   </a>
                 ) : (
-                  <span>WhatsApp: [ number — D2 ]</span>
+                  <span>WhatsApp: [ number, D2 ]</span>
                 )}
               </li>
             )}
