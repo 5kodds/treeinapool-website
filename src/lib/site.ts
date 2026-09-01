@@ -454,14 +454,37 @@ export const TESTIMONIALS: Testimonial[] = [
   },
 ];
 
-export type TrustItem = { name: string; note: string; placeholder?: boolean };
+export type TrustItem = {
+  name: string;
+  note: string;
+  /** Where a visitor goes to check the claim for themselves. */
+  href?: string;
+  placeholder?: boolean;
+};
 
-// D8: no logo goes up without the client's written sign-off.
+/**
+ * D8: no client logo goes up without written sign-off, and no quote is
+ * published that the person did not actually say. Until those land, this row
+ * carries the next best thing and arguably the better thing: work that is
+ * live right now, each cell linking to the place a stranger can verify it
+ * without taking anyone's word for it.
+ */
 export const TRUST_ITEMS: TrustItem[] = [
-  { name: "[ Client logo ]", note: "Fintech", placeholder: true },
-  { name: "[ Client logo ]", note: "Operations", placeholder: true },
-  { name: "[ Client logo ]", note: "Logistics", placeholder: true },
-  { name: "[ Client logo ]", note: "Healthcare", placeholder: true },
+  {
+    name: "Vuvu",
+    note: "Live on iOS and Android",
+    href: "https://apps.apple.com/ng/app/vuvu/id6738325760",
+  },
+  {
+    name: "vuvu.ng",
+    note: "Bill payments, in production",
+    href: "https://vuvu.ng",
+  },
+  {
+    name: "AfroMadeIt Global",
+    note: "HR consultancy, live",
+    href: "https://afromadeitglobal.com",
+  },
 ];
 
 // D9: founder sign-off needed on this line.
