@@ -487,9 +487,13 @@ export const TRUST_ITEMS: TrustItem[] = [
   },
 ];
 
-// D9: founder sign-off needed on this line.
+/**
+ * D9. The previous line promised "the two people who will actually build the
+ * thing", which named a headcount the studio does not have and contradicted
+ * the About page two clicks away. This one says the thing being sold.
+ */
 export const PERSONALITY_STATEMENT =
-  "Working with us is less like hiring an agency and more like hiring the two people who will actually build the thing, because that is who turns up to the call.";
+  "You are hiring the person who scopes the work, runs the sprints and hands it over at the end. No account manager in between, and nobody touches your project who was not briefed by the founder directly.";
 
 export const WHY_US = [
   {

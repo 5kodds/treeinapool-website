@@ -36,7 +36,7 @@ invented value, and nothing fabricated reaches a production build.
 |----|----------------|----------------|-------------------|
 | D1 | Stack choice | n/a | Settled: Next.js 16 App Router, static generation |
 | D4 | Booking tool | `/contact` | Settled for now: form-only, no scheduler embed. Both enquiry paths work today |
-| D9 | Approve or edit the personality statement | `src/lib/site.ts` → `PERSONALITY_STATEMENT` | Draft copy is live on the Home page |
+| D9 | Approve or edit the personality statement | `src/lib/site.ts` → `PERSONALITY_STATEMENT` | **Rewritten.** The old line sold "the two people who will actually build the thing", which named a headcount the studio does not have and contradicted the About page two clicks away. It now states what is actually being bought: the person who scopes the work runs the sprints and hands it over, no account manager, nobody on the project unbriefed by the founder |
 | D11 | Public location line | `src/lib/site.ts` → `LOCATION_LINE` | Footer shows `[ Location line, D11 ]` |
 | D13 | Social profile URLs (LinkedIn, X, others) | `src/lib/site.ts` → `SOCIAL_LINKS` | **Half resolved.** LinkedIn is live at `linkedin.com/in/olaseniotusanya` and now also appears in the founder `sameAs` on the Organization JSON-LD. X is still a placeholder: the handle `@olaseniotusanya` is listed on his GitHub profile, but it is a personal account, so it links out only if he wants it to. Links render only once a real URL exists |
 | D14 | Newsletter provider | `FORMSPREE_NEWSLETTER_ENDPOINT` | Sign-ups are accepted and the visitor is offered a mailto fallback; nothing is stored until this is set |
@@ -97,6 +97,31 @@ trust bar, no testimonials, and no confirmed outcome figure on any of the
 three case studies. A mid-market brand comparing three studios will discount
 the one that shows a premium price next to unfilled brackets. D5 and D8, and
 the home page counts, are now the highest-value things left on this list.
+
+## Product screenshots
+
+Real screenshots, captured from each live product, replace the drawn
+placeholders on the work cards and case study heroes. They live in
+`src/assets/work/` and are wired by slug in `src/lib/case-study-images.ts`.
+
+| Study | Image | Source |
+|-------|-------|--------|
+| Vuvu.ng | Yes | vuvu.ng, hero with both store badges |
+| AfroMadeIt Global | Yes | afromadeitglobal.com, hero |
+| Farm Buddy | **No, deliberately** | See below |
+
+**Farm Buddy has no screenshot on purpose.** It is live at
+farmbud.netlify.app, but the current build is an unstyled prototype: default
+form controls, a broken image placeholder, and a Gemini API key error on
+submit. Putting that shot on a page that sells turning prototypes into
+products would disprove the claim in the same screen. Two ways to fix it,
+both the founder's call: restyle and redeploy the product, or supply a
+screenshot of a build worth showing. Until then the study keeps the drawn
+placeholder, which reads as unfinished rather than as bad.
+
+**Client permission.** The Vuvu screenshot rides on the same Baniri
+permission as naming them at all, D5. If they would rather not be named, the
+image comes out with the name.
 
 ## Conflicts flagged rather than guessed
 

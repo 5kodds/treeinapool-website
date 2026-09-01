@@ -1,11 +1,15 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { track } from "@/lib/analytics";
 import { Tag } from "@/components/ui/Tag";
 import type { CaseStudy } from "@/lib/case-studies";
+import { caseStudyImages } from "@/lib/case-study-images";
 
 export function CaseStudyCard({ caseStudy }: { caseStudy: CaseStudy }) {
+  const images = caseStudyImages(caseStudy.slug);
+
   return (
     <Link
       href={`/work/${caseStudy.slug}`}
@@ -22,17 +26,29 @@ export function CaseStudyCard({ caseStudy }: { caseStudy: CaseStudy }) {
         <i className="corner tr" aria-hidden="true" />
         <i className="corner bl" aria-hidden="true" />
         <i className="corner br" aria-hidden="true" />
-        <div
-          className="flex aspect-[16/10] items-center justify-center border-b border-[var(--color-divider)]"
-          style={{
-            background:
-              "repeating-linear-gradient(135deg, color-mix(in srgb, var(--color-accent-600) 8%, transparent) 0 12px, transparent 12px 24px)",
-          }}
-        >
-          <span className="text-xs font-semibold uppercase tracking-[0.1em] text-muted-2">
-            Image placeholder · {caseStudy.category}
-          </span>
-        </div>
+        {images ? (
+          <div className="relative aspect-[16/10] overflow-hidden border-b border-[var(--color-divider)]">
+            <Image
+              src={images.card}
+              alt={`${caseStudy.title}, screenshot of the live product`}
+              fill
+              sizes="(min-width: 640px) 50vw, 100vw"
+              className="object-cover"
+            />
+          </div>
+        ) : (
+          <div
+            className="flex aspect-[16/10] items-center justify-center border-b border-[var(--color-divider)]"
+            style={{
+              background:
+                "repeating-linear-gradient(135deg, color-mix(in srgb, var(--color-accent-600) 8%, transparent) 0 12px, transparent 12px 24px)",
+            }}
+          >
+            <span className="text-xs font-semibold uppercase tracking-[0.1em] text-muted-2">
+              {caseStudy.category}
+            </span>
+          </div>
+        )}
         <div className="p-6">
           <h3 className="text-[26px] leading-[30px] uppercase tracking-wide">
             {caseStudy.title}

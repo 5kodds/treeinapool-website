@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { caseStudyImages } from "@/lib/case-study-images";
 import { Container } from "@/components/ui/Container";
 import { Frame } from "@/components/ui/Frame";
 import { Tag } from "@/components/ui/Tag";
@@ -49,6 +51,7 @@ export default async function CaseStudyPage({
 
   const all = getAllCaseStudies();
   const next = all[(all.findIndex((c) => c.slug === slug) + 1) % all.length];
+  const images = caseStudyImages(slug);
 
   return (
     <>
@@ -87,17 +90,30 @@ export default async function CaseStudyPage({
 
       <section className="pb-14">
         <Container>
-          <div
-            className="flex aspect-[21/9] items-center justify-center border border-[var(--color-divider)]"
-            style={{
-              background:
-                "repeating-linear-gradient(135deg, color-mix(in srgb, var(--color-accent-600) 8%, transparent) 0 14px, transparent 14px 28px)",
-            }}
-          >
-            <span className="text-xs font-semibold uppercase tracking-[0.1em] text-muted-2">
-              Hero image placeholder · product screenshot
-            </span>
-          </div>
+          {images ? (
+            <div className="relative aspect-[21/9] overflow-hidden border border-[var(--color-divider)]">
+              <Image
+                src={images.hero}
+                alt={`${caseStudy.title}, screenshot of the live product`}
+                fill
+                priority
+                sizes="(min-width: 1100px) 1040px, 100vw"
+                className="object-cover"
+              />
+            </div>
+          ) : (
+            <div
+              className="flex aspect-[21/9] items-center justify-center border border-[var(--color-divider)]"
+              style={{
+                background:
+                  "repeating-linear-gradient(135deg, color-mix(in srgb, var(--color-accent-600) 8%, transparent) 0 14px, transparent 14px 28px)",
+              }}
+            >
+              <span className="text-xs font-semibold uppercase tracking-[0.1em] text-muted-2">
+                {caseStudy.category}
+              </span>
+            </div>
+          )}
         </Container>
       </section>
 
