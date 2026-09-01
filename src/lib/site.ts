@@ -41,10 +41,44 @@ export const SOCIAL_LINKS: {
   href: string;
   placeholder?: boolean;
 }[] = [
-  { name: "LinkedIn", href: "", placeholder: true },
+  { name: "LinkedIn", href: "https://www.linkedin.com/in/olaseniotusanya" },
   { name: "X", href: "", placeholder: true },
 ];
+
+/**
+ * The founder, named once here so the About page, the Organization
+ * structured data and anything added later all describe the same person
+ * the same way.
+ */
+export const FOUNDER = {
+  name: "Olaseni Otusanya",
+  jobTitle: "Founder",
+  /** Verifiable, currently held, and stated the same way on the other site. */
+  alsoKnownFor: "Co-Founder and COO, Product at AfroMadeIt Global LLC",
+  profileUrl: "https://www.linkedin.com/in/olaseniotusanya",
+};
 export const CURRENCY_NOTE = "NGN / USD";
+
+/**
+ * The naira and dollar columns are not one number converted twice. They are
+ * two markets, each priced against what senior product work actually costs
+ * in it, which is why the ratio between them is not the spot rate.
+ */
+export const PRICING_BASIS =
+  "Bands are the starting point for a fixed scope, not an hourly estimate. The naira and dollar figures are priced to their own markets rather than converted from one another, and the final number is fixed in writing after the discovery call.";
+
+/**
+ * The escape hatch for work that does not fit any band. Named here so the
+ * services table, the service cards and the enquiry forms all describe the
+ * same option in the same words.
+ */
+export const CUSTOM_SCOPE = {
+  label: "Custom scope",
+  band: "Priced after discovery",
+  summary:
+    "Multi-product platforms, regulated builds, migrations off something large, or a scope that spans more than one of the four. Anything above the bands is quoted on its own terms.",
+  formOption: "Above the bands, custom scope",
+};
 
 export type Service = {
   id: string;
@@ -64,7 +98,10 @@ export type Service = {
   faqs: { q: string; a: string }[];
 };
 
-// D3: price bands are placeholders pending the founder's real numbers.
+// D3 resolved. Bands are set from 2026 market benchmarks for senior-led
+// boutique studios, read against what this studio actually offers: the
+// founder on the engagement, fixed written scope, and ownership transferred
+// at launch. See DECISIONS-v2.1.md for the benchmarks each number came from.
 export const SERVICES: Service[] = [
   {
     id: "prototype-to-production",
@@ -72,8 +109,8 @@ export const SERVICES: Service[] = [
     name: "Prototype → production",
     who: "Founders with a no-code build",
     timeline: "4–8 weeks",
-    bandNgn: "₦[ 0.0m ]",
-    bandUsd: "$[ 0k ]",
+    bandNgn: "₦6.5m",
+    bandUsd: "$12k",
     summary:
       "Your Lovable or Bubble build, rewritten as a product that survives real users and real load.",
     whatItIs:
@@ -109,8 +146,8 @@ export const SERVICES: Service[] = [
     name: "Product design",
     who: "Teams with devs, no designer",
     timeline: "2–4 weeks",
-    bandNgn: "₦[ 0.0m ]",
-    bandUsd: "$[ 0k ]",
+    bandNgn: "₦4.0m",
+    bandUsd: "$7.5k",
     summary:
       "Flows, screens and a component system your developers build from directly, with the states and edge cases drawn, not left to interpretation.",
     whatItIs:
@@ -146,8 +183,8 @@ export const SERVICES: Service[] = [
     name: "Full-cycle build",
     who: "SMEs digitising operations",
     timeline: "8–14 weeks",
-    bandNgn: "₦[ 0.0m ]",
-    bandUsd: "$[ 0k ]",
+    bandNgn: "₦12m",
+    bandUsd: "$22k",
     summary:
       "Discovery through launch for one product: a web app, a mobile app, or the internal portal your operation currently runs on spreadsheets.",
     whatItIs:
@@ -183,8 +220,8 @@ export const SERVICES: Service[] = [
     name: "AI & automation",
     who: "Operations with manual steps",
     timeline: "3–6 weeks",
-    bandNgn: "₦[ 0.0m ]",
-    bandUsd: "$[ 0k ]",
+    bandNgn: "₦4.5m",
+    bandUsd: "$8k",
     summary:
       "The steps someone on your team does by hand every day, such as quoting, triage, reconciliation and reporting, moved into software, with a human still in the loop where it matters.",
     whatItIs:

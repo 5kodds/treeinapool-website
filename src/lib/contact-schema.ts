@@ -8,11 +8,17 @@ export const PROJECT_TYPES = [
   "Not sure yet",
 ] as const;
 
+/**
+ * These mirror the published starting-from bands on /services, so the number
+ * someone picks here means the same thing it meant on the page that sent
+ * them. The last two options exist because a form that forces a guess
+ * collects a guess.
+ */
 export const BUDGET_BANDS = [
-  "Under $5k / ₦8m",
-  "$5k–$15k / ₦8m–₦24m",
-  "$15k–$40k / ₦24m–₦64m",
-  "$40k+ / ₦64m+",
+  "Under ₦4m / under $7.5k",
+  "₦4m to ₦12m / $7.5k to $22k",
+  "₦12m to ₦30m / $22k to $55k",
+  "Above the bands, custom scope",
   "Prefer to discuss on the call",
 ] as const;
 
@@ -54,12 +60,12 @@ export const TIMELINES = [
   "Exploring options",
 ] as const;
 
-// D17: budget bands shown on the rebuild path.
+// D17: budget bands on the rebuild path, anchored to the S1 starting band.
 export const REBUILD_BUDGET_BANDS = [
-  "Under $10k / ₦16m",
-  "$10k–$25k / ₦16m–₦40m",
-  "$25k–$60k / ₦40m–₦96m",
-  "$60k+ / ₦96m+",
+  "Under ₦6.5m / under $12k",
+  "₦6.5m to ₦16m / $12k to $30k",
+  "₦16m to ₦35m / $30k to $65k",
+  "Above the bands, custom scope",
   "Prefer to discuss on the call",
 ] as const;
 

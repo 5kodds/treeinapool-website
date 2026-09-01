@@ -8,6 +8,8 @@ import { Accordion } from "@/components/ui/Accordion";
 import { FaqSection } from "@/components/FaqSection";
 import {
   CURRENCY_NOTE,
+  CUSTOM_SCOPE,
+  PRICING_BASIS,
   faqsForPage,
   SERVICES,
   SHOW_WHATSAPP,
@@ -42,15 +44,18 @@ export default function ServicesPage() {
               Jump to
             </div>
             <div className="flex flex-col">
-              {SERVICES.map((s, i) => (
+              {SERVICES.map((s) => (
                 <a
                   key={s.id}
                   href={`#${s.code.toLowerCase()}`}
-                  className={`px-5 py-2.5 text-sm ${i < SERVICES.length - 1 ? "border-b border-[var(--color-divider)]" : ""}`}
+                  className="border-b border-[var(--color-divider)] px-5 py-2.5 text-sm"
                 >
                   {s.code} · {s.name}
                 </a>
               ))}
+              <a href="#s5" className="px-5 py-2.5 text-sm">
+                S5 · {CUSTOM_SCOPE.label}
+              </a>
             </div>
           </Frame>
         </Container>
@@ -100,13 +105,24 @@ export default function ServicesPage() {
                       </td>
                     </tr>
                   ))}
+                  <tr>
+                    <td className="pl-6 text-[13px] font-semibold tracking-[0.08em] text-[var(--color-accent-700)]">
+                      S5
+                    </td>
+                    <td className="text-[15px]">{CUSTOM_SCOPE.label}</td>
+                    <td className="text-[15px] text-muted">
+                      Scope beyond the four bands
+                    </td>
+                    <td className="whitespace-nowrap text-lg">Set in scoping</td>
+                    <td className="whitespace-nowrap text-lg">
+                      {CUSTOM_SCOPE.band}
+                    </td>
+                  </tr>
                 </tbody>
               </table>
             </div>
             <p className="m-0 border-t border-[var(--color-divider)] px-6 py-3 text-[13px] leading-6 text-muted">
-              Bands are placeholders pending the founder&apos;s final numbers
-              (decision D3). Final scope and price are confirmed in writing
-              after the discovery call.
+              {PRICING_BASIS}
             </p>
           </Frame>
         </Container>
@@ -208,6 +224,62 @@ export default function ServicesPage() {
           </Container>
         </section>
       ))}
+
+      {/* Custom scope, for work that outgrows the four bands */}
+      <section
+        id="s5"
+        className="scroll-mt-24 border-t border-[var(--color-divider)] py-14 md:py-16"
+      >
+        <Container className="grid gap-10 md:grid-cols-[7fr_5fr] md:items-start">
+          <div>
+            <span className="mb-1 block text-xs font-semibold uppercase tracking-[0.08em] text-[var(--color-accent-700)]">
+              S5
+            </span>
+            <h2 className="text-[clamp(26px,3vw,38px)] uppercase leading-[1.1] tracking-wide">
+              {CUSTOM_SCOPE.label}
+            </h2>
+            <p className="mt-5 max-w-[56ch] text-[16px] leading-7 text-muted">
+              {CUSTOM_SCOPE.summary}
+            </p>
+            <p className="mt-4 max-w-[56ch] text-[16px] leading-7 text-muted">
+              The four bands above exist so nobody has to book a call to find
+              out roughly what this costs. A band is not a cap, though. When
+              the work is genuinely bigger than the shape it is being poured
+              into, saying so is cheaper for both of us than pretending it
+              fits and finding out in week nine.
+            </p>
+            <p className="mt-6">
+              <CtaLink
+                href="/contact#enquiry"
+                variant="ghost"
+                page="services"
+                position="custom-scope"
+              >
+                Describe the scope →
+              </CtaLink>
+            </p>
+          </div>
+          <Frame className="p-5">
+            <span className="mb-3 block text-xs font-semibold uppercase tracking-[0.08em] text-[var(--color-accent-700)]">
+              Facts
+            </span>
+            <div className="flex justify-between gap-3 border-b border-[var(--color-divider)] py-2 text-sm">
+              <span>Timeline</span>
+              <span className="whitespace-nowrap text-lg">Set in scoping</span>
+            </div>
+            <div className="flex justify-between gap-3 border-b border-[var(--color-divider)] py-2 text-sm">
+              <span>From</span>
+              <span className="whitespace-nowrap text-lg">
+                {CUSTOM_SCOPE.band}
+              </span>
+            </div>
+            <div className="flex justify-between gap-3 py-2 text-sm">
+              <span>You end up owning</span>
+              <span className="whitespace-nowrap text-lg">The whole thing</span>
+            </div>
+          </Frame>
+        </Container>
+      </section>
 
       {/* General FAQs */}
       <section className="border-t border-[var(--color-divider)] py-14 md:py-16">

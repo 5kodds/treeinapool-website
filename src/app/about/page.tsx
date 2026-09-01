@@ -5,7 +5,7 @@ import { Frame } from "@/components/ui/Frame";
 import { Kicker } from "@/components/ui/Kicker";
 import { CtaLink } from "@/components/ui/CtaLink";
 import { FaqSection } from "@/components/FaqSection";
-import { faqsForPage, PROCESS_STAGES } from "@/lib/site";
+import { faqsForPage, FOUNDER, PROCESS_STAGES } from "@/lib/site";
 import founderPhoto from "@/assets/founder-headshot.png";
 
 export const metadata: Metadata = {
@@ -31,6 +31,30 @@ const VALUES = [
   {
     name: "The honest no",
     body: "Some projects don't need an agency yet, and some need a different one. Saying so on the call costs us a proposal and saves you a quarter. We would rather be the studio that told you the truth early.",
+  },
+];
+
+/**
+ * The panel under the founder copy. Everything here is checkable somewhere
+ * public, which is the point: a bio is a claim, a fact table is an invitation
+ * to go and look.
+ */
+const FOUNDER_FACTS: { label: string; value: React.ReactNode }[] = [
+  { label: "On your project as", value: "Founder, start to handover" },
+  { label: "Based", value: "Nigeria, working in NGN and USD" },
+  {
+    label: "Also",
+    value: "Co-Founder & COO, Product, AfroMadeIt Global",
+  },
+  { label: "Shipped", value: "Farm Buddy, Vuvu.ng, AfroMadeIt Global" },
+  { label: "Before software", value: "Four years in agricultural extension" },
+  {
+    label: "Elsewhere",
+    value: (
+      <a href={FOUNDER.profileUrl} rel="me noopener" className="underline">
+        LinkedIn
+      </a>
+    ),
   },
 ];
 
@@ -80,7 +104,7 @@ export default function AboutPage() {
               unglamorous and unforgiving: the flows are short, the tolerance
               for error is zero, and the product only counts once it sits on the
               phone people already pay with, which meant taking the web app to
-              both stores rather than stopping at a URL. Afromadeit Global was a
+              both stores rather than stopping at a URL. AfroMadeIt Global was a
               third kind of problem, where the build is not the hard part and
               saying the right thing is.
             </p>
@@ -203,8 +227,54 @@ export default function AboutPage() {
               call and the sprint demos, not just the sales call.
             </p>
             <p className="mt-4 max-w-[62ch] text-[16px] leading-7 text-muted">
-              [ Founder bio, background and prior work. Replace before launch. ]
+              Olaseni came to software the long way round, through
+              agricultural extension. That is the job where somebody hands you
+              a dying plant and a look, and &quot;let me circle back next
+              quarter&quot; is not among the available answers. Four years of
+              it is an unreasonably good education in product: your user is
+              not reading the documentation, the connection is bad, the stakes
+              are somebody&apos;s harvest, and the only feature that counts is
+              the one that works in the field on the first attempt.
             </p>
+            <p className="mt-4 max-w-[62ch] text-[16px] leading-7 text-muted">
+              He is Co-Founder and COO for product at AfroMadeIt Global, a
+              strategic HR consultancy working across US, UK and African
+              markets, and he ran product operations at Baniri Technologies
+              while Vuvu.ng went from a web app to a listing in both stores.
+              Farm Buddy is his own: a crop diagnosis tool that treats the
+              camera as the primary input, because asking someone holding a
+              diseased leaf to describe it in written English is a design
+              decision, and a bad one.
+            </p>
+            <p className="mt-4 max-w-[62ch] text-[16px] leading-7 text-muted">
+              He reads more papers than is strictly good for him, holds
+              opinions about empty states that he is happy to defend at
+              length, and will tell you your project does not need an agency
+              yet when that is the true answer. The thread through all of it
+              is a mild allergy to software that demos beautifully and folds
+              the moment a stranger touches it. Most of this job, honestly, is
+              declining to be impressed by your own prototype.
+            </p>
+
+            <Frame className="mt-8 p-5">
+              <span className="mb-3 block text-xs font-semibold uppercase tracking-[0.08em] text-[var(--color-accent-700)]">
+                Facts
+              </span>
+              {FOUNDER_FACTS.map((fact, index) => (
+                <div
+                  key={fact.label}
+                  className={`flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 py-2 text-sm ${
+                    index < FOUNDER_FACTS.length - 1
+                      ? "border-b border-[var(--color-divider)]"
+                      : ""
+                  }`}
+                >
+                  <span className="text-muted">{fact.label}</span>
+                  <span className="text-right text-[15px]">{fact.value}</span>
+                </div>
+              ))}
+            </Frame>
+
             <div className="mt-8 border-t border-[var(--color-divider)] pt-6">
               <span className="block text-xs font-semibold uppercase tracking-[0.08em] text-[var(--color-accent-700)]">
                 How the team scales

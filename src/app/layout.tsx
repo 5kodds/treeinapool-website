@@ -4,6 +4,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import {
   CONTACT_EMAIL,
+  FOUNDER,
   SITE_DESCRIPTION,
   SITE_NAME,
   SITE_URL,
@@ -59,6 +60,14 @@ const organizationJsonLd = {
   sameAs: SOCIAL_LINKS.filter((social) => social.href).map(
     (social) => social.href,
   ),
+  // A founder-led studio should say so where machines read it, not only in
+  // prose. sameAs points at the one profile that can be checked.
+  founder: {
+    "@type": "Person",
+    name: FOUNDER.name,
+    jobTitle: FOUNDER.jobTitle,
+    sameAs: FOUNDER.profileUrl ? [FOUNDER.profileUrl] : [],
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

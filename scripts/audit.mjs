@@ -44,6 +44,11 @@ const add = (level, route, check, detail) =>
 const PLACEHOLDER = /\[\s*[^\]]{0,60}\]/g;
 const PLACEHOLDER_ALLOWED = [/\[\s*\]/];
 
+// Hosts that answer non-browser requests with a refusal regardless of whether
+// the URL is good. A link here is still checked for reachability, just not
+// judged by its status code.
+const BOT_BLOCKED = ["linkedin.com", "www.w3.org"];
+
 const server = REMOTE ? null : await startServer(PORT);
 const browser = await chromium.launch({
   executablePath: process.env.CHROME_PATH || undefined,
@@ -270,6 +275,13 @@ try {
       const res = await page.request
         .get(target, { timeout: 15_000 })
         .catch(() => null);
+      // Some hosts refuse anything that is not a browser. LinkedIn answers
+      // bots with its own HTTP 999, and w3.org rate-limits with a 403. Those
+      // say the crawler was blocked, not that the link is broken, so
+      // reporting them trains us to ignore the whole section.
+      if (res && BOT_BLOCKED.some((host) => target.includes(host))) {
+        continue;
+      }
       if (!res) {
         add(
           "WARN",
