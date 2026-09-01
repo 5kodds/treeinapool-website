@@ -1,20 +1,39 @@
 import { spawn } from "node:child_process";
+import { existsSync, readdirSync, readFileSync } from "node:fs";
+import path from "node:path";
+
+/**
+ * Content-backed routes are read from disk rather than listed by hand.
+ * A hardcoded list goes stale the moment a case study is renamed or
+ * removed, and then every check reports 404s that are the list's fault
+ * rather than the site's.
+ */
+function contentRoutes(dir, prefix) {
+  const full = path.join(process.cwd(), "content", dir);
+  if (!existsSync(full)) return [];
+  return readdirSync(full)
+    .filter((file) => file.endsWith(".md"))
+    .filter((file) => {
+      // Drafts are deliberately unpublished, so they have no route.
+      const raw = readFileSync(path.join(full, file), "utf8");
+      return !/^draft:\s*true\s*$/m.test(raw);
+    })
+    .map((file) => `${prefix}/${file.replace(/\.md$/, "")}`);
+}
 
 export const ROUTES = [
   "/",
   "/services",
   "/work",
-  "/work/guided-intake-lender",
-  "/work/spreadsheet-to-portal",
+  ...contentRoutes("case-studies", "/work"),
   "/process",
   "/about",
   "/insights",
-  "/insights/how-to-scope-an-mvp-so-it-ships",
-  "/insights/fixed-price-vs-time-and-materials",
-  "/insights/what-a-product-agency-does-week-to-week",
+  ...contentRoutes("insights", "/insights"),
   "/contact",
   "/performance",
   "/teardowns",
+  ...contentRoutes("teardowns", "/teardowns"),
   "/accessibility",
   "/privacy",
   "/terms",

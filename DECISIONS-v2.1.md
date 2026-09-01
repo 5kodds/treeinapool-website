@@ -14,9 +14,9 @@ invented value, and nothing fabricated reaches a production build.
 | ID | Decision needed | Where it lands | Why it blocks |
 |----|----------------|----------------|---------------|
 | D3 | Real "starting from" price bands per service | `src/lib/site.ts` → `SERVICES[].bandNgn` / `bandUsd` | The comparison table and every service card currently show `₦[ 0.0m ] / $[ 0k ]` |
-| D5 | Real case study data: client name, sector, confirmed numbers | `content/case-studies/*.md` | Both seeded case studies are templates; every figure must be one the client has confirmed |
+| D5 | Outcome numbers for the three real case studies | `content/case-studies/*.md` | **Mostly resolved.** The two invented placeholder studies are gone, replaced by Farm Buddy, Vuvu and Afromadeit Global. Each describes real work with a real stack and **no metrics at all**, because none are confirmed yet. The outcome band stays hidden until real figures land. Three small gaps remain, marked `[ Confirm ]`: what Afromadeit Global does, and durations for it and Vuvu |
 | D6 | Confirm the production domain | `src/lib/site.ts` → `SITE_URL` | Canonicals, sitemap, OG URLs and JSON-LD all derive from it |
-| D7 | Founder origin story, bio, and the "why TreeInAPool" line | `src/app/about/page.tsx` | Three bracketed paragraphs are visible on `/about` today |
+| D7 | Sign off the origin and name copy | `src/app/about/page.tsx` | **Drafted at the founder's request**, from the three real projects. Nothing about training history, per instruction. The name section is an explicit metaphor rather than an invented anecdote, so it is a position to endorse, not a memory to remember. Needs a read-through |
 | D12 | Privacy and Terms legal review | `/privacy`, `/terms` | Both pages carry a visible "template copy pending legal review" notice |
 | D18 | Confirm WCAG 2.1 AA is a commitment TreeInAPool will hold to | `/accessibility` | The page states it as a public commitment; `npm run a11y` enforces it in CI |
 | n/a | Products-shipped count and start year | `src/app/page.tsx` hero | Reads `[ 00 ] products shipped since [ year ]` |

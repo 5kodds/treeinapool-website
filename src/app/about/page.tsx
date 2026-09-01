@@ -65,18 +65,43 @@ export default function AboutPage() {
               at the end, when it&apos;s expensive.
             </p>
             <p className="mt-5 max-w-[62ch] text-[16px] leading-7 text-muted">
-              [ Founder origin story: what led to starting TreeInAPool, in
-              Olaseni&apos;s own words. Replace this bracketed paragraph before
-              launch; we won&apos;t publish invented history. ]
+              TreeInAPool came out of building. Farm Buddy started as a question
+              about reach: agricultural extension officers are the people who
+              diagnose a sick crop and say what to do about it, and there are
+              nowhere near enough of them. Building it meant accepting that the
+              farmer would not be typing a description in English. The camera
+              became the primary input, a recorded voice note became a valid
+              one, and a multimodal model turned a photograph of a leaf into a
+              diagnosis, a read on the soil, and something to actually do about
+              both.
+            </p>
+            <p className="mt-5 max-w-[62ch] text-[16px] leading-7 text-muted">
+              Vuvu.ng taught the opposite discipline. Bill payments are
+              unglamorous and unforgiving: the flows are short, the tolerance
+              for error is zero, and the product only counts once it sits on the
+              phone people already pay with, which meant taking the web app to
+              both stores rather than stopping at a URL. Afromadeit Global was a
+              third kind of problem, where the build is not the hard part and
+              saying the right thing is.
+            </p>
+            <p className="mt-5 max-w-[62ch] text-[16px] leading-7 text-muted">
+              The pattern across all three was the same. The interesting work
+              was never the demo. It was the distance between something that
+              runs and something a stranger can depend on. Closing that distance
+              is what this studio sells.
             </p>
             <div className="mt-8 border-t border-[var(--color-divider)] pt-6">
               <span className="block text-xs font-semibold uppercase tracking-[0.08em] text-[var(--color-accent-700)]">
                 Why &quot;TreeInAPool&quot;
               </span>
               <p className="mt-3 max-w-[62ch] text-[16px] leading-7 text-muted">
-                [ The name&apos;s origin story: pending decision D7. A
-                distinctive name is an asset worth a real one-line story; this
-                section carries it once it&apos;s written down. ]
+                A prototype is a cut flower. It looks alive, it photographs
+                well, and it is already dying, because nothing underneath is
+                feeding it. A tree is the other thing: rooted, slower to get
+                going, and still standing next season. The pool is where we keep
+                finding them, a contained space nobody planted for, holding
+                something that has to grow anyway. The name is a reminder of
+                which of the two we are being paid to produce.
               </p>
             </div>
           </div>
