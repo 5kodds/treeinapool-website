@@ -36,7 +36,61 @@ export default function Home() {
   );
   const homeFaqs = faqsForPage("/").slice(0, 5);
   const perf = getPerformanceReport();
-  const perfHome = perf?.pages.find((page) => page.path === "/");
+  /**
+   * Only a run against a real deployment earns a place on the home page. A
+   * local build has no CDN and shares a CI machine, so its numbers swing by
+   * fifteen points between runs: too noisy to headline, and publishing the
+   * bad end would understate the product as badly as publishing the good end
+   * would flatter it. Until `PERF_BASE_URL=<domain> npm run perf` has been
+   * run, this block stays off and /performance carries the local figures
+   * with their caveat.
+   */
+  const perfIsLive = Boolean(perf?.measuredAgainst?.includes("live deployment"));
+  const perfHome = perfIsLive
+    ? perf?.pages.find((page) => page.path === "/")
+    : undefined;
+  /**
+   * A bare "96" and "2.6s" mean nothing to someone who does not use
+   * Lighthouse daily, and a number shown without the target it is being
+   * judged against is decoration. Each stat carries its scale, what it
+   * actually means, and whether it clears the budget published on /process.
+   */
+  const homeStats = perfHome
+    ? [
+        {
+          value: String(perfHome.scores.performance),
+          scale: "/100",
+          label: "Performance",
+          plain: "How fast the page is to use, not just to look at",
+          budget: "90 or above",
+          pass: perfHome.scores.performance >= 90,
+        },
+        {
+          value: String(perfHome.scores.accessibility),
+          scale: "/100",
+          label: "Accessibility",
+          plain: "Usable with a keyboard, a screen reader, or poor eyesight",
+          budget: "95 or above",
+          pass: perfHome.scores.accessibility >= 95,
+        },
+        {
+          value: formatMs(perfHome.vitals.lcpMs),
+          scale: null,
+          label: "Largest paint",
+          plain: "When the main content finishes appearing on a 4G phone",
+          budget: "under 2.5s",
+          pass: perfHome.vitals.lcpMs < 2500,
+        },
+        {
+          value: perfHome.vitals.cls.toFixed(3),
+          scale: null,
+          label: "Layout shift",
+          plain: "How much the page jumps around while it loads",
+          budget: "under 0.1",
+          pass: perfHome.vitals.cls < 0.1,
+        },
+      ]
+    : [];
 
   return (
     <>
@@ -71,13 +125,17 @@ export default function Home() {
             </div>
           </div>
           <Frame className="p-5">
-            <span className="kicker">Credibility line</span>
+            <span className="kicker">What is actually live</span>
             <p className="mt-3 text-[26px] uppercase leading-[30px]">
-              [ 00 ] products shipped since [ year ]
+              Two products live, in two app stores and on the web
             </p>
             <p className="mt-3 text-[13px] leading-5 text-muted-2">
-              Placeholder, needs the real count before launch. No fake logos, no
-              invented metrics.
+              Vuvu.ng has been in the App Store and Google Play since November
+              2024. AfroMadeIt Global is live today. Both are linked from{" "}
+              <Link href="/work" className="underline">
+                the work page
+              </Link>
+              , because a claim you cannot check is not evidence.
             </p>
           </Frame>
         </Container>
@@ -96,25 +154,42 @@ export default function Home() {
             <div className="flex flex-wrap items-baseline justify-between gap-3">
               <span className="kicker mb-0">Measured, not claimed</span>
               <span className="text-[13px] text-muted-2">
-                Lighthouse, {perf?.measuredOn} · this site ·{" "}
+                Lighthouse {perf?.measuredOn}, throttled mobile ·{" "}
                 <Link href="/performance" className="underline">
                   how it was measured
                 </Link>
               </span>
             </div>
-            <dl className="mt-6 grid grid-cols-2 gap-6 border-t border-[var(--color-divider)] pt-6 sm:grid-cols-4">
-              {[
-                ["Performance", String(perfHome.scores.performance)],
-                ["Accessibility", String(perfHome.scores.accessibility)],
-                ["Largest paint", formatMs(perfHome.vitals.lcpMs)],
-                ["Layout shift", perfHome.vitals.cls.toFixed(3)],
-              ].map(([label, value]) => (
-                <div key={label}>
+            <p className="mt-4 max-w-[70ch] text-[15px] leading-6 text-muted">
+              These are this site&apos;s own scores against the budgets we
+              commit to on every build. We publish them because an agency that
+              will not measure its own site is unlikely to measure yours.
+            </p>
+            <dl className="mt-6 grid grid-cols-1 gap-6 border-t border-[var(--color-divider)] pt-6 sm:grid-cols-2 lg:grid-cols-4">
+              {homeStats.map((stat) => (
+                <div key={stat.label}>
                   <dd className="font-[family-name:var(--font-heading)] text-[clamp(30px,3.4vw,44px)] font-semibold leading-none">
-                    {value}
+                    {stat.value}
+                    {stat.scale && (
+                      <span className="text-[0.5em] font-normal text-muted-2">
+                        {stat.scale}
+                      </span>
+                    )}
                   </dd>
-                  <dt className="mt-2 text-[11px] uppercase tracking-[0.08em] text-muted-2">
-                    {label}
+                  <dt className="mt-2 text-[13px] leading-5">
+                    <span className="block font-semibold">{stat.label}</span>
+                    <span className="mt-0.5 block text-muted-2">
+                      {stat.plain}
+                    </span>
+                    <span
+                      className={`mt-1 block text-[11px] uppercase tracking-[0.08em] ${
+                        stat.pass
+                          ? "text-[var(--color-accent-700)]"
+                          : "text-muted"
+                      }`}
+                    >
+                      {stat.pass ? "Meets" : "Misses"} our budget, {stat.budget}
+                    </span>
                   </dt>
                 </div>
               ))}

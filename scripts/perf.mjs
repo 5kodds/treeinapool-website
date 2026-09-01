@@ -13,13 +13,28 @@ import { writeFileSync, mkdirSync } from "node:fs";
 import path from "node:path";
 import lighthouse from "lighthouse";
 import * as chromeLauncher from "chrome-launcher";
-import { startServer, stopServer } from "./lib/dev-server.mjs";
+import { startServer, stopServer, ROUTES as ALL_ROUTES } from "./lib/dev-server.mjs";
 
 const PORT = Number(process.env.PERF_PORT ?? 3999);
-const ORIGIN = `http://localhost:${PORT}`;
+/**
+ * PERF_BASE_URL measures a deployment instead of a local build. A local build
+ * has no CDN, no real TLS and no cold start, so it flatters itself. The page
+ * says which of the two it was.
+ */
+const REMOTE = process.env.PERF_BASE_URL?.replace(/\/+$/, "");
+const ORIGIN = REMOTE || `http://localhost:${PORT}`;
+
+/**
+ * The case study route is read off disk rather than hardcoded. The previous
+ * list still named a case study that had been deleted, so every run measured
+ * a 404 and reported it as the site's performance.
+ */
+const firstCaseStudy = ALL_ROUTES.find((route) => route.startsWith("/work/"));
 const ROUTES = [
   { path: "/", label: "Home" },
-  { path: "/work/guided-intake-lender", label: "Case study" },
+  { path: "/services", label: "Services" },
+  ...(firstCaseStudy ? [{ path: firstCaseStudy, label: "Case study" }] : []),
+  { path: "/contact", label: "Contact" },
 ];
 
 const CHROME_PATH =
@@ -31,7 +46,10 @@ async function audit(url, chromePort) {
     { port: chromePort, output: "json", logLevel: "error" },
     undefined,
   );
-  const { categories, audits, configSettings } = result.lhr;
+  const { categories, audits, configSettings, runtimeError } = result.lhr;
+  if (runtimeError?.code && runtimeError.code !== "NO_ERROR") {
+    throw new Error(`${runtimeError.code}: ${runtimeError.message}`);
+  }
 
   return {
     scores: {
@@ -52,9 +70,17 @@ async function audit(url, chromePort) {
   };
 }
 
-const server = await startServer(PORT);
+const server = REMOTE ? null : await startServer(PORT);
 const chrome = await chromeLauncher.launch({
-  chromeFlags: ["--headless=new", "--no-sandbox", "--disable-dev-shm-usage"],
+  chromeFlags: [
+    "--headless=new",
+    "--no-sandbox",
+    "--disable-dev-shm-usage",
+    // Outbound traffic in this environment only leaves through the agent proxy.
+    ...(REMOTE && process.env.HTTPS_PROXY
+      ? [`--proxy-server=${process.env.HTTPS_PROXY}`, "--ignore-certificate-errors"]
+      : []),
+  ],
   chromePath: CHROME_PATH,
 });
 
@@ -72,8 +98,12 @@ try {
     lighthouseVersion: (
       await import("lighthouse/package.json", { with: { type: "json" } })
     ).default.version,
-    measuredAgainst: "local production build (npm run build && npm run start)",
-    note: "Scores from a local production build. Re-run against the live domain once deployed, and before any pitch.",
+    measuredAgainst: REMOTE
+      ? `the live deployment at ${REMOTE}`
+      : "local production build (npm run build && npm run start)",
+    note: REMOTE
+      ? "Scores from the live deployment, on a throttled mobile profile. Re-run after any change that touches the home page."
+      : "Scores from a local production build, which has no CDN and no cold start, so it flatters itself. Re-run with PERF_BASE_URL against the live domain before any pitch.",
     pages,
   };
 
@@ -88,5 +118,5 @@ try {
   console.log(`\nWrote ${outPath}`);
 } finally {
   await chrome.kill();
-  stopServer(server);
+  if (server) stopServer(server);
 }

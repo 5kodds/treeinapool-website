@@ -18,7 +18,6 @@ invented value, and nothing fabricated reaches a production build.
 | D7 | Sign off the origin, founder and name copy | `src/app/about/page.tsx` | **Drafted at the founder's request** and rewritten for a mid-market buyer: the founder section now leads on product and operations (roadmaps, PRDs, acceptance criteria, backlog prioritisation across fintech, ecommerce and media) rather than on the agricultural extension background, which is reduced to a single clause about arriving at product from an evidence discipline. The origin section leads with Vuvu.ng for the same reason. Built from what is publicly checkable (AfroMadeIt lists him as Co-Founder & COO, Product; Baniri Technologies Ltd is the listed App Store developer of Vuvu; the LinkedIn profile is live) plus his own LinkedIn export. The name section is an explicit metaphor rather than an invented anecdote, so it is a position to endorse, not a memory to remember. Needs a read-through |
 | D12 | Privacy and Terms legal review | `/privacy`, `/terms` | Both pages carry a visible "template copy pending legal review" notice |
 | D18 | Confirm WCAG 2.1 AA is a commitment TreeInAPool will hold to | `/accessibility` | The page states it as a public commitment; `npm run a11y` enforces it in CI |
-| n/a | Products-shipped count and start year | `src/app/page.tsx` hero | Reads `[ 00 ] products shipped since [ year ]` |
 
 ## Blocking a specific feature, not launch
 
@@ -122,6 +121,45 @@ placeholder, which reads as unfinished rather than as bad.
 **Client permission.** The Vuvu screenshot rides on the same Baniri
 permission as naming them at all, D5. If they would rather not be named, the
 image comes out with the name.
+
+## Home page proof, and why the performance block is currently off
+
+**The credibility line is real now.** It read `[ 00 ] products shipped since
+[ year ]` with a note admitting it was a placeholder, directly beside the
+hero CTA. It now states two things that can be opened and checked: Vuvu.ng
+in the App Store and Google Play since November 2024, and AfroMadeIt Global
+live on the web. Farm Buddy is not counted, because its deployed build is an
+unfinished prototype and counting it would be the exact overclaim the line
+is meant to avoid.
+
+**The sprint plan no longer looks like a redacted client document.** Its
+header read "Sprint plan, [ client ]", which reads as a real engagement with
+the name removed. It now says "worked example", which is what it is. The
+footnote already said "illustrative"; the header now agrees with it.
+
+**The performance block is hidden until a real measurement exists.** It was
+showing 96 / 99 / 2.6s / 0.000 with no scale, no plain meaning, and no
+target, so a reader could not tell whether any of it was good. Worse, the
+2.6s quietly missed the under-2.5s budget this site publishes on /process,
+and the figures came from a local build while the label said "this site".
+
+The block is rebuilt: every stat now carries its scale, a sentence on what
+it actually means for a visitor, and whether it clears the published budget.
+It renders **only** when the report was measured against a live deployment.
+A local build has no CDN and shares a CI container, where repeat runs of the
+same commit swing between 81 and 96, so publishing either end of that range
+would mislead. /performance still shows the local figures, with the caveat.
+
+**To turn it on, from a normal network:**
+
+```
+npm run build && npm run perf:live
+```
+
+That writes `content/performance/latest.json` from the deployed domain and
+the home page block appears by itself. It could not be run from the build
+container: Lighthouse hits a proxy interstitial on outbound TLS, and the
+PageSpeed Insights API refused with a shared-IP quota error.
 
 ## Conflicts flagged rather than guessed
 

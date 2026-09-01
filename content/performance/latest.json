@@ -1,43 +1,81 @@
 {
-  "measuredOn": "2026-08-31",
+  "measuredOn": "2026-09-01",
   "lighthouseVersion": "13.4.1",
   "measuredAgainst": "local production build (npm run build && npm run start)",
-  "note": "Scores from a local production build. Re-run against the live domain once deployed, and before any pitch.",
+  "note": "Scores from a local production build on a shared CI container, where repeat runs of the same commit swing between 81 and 96. Treat these as a pessimistic floor, not a measurement. The home page deliberately shows nothing until a run against the live domain replaces this file: PERF_BASE_URL=https://your-domain npm run perf",
   "pages": [
     {
       "path": "/",
       "label": "Home",
       "scores": {
-        "performance": 96,
+        "performance": 81,
         "accessibility": 99,
         "bestPractices": 100,
         "seo": 100
       },
       "vitals": {
-        "lcpMs": 2581,
+        "lcpMs": 3905,
         "cls": 0,
-        "tbtMs": 135,
-        "fcpMs": 1083,
-        "speedIndexMs": 1083
+        "tbtMs": 263,
+        "fcpMs": 1102,
+        "speedIndexMs": 3841
       },
       "formFactor": "mobile",
       "throttling": "simulate"
     },
     {
-      "path": "/work/guided-intake-lender",
-      "label": "Case study",
+      "path": "/services",
+      "label": "Services",
       "scores": {
-        "performance": 99,
+        "performance": 97,
         "accessibility": 100,
         "bestPractices": 100,
         "seo": 100
       },
       "vitals": {
-        "lcpMs": 1971,
+        "lcpMs": 2649,
         "cls": 0,
-        "tbtMs": 96,
-        "fcpMs": 795,
-        "speedIndexMs": 795
+        "tbtMs": 55,
+        "fcpMs": 1067,
+        "speedIndexMs": 1067
+      },
+      "formFactor": "mobile",
+      "throttling": "simulate"
+    },
+    {
+      "path": "/work/afromadeit-global",
+      "label": "Case study",
+      "scores": {
+        "performance": 97,
+        "accessibility": 100,
+        "bestPractices": 100,
+        "seo": 100
+      },
+      "vitals": {
+        "lcpMs": 2598,
+        "cls": 0,
+        "tbtMs": 60,
+        "fcpMs": 800,
+        "speedIndexMs": 800
+      },
+      "formFactor": "mobile",
+      "throttling": "simulate"
+    },
+    {
+      "path": "/contact",
+      "label": "Contact",
+      "scores": {
+        "performance": 95,
+        "accessibility": 99,
+        "bestPractices": 100,
+        "seo": 100
+      },
+      "vitals": {
+        "lcpMs": 2520,
+        "cls": 0,
+        "tbtMs": 162,
+        "fcpMs": 927,
+        "speedIndexMs": 927
       },
       "formFactor": "mobile",
       "throttling": "simulate"

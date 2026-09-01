@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "perf": "node scripts/perf.mjs",
+    "perf:live": "PERF_BASE_URL=https://treeinapool-website.vercel.app node scripts/perf.mjs",
     "a11y": "node scripts/a11y.mjs",
     "audit": "node scripts/audit.mjs",
     "e2e": "node scripts/e2e.mjs",

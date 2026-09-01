@@ -1,8 +1,8 @@
 import type { StaticImageData } from "next/image";
-import vuvuCard from "@/assets/work/vuvu-card.png";
-import vuvuHero from "@/assets/work/vuvu-hero.png";
-import afromadeitCard from "@/assets/work/afromadeit-card.png";
-import afromadeitHero from "@/assets/work/afromadeit-hero.png";
+import vuvuCard from "@/assets/work/vuvu-card.webp";
+import vuvuHero from "@/assets/work/vuvu-hero.webp";
+import afromadeitCard from "@/assets/work/afromadeit-card.webp";
+import afromadeitHero from "@/assets/work/afromadeit-hero.webp";
 
 /**
  * Screenshots of the real product, captured from the live site, keyed by case
