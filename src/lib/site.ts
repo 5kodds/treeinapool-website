@@ -22,11 +22,14 @@ export const SITE_DESCRIPTION =
   "TreeInAPool is a product development agency. We turn prototypes into products people pay for.";
 
 // D2: dual market framing: global tone, local reach.
-export const CONTACT_EMAIL = "hello@treeinapool.com";
-export const WHATSAPP_NUMBER = ""; // TODO: add the real WhatsApp number (with country code, no symbols) before launch
+export const CONTACT_EMAIL = "treeinapool@gmail.com";
+// Digits only, country code first: wa.me rejects spaces and symbols.
+export const WHATSAPP_NUMBER = "19852447681";
 export const WHATSAPP_URL = WHATSAPP_NUMBER
   ? `https://wa.me/${WHATSAPP_NUMBER}`
   : "";
+/** Human-readable form for display; the link itself uses the raw digits. */
+export const WHATSAPP_DISPLAY = "+1 985 244 7681";
 export const SHOW_WHATSAPP = true;
 
 // D11: public location line for the footer.

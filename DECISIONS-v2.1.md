@@ -4,7 +4,7 @@ Open decisions carried forward from the v2 PRD (D1–D7), added by the v2.1
 upgrade brief (D8–D14), and added by the Epic I credibility addendum
 (D15–D18).
 
-Everything below is **built and wired**, each row is content or a
+Everything below is **built and wired**. Each row is content or a
 confirmation the founder owns, not engineering work. Where a decision is
 outstanding, the site ships a clearly bracketed placeholder rather than an
 invented value, and nothing fabricated reaches a production build.
@@ -14,18 +14,18 @@ invented value, and nothing fabricated reaches a production build.
 | ID | Decision needed | Where it lands | Why it blocks |
 |----|----------------|----------------|---------------|
 | D3 | Real "starting from" price bands per service | `src/lib/site.ts` → `SERVICES[].bandNgn` / `bandUsd` | The comparison table and every service card currently show `₦[ 0.0m ] / $[ 0k ]` |
-| D5 | Real case study data, client name, sector, confirmed numbers | `content/case-studies/*.md` | Both seeded case studies are templates; every figure must be one the client has confirmed |
+| D5 | Real case study data: client name, sector, confirmed numbers | `content/case-studies/*.md` | Both seeded case studies are templates; every figure must be one the client has confirmed |
 | D6 | Confirm the production domain | `src/lib/site.ts` → `SITE_URL` | Canonicals, sitemap, OG URLs and JSON-LD all derive from it |
 | D7 | Founder origin story, bio, and the "why TreeInAPool" line | `src/app/about/page.tsx` | Three bracketed paragraphs are visible on `/about` today |
 | D12 | Privacy and Terms legal review | `/privacy`, `/terms` | Both pages carry a visible "template copy pending legal review" notice |
 | D18 | Confirm WCAG 2.1 AA is a commitment TreeInAPool will hold to | `/accessibility` | The page states it as a public commitment; `npm run a11y` enforces it in CI |
-|, | Products-shipped count and start year | `src/app/page.tsx` hero | Reads `[ 00 ] products shipped since [ year ]` |
+| n/a | Products-shipped count and start year | `src/app/page.tsx` hero | Reads `[ 00 ] products shipped since [ year ]` |
 
 ## Blocking a specific feature, not launch
 
 | ID | Decision needed | Where it lands | What it unblocks |
 |----|----------------|----------------|------------------|
-| D2 | WhatsApp number (international format, digits only) | `src/lib/site.ts` → `WHATSAPP_NUMBER` | WhatsApp CTAs currently fall back to email; the footer shows `[ number, D2 ]` |
+| D2 | ~~WhatsApp number~~ | `src/lib/site.ts` → `WHATSAPP_NUMBER` | **Resolved.** +1 985 244 7681 is live; WhatsApp CTAs and the footer link out to wa.me |
 | D8 | Real testimonial quotes and client logos, **with written permission** | `src/lib/site.ts` → `TESTIMONIALS`, `TRUST_ITEMS` | The quote carousel and trust bar are hidden in production until real data lands. Verified: a default production build contains neither the placeholder quotes nor the placeholder logos |
 | D10 | Review the three seeded insight articles | `content/insights/*.md` | They are authored drafts (generic educational content, no client claims) and are live on `/insights` today |
 | D15 | Approve the teardown format and its "not a client engagement" labelling | `content/teardowns/`, `/teardowns` | The template ships with `draft: true`, so nothing publishes until approved |
@@ -35,7 +35,7 @@ invented value, and nothing fabricated reaches a production build.
 
 | ID | Decision needed | Where it lands | Current behaviour |
 |----|----------------|----------------|-------------------|
-| D1 | Stack choice |, | Settled: Next.js 16 App Router, static generation |
+| D1 | Stack choice | n/a | Settled: Next.js 16 App Router, static generation |
 | D4 | Booking tool | `/contact` | Settled for now: form-only, no scheduler embed. Both enquiry paths work today |
 | D9 | Approve or edit the personality statement | `src/lib/site.ts` → `PERSONALITY_STATEMENT` | Draft copy is live on the Home page |
 | D11 | Public location line | `src/lib/site.ts` → `LOCATION_LINE` | Footer shows `[ Location line, D11 ]` |
@@ -55,9 +55,10 @@ than at Formspree.
 
 Without the variables the forms still work on screen but store and send
 nothing, falling back to a pre-filled mailto so a lead still reaches
-`hello@treeinapool.com`.
+`treeinapool@gmail.com`.
 
 ## Conflicts flagged rather than guessed
 
-None. Where the v2.1 brief and the v2 PRD could have collided, booking
-(PRD D4: form-only) and pricing display (PRD D3: bands with placeholders), the PRD's founder decisions were kept, as the brief instructs.
+None. Where the v2.1 brief and the v2 PRD could have collided, on booking
+(PRD D4: form-only) and pricing display (PRD D3: bands with placeholders),
+the PRD's founder decisions were kept, as the brief instructs.

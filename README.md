@@ -16,7 +16,7 @@ credibility addendum.
 ## Stack
 
 - **Next.js 16** (App Router, static generation) + **React 19** + **TypeScript**
-- **Tailwind v4**, design tokens in `src/app/globals.css` under `@theme`,
+- **Tailwind v4**: design tokens in `src/app/globals.css` under `@theme`,
   with component classes in `@layer components` so utilities always win
 - **gray-matter** for the three markdown content types
 - **zod** for form validation, client and server side
@@ -34,7 +34,8 @@ npm run perf     # regenerate content/performance/latest.json (needs a build fir
 npm run a11y     # axe-core across every route, desktop + mobile; fails on serious/critical
 npm run audit    # dead links, metadata, JSON-LD, console errors, placeholder leaks
 npm run e2e      # the journeys that convert: both forms, newsletter, nav, accordions
-npm run verify   # lint + build + a11y + audit + e2e, in order
+npm run cta      # every link and button on every route actually goes somewhere
+npm run verify   # lint + build + a11y + audit + cta + e2e, in order
 npm run logo     # regenerate the logo assets from assets-src/ (rarely needed)
 ```
 
@@ -61,15 +62,15 @@ src/lib/markdown.ts         # dependency-free renderer for the article subset
 All three are markdown with frontmatter, loaded by a matching `src/lib/*.ts`.
 Adding a file publishes a page with no code change, and the sitemap picks it up.
 
-**Case studies** (`content/case-studies/`), client, sector, engagement,
+**Case studies** (`content/case-studies/`): client, sector, engagement,
 duration, problem, approach steps, outcome stats, stack, optional
 testimonial. The testimonial band renders only when the field is non-null.
 
-**Insights** (`content/insights/`), title, date, category, summary,
+**Insights** (`content/insights/`): title, date, category, summary,
 optional readingTime (derived when absent) and `draft`. Renders with a
 sticky table of contents built from the `##` headings.
 
-**Teardowns** (`content/teardowns/`), unsolicited analyses of public
+**Teardowns** (`content/teardowns/`): unsolicited analyses of public
 sites, deliberately styled apart from client work and labelled *"Unsolicited
 analysis. Not a client engagement."* Every finding and prediction requires
 `source` and `observedOn`; entries missing either are **dropped at load
@@ -86,7 +87,7 @@ Both enquiry paths (`/contact`, new project and rebuild tabs) post to
   `lead_type` of `project` or `rebuild` so the two can be triaged apart;
 - if it isn't set, accepts the submission so the on-screen flow works but
   **stores and sends nothing**. The visitor gets a pre-filled `mailto:`
-  fallback so a real lead still reaches `hello@treeinapool.com`.
+  fallback so a real lead still reaches `treeinapool@gmail.com`.
 
 `/api/subscribe` behaves the same way for newsletter sign-ups via
 `FORMSPREE_NEWSLETTER_ENDPOINT`. Copy `.env.example` to `.env.local` and
@@ -130,7 +131,13 @@ auto-advancing carousel.
 | `npm run build` | Anything that breaks static generation | any error |
 | `npm run a11y` | WCAG 2.1 AA violations, both viewports | serious or critical |
 | `npm run audit` | Dead internal links, missing title/description/og, unparseable JSON-LD, `<img>` with no alt, missing or duplicated `<h1>`, console errors, failed requests | any ERROR |
+| `npm run cta` | Links with no destination, buttons with no handler, CTAs that don't navigate | any dead control |
 | `npm run e2e` | Both enquiry forms, newsletter, nav dropdown (hover + keyboard + Escape), FAQ accordions, mobile menu | any failed journey |
+
+`npm run e2e` submits the forms, so it starts its server with the Formspree
+endpoints blanked. The submission path is exercised end to end and nothing
+is ever delivered, which keeps the suite from eating the Formspree quota.
+Delivery itself is confirmed by hand against production, not on every run.
 
 Two deliberate design choices in `audit`:
 

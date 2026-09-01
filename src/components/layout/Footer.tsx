@@ -8,7 +8,7 @@ import {
   SHOW_WHATSAPP,
   SITE_NAME,
   SOCIAL_LINKS,
-  WHATSAPP_NUMBER,
+  WHATSAPP_DISPLAY,
   WHATSAPP_URL,
 } from "@/lib/site";
 
@@ -129,7 +129,7 @@ export function Footer() {
                     rel="noopener noreferrer"
                     className="no-underline hover:text-[var(--color-accent-700)]"
                   >
-                    WhatsApp: {WHATSAPP_NUMBER}
+                    WhatsApp: {WHATSAPP_DISPLAY}
                   </a>
                 ) : (
                   <span>WhatsApp: [ number, D2 ]</span>

@@ -71,7 +71,16 @@ function assert(condition, message) {
   if (!condition) throw new Error(message);
 }
 
-const server = await startServer(PORT);
+// This suite submits both enquiry forms and the newsletter on every run.
+// With a real Formspree endpoint in .env.local that meant a live submission
+// each time, which quietly ate the account's monthly quota. The server is
+// started with the endpoints blanked so the route takes its undelivered
+// path: the on-screen flow is still exercised end to end, and nothing is
+// ever sent. Delivery itself is verified once, by hand, against production.
+const server = await startServer(PORT, {
+  FORMSPREE_ENDPOINT: "",
+  FORMSPREE_NEWSLETTER_ENDPOINT: "",
+});
 const browser = await chromium.launch({
   executablePath: process.env.CHROME_PATH || undefined,
   args: ["--no-sandbox"],

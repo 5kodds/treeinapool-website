@@ -26,10 +26,10 @@ export const ROUTES = [
  * step open long after the work is done. Spawning detached puts both in
  * their own process group so stopServer() can signal the whole group.
  */
-export function startServer(port) {
+export function startServer(port, envOverrides = {}) {
   const server = spawn("npm", ["run", "start", "--", "-p", String(port)], {
     stdio: ["ignore", "pipe", "pipe"],
-    env: process.env,
+    env: { ...process.env, ...envOverrides },
     detached: true,
   });
   return new Promise((resolve, reject) => {
