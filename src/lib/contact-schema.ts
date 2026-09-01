@@ -15,9 +15,9 @@ export const PROJECT_TYPES = [
  * collects a guess.
  */
 export const BUDGET_BANDS = [
-  "Under ₦4m / under $7.5k",
-  "₦4m to ₦12m / $7.5k to $22k",
-  "₦12m to ₦30m / $22k to $55k",
+  "Under ₦9m / under $16k",
+  "₦9m to ₦26m / $16k to $48k",
+  "₦26m to ₦60m / $48k to $110k",
   "Above the bands, custom scope",
   "Prefer to discuss on the call",
 ] as const;
@@ -62,9 +62,9 @@ export const TIMELINES = [
 
 // D17: budget bands on the rebuild path, anchored to the S1 starting band.
 export const REBUILD_BUDGET_BANDS = [
-  "Under ₦6.5m / under $12k",
-  "₦6.5m to ₦16m / $12k to $30k",
-  "₦16m to ₦35m / $30k to $65k",
+  "Under ₦14m / under $24k",
+  "₦14m to ₦30m / $24k to $55k",
+  "₦30m to ₦65m / $55k to $120k",
   "Above the bands, custom scope",
   "Prefer to discuss on the call",
 ] as const;

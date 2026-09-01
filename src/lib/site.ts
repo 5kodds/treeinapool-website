@@ -60,18 +60,13 @@ export const FOUNDER = {
 export const CURRENCY_NOTE = "NGN / USD";
 
 /**
- * The naira and dollar columns are not one number converted twice. They are
- * two markets, each priced against what senior product work actually costs
- * in it, which is why the ratio between them is not the spot rate.
+ * Two markets, two prices. The naira and dollar figures are each set against
+ * what senior product work clears in their own market, so the ratio between
+ * them is deliberately not the spot rate.
  */
 export const PRICING_BASIS =
-  "Bands are the starting point for a fixed scope, not an hourly estimate. The naira and dollar figures are priced to their own markets rather than converted from one another, and the final number is fixed in writing after the discovery call.";
+  "Bands are the starting point for a fixed scope, not an hourly estimate, and most engagements land above them. The naira and dollar figures are priced to their own markets rather than converted from one another. The final number is fixed in writing after the discovery call, and it does not move afterwards unless you change the scope.";
 
-/**
- * The escape hatch for work that does not fit any band. Named here so the
- * services table, the service cards and the enquiry forms all describe the
- * same option in the same words.
- */
 export const CUSTOM_SCOPE = {
   label: "Custom scope",
   band: "Priced after discovery",
@@ -98,10 +93,12 @@ export type Service = {
   faqs: { q: string; a: string }[];
 };
 
-// D3 resolved. Bands are set from 2026 market benchmarks for senior-led
-// boutique studios, read against what this studio actually offers: the
-// founder on the engagement, fixed written scope, and ownership transferred
-// at launch. See DECISIONS-v2.1.md for the benchmarks each number came from.
+// D3 resolved. Bands are set from 2026 benchmarks for the mid-market tier
+// this studio is selling into: agencies serving multi-location and
+// growth-stage brands quote $40k to $100k for a build of this shape. The
+// bands sit at the entry of that range rather than under it, because a price
+// that reads cheap to a serious buyer is a disqualification, not a discount.
+// DECISIONS-v2.1.md records the benchmark behind each number.
 export const SERVICES: Service[] = [
   {
     id: "prototype-to-production",
@@ -109,8 +106,8 @@ export const SERVICES: Service[] = [
     name: "Prototype → production",
     who: "Founders with a no-code build",
     timeline: "4–8 weeks",
-    bandNgn: "₦6.5m",
-    bandUsd: "$12k",
+    bandNgn: "₦14m",
+    bandUsd: "$24k",
     summary:
       "Your Lovable or Bubble build, rewritten as a product that survives real users and real load.",
     whatItIs:
@@ -146,8 +143,8 @@ export const SERVICES: Service[] = [
     name: "Product design",
     who: "Teams with devs, no designer",
     timeline: "2–4 weeks",
-    bandNgn: "₦4.0m",
-    bandUsd: "$7.5k",
+    bandNgn: "₦9m",
+    bandUsd: "$16k",
     summary:
       "Flows, screens and a component system your developers build from directly, with the states and edge cases drawn, not left to interpretation.",
     whatItIs:
@@ -183,8 +180,8 @@ export const SERVICES: Service[] = [
     name: "Full-cycle build",
     who: "SMEs digitising operations",
     timeline: "8–14 weeks",
-    bandNgn: "₦12m",
-    bandUsd: "$22k",
+    bandNgn: "₦26m",
+    bandUsd: "$48k",
     summary:
       "Discovery through launch for one product: a web app, a mobile app, or the internal portal your operation currently runs on spreadsheets.",
     whatItIs:
@@ -220,8 +217,8 @@ export const SERVICES: Service[] = [
     name: "AI & automation",
     who: "Operations with manual steps",
     timeline: "3–6 weeks",
-    bandNgn: "₦4.5m",
-    bandUsd: "$8k",
+    bandNgn: "₦10m",
+    bandUsd: "$18k",
     summary:
       "The steps someone on your team does by hand every day, such as quoting, triage, reconciliation and reporting, moved into software, with a human still in the loop where it matters.",
     whatItIs:

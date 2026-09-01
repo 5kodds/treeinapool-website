@@ -40,14 +40,17 @@ const VALUES = [
  * to go and look.
  */
 const FOUNDER_FACTS: { label: string; value: React.ReactNode }[] = [
-  { label: "On your project as", value: "Founder, start to handover" },
-  { label: "Based", value: "Nigeria, working in NGN and USD" },
+  { label: "On your project as", value: "Founder, strategy through handover" },
   {
     label: "Also",
     value: "Co-Founder & COO, Product, AfroMadeIt Global",
   },
-  { label: "Shipped", value: "Farm Buddy, Vuvu.ng, AfroMadeIt Global" },
-  { label: "Before software", value: "Four years in agricultural extension" },
+  {
+    label: "Domains",
+    value: "Fintech, ecommerce, media, AI decision support",
+  },
+  { label: "Shipped", value: "Vuvu.ng, Farm Buddy, AfroMadeIt Global" },
+  { label: "Markets", value: "US, UK, Nigeria. Priced in NGN or USD" },
   {
     label: "Elsewhere",
     value: (
@@ -89,30 +92,31 @@ export default function AboutPage() {
               at the end, when it&apos;s expensive.
             </p>
             <p className="mt-5 max-w-[62ch] text-[16px] leading-7 text-muted">
-              TreeInAPool came out of building. Farm Buddy started as a question
-              about reach: agricultural extension officers are the people who
-              diagnose a sick crop and say what to do about it, and there are
-              nowhere near enough of them. Building it meant accepting that the
-              farmer would not be typing a description in English. The camera
-              became the primary input, a recorded voice note became a valid
-              one, and a multimodal model turned a photograph of a leaf into a
-              diagnosis, a read on the soil, and something to actually do about
-              both.
+              TreeInAPool came out of building. Vuvu.ng set the standard.
+              Bill payments are unglamorous and unforgiving: the flows are
+              short, the tolerance for error is zero, and the product only
+              counts once it sits on the phone people already pay with, which
+              meant defining every journey from onboarding to receipt and
+              taking the web app into both stores rather than stopping at a
+              URL.
             </p>
             <p className="mt-5 max-w-[62ch] text-[16px] leading-7 text-muted">
-              Vuvu.ng taught the opposite discipline. Bill payments are
-              unglamorous and unforgiving: the flows are short, the tolerance
-              for error is zero, and the product only counts once it sits on the
-              phone people already pay with, which meant taking the web app to
-              both stores rather than stopping at a URL. AfroMadeIt Global was a
-              third kind of problem, where the build is not the hard part and
-              saying the right thing is.
+              Farm Buddy was the opposite discipline, a question about input
+              rather than output. Its users were never going to type a
+              description in English, so the camera became the primary input,
+              a voice note became a valid one, and a multimodal model turned a
+              photograph into a diagnosis and something to do about it. That
+              is a product decision before it is a technical one, and getting
+              it wrong would have produced a demo nobody could use.
+              AfroMadeIt Global was a third kind of problem, where the build
+              is not the hard part and deciding what the business actually
+              claims is.
             </p>
             <p className="mt-5 max-w-[62ch] text-[16px] leading-7 text-muted">
               The pattern across all three was the same. The interesting work
               was never the demo. It was the distance between something that
-              runs and something a stranger can depend on. Closing that distance
-              is what this studio sells.
+              runs and something a stranger can depend on. Closing that
+              distance is what this studio sells.
             </p>
             <div className="mt-8 border-t border-[var(--color-divider)] pt-6">
               <span className="block text-xs font-semibold uppercase tracking-[0.08em] text-[var(--color-accent-700)]">
@@ -227,33 +231,36 @@ export default function AboutPage() {
               call and the sprint demos, not just the sales call.
             </p>
             <p className="mt-4 max-w-[62ch] text-[16px] leading-7 text-muted">
-              Olaseni came to software the long way round, through
-              agricultural extension. That is the job where somebody hands you
-              a dying plant and a look, and &quot;let me circle back next
-              quarter&quot; is not among the available answers. Four years of
-              it is an unreasonably good education in product: your user is
-              not reading the documentation, the connection is bad, the stakes
-              are somebody&apos;s harvest, and the only feature that counts is
-              the one that works in the field on the first attempt.
+              Olaseni is a product and operations lead by trade. Roadmaps,
+              PRDs, acceptance criteria, release plans, and a backlog
+              prioritised by impact against effort rather than by whoever
+              asked most recently. He has run that work across fintech,
+              ecommerce and media, which is a polite way of saying he has
+              shipped in the three categories where being wrong is visible to
+              everybody by Tuesday.
             </p>
             <p className="mt-4 max-w-[62ch] text-[16px] leading-7 text-muted">
-              He is Co-Founder and COO for product at AfroMadeIt Global, a
-              strategic HR consultancy working across US, UK and African
-              markets, and he ran product operations at Baniri Technologies
-              while Vuvu.ng went from a web app to a listing in both stores.
-              Farm Buddy is his own: a crop diagnosis tool that treats the
-              camera as the primary input, because asking someone holding a
-              diseased leaf to describe it in written English is a design
-              decision, and a bad one.
+              At Baniri Technologies he owned the definition and launch of
+              Vuvu.ng, writing the flows and acceptance criteria for every
+              bill-payment journey from onboarding through to the receipt, and
+              taking it from a web app to a listing in both stores. He is
+              Co-Founder and COO for product at AfroMadeIt Global, a strategic
+              HR consultancy operating across US, UK and African markets. His
+              own engineering runs to computer vision, forecasting and
+              language automation: decision-support systems, where a
+              confidently wrong answer costs somebody real money.
             </p>
             <p className="mt-4 max-w-[62ch] text-[16px] leading-7 text-muted">
-              He reads more papers than is strictly good for him, holds
-              opinions about empty states that he is happy to defend at
+              He arrived at product from an evidence discipline rather than
+              from design or engineering, which shows up as an unfashionable
+              interest in whether a thing is actually being used, by whom, and
+              instead of what. He reads more papers than is strictly good for
+              him, holds opinions about empty states he is glad to defend at
               length, and will tell you your project does not need an agency
               yet when that is the true answer. The thread through all of it
               is a mild allergy to software that demos beautifully and folds
-              the moment a stranger touches it. Most of this job, honestly, is
-              declining to be impressed by your own prototype.
+              the moment a stranger touches it. Most of this job is declining
+              to be impressed by your own prototype.
             </p>
 
             <Frame className="mt-8 p-5">
