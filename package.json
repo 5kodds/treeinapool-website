@@ -17,6 +17,7 @@
     "cta": "node scripts/cta-check.mjs"
   },
   "dependencies": {
+    "@vercel/analytics": "^2.0.1",
     "clsx": "^2.1.1",
     "gray-matter": "^4.0.3",
     "lucide-react": "^1.38.0",
