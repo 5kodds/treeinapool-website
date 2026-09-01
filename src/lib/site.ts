@@ -497,6 +497,9 @@ export const PERSONALITY_STATEMENT =
 
 export const WHY_US = [
   {
+    figure: "cadence" as const,
+    figureTitle:
+      "Four sprints stacked in sequence, each one ending at a live URL",
     title: "You are never guessing what happened this week",
     body: "Most agency relationships go quiet between invoices. Ours can't: every sprint ends with a live URL you can open, click, and break. If a week went badly, you find out in that demo, not in a post-mortem.",
     points: [
@@ -506,6 +509,9 @@ export const WHY_US = [
     ],
   },
   {
+    figure: "scope" as const,
+    figureTitle:
+      "A signed scope beside the only route a change is allowed to take: quoted, approved, built",
     title: "The scope is a document, not a conversation",
     body: "Discovery ends with a written scope: what's included, what isn't, what it costs, and when it lands. Changes are priced in writing before anyone builds them, so the number you approved is the number you pay.",
     points: [
@@ -515,6 +521,9 @@ export const WHY_US = [
     ],
   },
   {
+    figure: "handover" as const,
+    figureTitle:
+      "Repository, hosting, analytics and domain crossing from us to you at launch",
     title: "You keep everything when we're done",
     body: "Repositories, hosting, analytics, and domains transfer to you at launch. If you never speak to us again, the product keeps running and any competent developer can pick it up.",
     points: [

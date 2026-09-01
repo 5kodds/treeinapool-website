@@ -161,6 +161,25 @@ the home page block appears by itself. It could not be run from the build
 container: Lighthouse hits a proxy interstitial on outbound TLS, and the
 PageSpeed Insights API refused with a shared-IP quota error.
 
+## The three "Why TreeInAPool" figures
+
+The slots read "Illustration slot 01/02/03" on the live site. They now carry
+three drawn figures, in the same blueprint language as the sprint plan and
+the case study frames:
+
+| Block | Figure |
+|-------|--------|
+| You are never guessing what happened this week | Four sprints stacked, each closing on a live URL |
+| The scope is a document, not a conversation | A signed scope, beside the one route a change may take: quoted, approved, built |
+| You keep everything when we're done | Repository, hosting, analytics and domain crossing to you at launch |
+
+**Stock photography was considered and rejected.** A photograph of strangers
+around a laptop is the visual signature of exactly the agencies this page
+argues against, and to a buyer weighing a $40k-plus engagement it reads as
+"this studio has nothing of its own to show". These are cheap to swap if the
+founder disagrees: each block in `WHY_US` names its figure, and replacing
+`WhyFigure` with an `Image` is a few lines in `AltFeatureSection`.
+
 ## Conflicts flagged rather than guessed
 
 None. Where the v2.1 brief and the v2 PRD could have collided, on booking

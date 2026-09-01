@@ -125,17 +125,19 @@ export default function Home() {
             </div>
           </div>
           <Frame className="p-5">
-            <span className="kicker">What is actually live</span>
+            <span className="kicker">Proof you can open</span>
             <p className="mt-3 text-[26px] uppercase leading-[30px]">
-              Two products live, in two app stores and on the web
+              A payments product in both app stores, taking real money from
+              real users
             </p>
             <p className="mt-3 text-[13px] leading-5 text-muted-2">
-              Vuvu.ng has been in the App Store and Google Play since November
-              2024. AfroMadeIt Global is live today. Both are linked from{" "}
+              Vuvu.ng shipped in November 2024 and has been running since.
+              Every claim on this site links to the thing itself, and no figure
+              goes up until the client has confirmed it.{" "}
               <Link href="/work" className="underline">
-                the work page
+                See the work
               </Link>
-              , because a claim you cannot check is not evidence.
+              .
             </p>
           </Frame>
         </Container>

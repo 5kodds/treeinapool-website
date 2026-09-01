@@ -2,10 +2,12 @@
 
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
-import { BlueprintFigure } from "@/components/ui/BlueprintFigure";
+import { WhyFigure, type FigureName } from "@/components/ui/WhyFigure";
 import { track } from "@/lib/analytics";
 
 type Block = {
+  figure: FigureName;
+  figureTitle: string;
   title: string;
   body: string;
   points: readonly string[];
@@ -31,10 +33,7 @@ export function AltFeatureSection({ blocks }: { blocks: readonly Block[] }) {
             className="grid items-center gap-8 md:grid-cols-2 md:gap-14"
           >
             <div className={flipped ? "md:order-2" : ""}>
-              <BlueprintFigure
-                label={`Illustration slot · ${String(index + 1).padStart(2, "0")}`}
-                ratio="16/10"
-              />
+              <WhyFigure name={block.figure} title={block.figureTitle} />
             </div>
 
             <div className={flipped ? "md:order-1" : ""}>
